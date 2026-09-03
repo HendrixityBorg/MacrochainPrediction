@@ -1,6 +1,6 @@
 # SX-CH-001 黄金潜变量链提交报告
 
-> 机器状态：**NOT_S_READY**。未通过项：`isolated_reproduction, prospective_current_macro_demo`。
+> 机器状态：**NOT_S_READY**。未通过项：`prospective_current_macro_demo`。
 
 ## 摘要
 

@@ -9,7 +9,8 @@
   `requirements.lock.txt`；
 - [x] `config/default.json`、`setup.sh`、`run.sh`、`test.sh`、Dockerfile 与 `.dockerignore`；
 - [x] 冻结事件记录和可再分发的官方原始输入；Yahoo 原始长历史不提交；
-- [ ] 最终提交 commit 的干净克隆复现记录（首次推送后生成）；
+- [x] 从 GitHub commit `07a10a4` 干净克隆，以 Python 3.11 全新环境完成离线重建、18/18 测试、
+  协议与 A004 时间戳核验；机器证据见 `reports/submission_package_audit.json`；
 - [x] 链级概率、逐跳 `p_i/n_i`、90% CI、逐前缀停止、不确定性来源和评估报告。
 
 ## 2. 非朴素模型
