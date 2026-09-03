@@ -1,0 +1,99 @@
+{
+  "status": "POST_LABEL_DIAGNOSTIC_NOT_CONFIRMATORY",
+  "generated_at_utc": "2026-09-03T04:28:47.743165+00:00",
+  "regime_shift": {
+    "development_events": 69,
+    "development_positives": 5,
+    "development_rate": 0.07246376811594203,
+    "confirmation_events": 164,
+    "confirmation_positives": 22,
+    "confirmation_rate": 0.13414634146341464
+  },
+  "development_only_prequential_selection_check": [
+    {
+      "start_after_events": 36,
+      "predictions": 33,
+      "positives": 3,
+      "brier": {
+        "latent_center": 0.08522601590443417,
+        "primary_anchor_multi_measurement_ci": 0.08640133302951351,
+        "expanding_climatology": 0.0843737938918759
+      },
+      "mean_probability": {
+        "latent_center": 0.06790387216357589,
+        "primary_anchor_multi_measurement_ci": 0.08977934366728776,
+        "expanding_climatology": 0.08694584757617561
+      }
+    },
+    {
+      "start_after_events": 48,
+      "predictions": 21,
+      "positives": 2,
+      "brier": {
+        "latent_center": 0.08893529283379978,
+        "primary_anchor_multi_measurement_ci": 0.09026314571390687,
+        "expanding_climatology": 0.08786884158345029
+      },
+      "mean_probability": {
+        "latent_center": 0.07272632334427638,
+        "primary_anchor_multi_measurement_ci": 0.09914427206751578,
+        "expanding_climatology": 0.08857540814285277
+      }
+    }
+  ],
+  "confirmation_uncertainty": [
+    {
+      "left": "chain_probability",
+      "right": "climatology_probability",
+      "observed_brier_difference_left_minus_right": 0.0006646326895213634,
+      "year_block_bootstrap_90ci": [
+        -0.0005874709296446091,
+        0.0019500933756644064
+      ],
+      "bootstrap_probability_left_better": 0.1961,
+      "draws": 20000,
+      "seed": 20260905
+    },
+    {
+      "left": "chain_probability",
+      "right": "naive_marginal_probability",
+      "observed_brier_difference_left_minus_right": -0.0091503697719516,
+      "year_block_bootstrap_90ci": [
+        -0.014223706512432847,
+        -0.004140228527542503
+      ],
+      "bootstrap_probability_left_better": 0.9994,
+      "draws": 20000,
+      "seed": 20260905
+    },
+    {
+      "left": "primary_only_probability",
+      "right": "climatology_probability",
+      "observed_brier_difference_left_minus_right": -0.0011688482191655643,
+      "year_block_bootstrap_90ci": [
+        -0.0027538027929268215,
+        0.00040370998340124144
+      ],
+      "bootstrap_probability_left_better": 0.88385,
+      "draws": 20000,
+      "seed": 20260905
+    },
+    {
+      "left": "direct_terminal_logistic_probability",
+      "right": "climatology_probability",
+      "observed_brier_difference_left_minus_right": -0.002069065929045482,
+      "year_block_bootstrap_90ci": [
+        -0.004211609082761262,
+        4.7157413206101045e-05
+      ],
+      "bootstrap_probability_left_better": 0.94535,
+      "draws": 20000,
+      "seed": 20260905
+    }
+  ],
+  "decision": {
+    "promote_primary_anchor": false,
+    "reason": "The primary-anchor variant looks better only after opening confirmation labels; both frozen development prequential checks favor expanding climatology. Promotion would be outcome-driven model switching.",
+    "legitimate_next_evidence": "At least 50 new custodian-controlled events or genuinely prospective predictions under a newly frozen protocol."
+  }
+}

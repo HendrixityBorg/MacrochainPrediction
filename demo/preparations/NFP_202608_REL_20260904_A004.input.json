@@ -1,0 +1,66 @@
+{
+  "event_id": "NFP_202608_REL_20260904_A004",
+  "topic": "nfp",
+  "release_time_utc": "2026-09-04T12:30:00Z",
+  "seal_deadline_utc": "2026-09-04T12:45:00Z",
+  "root_measure": "total_nonfarm_payroll_first_release_monthly_change_thousands",
+  "root_actual": null,
+  "root_consensus_or_nowcast": 68.5,
+  "root_scale": 124.42677605270522,
+  "expectation_asof_utc": "2026-09-03T05:28:57Z",
+  "scale_asof_utc": "2026-09-03T05:28:57Z",
+  "pre_event_features": {
+    "pre_event_real_rate": null,
+    "policy_regime": "not_used_by_locked_model",
+    "attention_proxy": null,
+    "feature_policy": "locked model uses only standardized root magnitude and sign"
+  },
+  "source_records": [
+    {
+      "source_id": "bls_employment_situation_schedule",
+      "url": "https://www.bls.gov/schedule/news_release/empsit.htm",
+      "retrieved_at_utc": "2026-09-03T05:25:00Z",
+      "local_path": "demo/evidence/NFP_202608_bls_schedule_20260903.json",
+      "sha256": "2037b8271f702d2bee1ab0c7fb081b34fae642539cdc4cecb8b4f979372818d5"
+    },
+    {
+      "source_id": "philadelphia_fed_employ_first_releases",
+      "url": "https://www.philadelphiafed.org/-/media/FRBP/Assets/Surveys-And-Data/real-time-data/data-files/xlsx/employ_level_first_second_third.xlsx",
+      "retrieved_at_utc": "2026-09-02T16:53:02.192062Z",
+      "local_path": "data/raw/employ.xlsx",
+      "sha256": "8af43817875de1075966ebb668f42ddd7367db908d7897a59744917ef167f755"
+    },
+    {
+      "source_id": "nfp_first_release_trailing_reference_class",
+      "url": "local-derived://nfp-first-release-trailing-reference-class",
+      "retrieved_at_utc": "2026-09-03T05:28:57Z",
+      "local_path": "demo/evidence/NFP_202608_root_definition_20260903.json",
+      "sha256": "c8f7b368593873728de2a086eba4f23ef593e549d8876f3964d820d9324bd2ba"
+    }
+  ],
+  "outcome_windows": {
+    "policy": {
+      "main": "H.15 2Y nominal yield",
+      "window": "previous valid market close to 2026-09-04 close",
+      "scale": "prior 60 valid daily changes, minimum 40, ending before release"
+    },
+    "real_rate": {
+      "main": "H.15 5Y inflation-indexed yield",
+      "window": "previous valid market close to 2026-09-04 close",
+      "scale": "prior 60 valid daily changes, minimum 40, ending before release"
+    },
+    "gold": {
+      "main": "GLD adjusted close",
+      "window": "previous valid market close to 2026-09-04 close",
+      "scale": "prior 60 valid close-to-close log returns, minimum 40, ending before release"
+    }
+  },
+  "decision_rule": {
+    "open_only_if_ci_lower_above_break_even": true,
+    "break_even_probability": 0.208,
+    "maximum_ci_width": 0.3,
+    "position_rule": "No position unless lower 90% bound exceeds the executable payoff threshold 0.208; abstain when width exceeds 0.30; no discretionary override."
+  },
+  "tracking_due_utc": "2027-03-04T12:45:00Z",
+  "notes": "Amendment 004 aligns the written decision rule with the executable payoff formula, records the first actionable stop, and adds per-prefix epistemic decomposition without changing p_i, chain probabilities, labels, or calibration. After release, add only root_actual and root_actual_source, then seal before the deadline."
+}

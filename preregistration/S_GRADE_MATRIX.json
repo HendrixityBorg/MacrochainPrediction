@@ -1,0 +1,27 @@
+{
+  "version": "sx-ch-001-s-matrix-v1",
+  "required": [
+    "repository_complete",
+    "isolated_reproduction",
+    "per_hop_probability_and_effective_n",
+    "non_naive_model",
+    "intrinsic_vs_external_separated",
+    "principled_stopping",
+    "confirmation_n_ge_50",
+    "brier_lt_0_15",
+    "terminal_positives_ge_10",
+    "root_ablation_improves",
+    "reliability_report",
+    "hop_decay_report",
+    "epistemic_ci",
+    "oracle_90ci_coverage_ge_0_85",
+    "ci_width_error_positive_significant",
+    "evidence_strength_bayesian_direction",
+    "rare_method_calibration_n_ge_20",
+    "three_hop_reproduction_within_0_05",
+    "live_decision_rule_matches_executable",
+    "complete_report",
+    "prospective_current_macro_demo",
+    "six_month_tracking_plan"
+  ]
+}

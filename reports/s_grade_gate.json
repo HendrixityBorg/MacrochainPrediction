@@ -1,0 +1,529 @@
+{
+  "status": "NOT_S_READY",
+  "full_s_evidence_complete": false,
+  "protocol_lock": {
+    "valid": true,
+    "reason": "ok",
+    "protocol_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+    "current_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+    "files": [
+      {
+        "path": "config/default.json",
+        "sha256": "4fce7acd03cc268243cc3fd89d42051afb443a17e7ffc73f26048b5b96a76812"
+      },
+      {
+        "path": "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md",
+        "sha256": "c6629e2c8bb16d8061f34b72da8091903f3059daaef917db9309fb60b3daeeb5"
+      },
+      {
+        "path": "preregistration/S_GRADE_MATRIX.json",
+        "sha256": "ae13f65ef01d264cd0762fa8ee4cc9aa7f98689ae4417ede6ccdd4362a0035bb"
+      },
+      {
+        "path": "src/macro_gold_latent/data.py",
+        "sha256": "27ae8c74f47f34c703238f93fb50f1223ef7e88e8e11fb1ca8dbeebad66a276a"
+      },
+      {
+        "path": "src/macro_gold_latent/latent.py",
+        "sha256": "bc25afa4a9bea959b828d0488e0fe391678c1eb5c19db4cae433785ad8be064c"
+      },
+      {
+        "path": "src/macro_gold_latent/model.py",
+        "sha256": "b27f273920cd11d0ebaa5a8cf5021c44f189e414a504c94e7a88c0bba61a01cf"
+      },
+      {
+        "path": "src/macro_gold_latent/stopping.py",
+        "sha256": "4b0c8f4c4e816a7c177e6c49fe83a5521a403323a53bb12916ce852e2d7cd1d7"
+      },
+      {
+        "path": "src/macro_gold_latent/evaluate.py",
+        "sha256": "1c5ec0838297d0c3be6aa3518fbd2bc592e9580d5949ebd6d1bf75a04a1bd2a9"
+      },
+      {
+        "path": "src/macro_gold_latent/oracle.py",
+        "sha256": "0a503a268673b1dd3918ecd6fe85fca02ba9d96942b19c4c6acf1bd96c3ebd77"
+      },
+      {
+        "path": "src/macro_gold_latent/gates.py",
+        "sha256": "3fc889ba0df7ac74e56ad411ed18276d73feea29c84486792eb46eb59a9579c8"
+      }
+    ],
+    "frozen_at_utc": "2026-09-03T06:55:51.054430+00:00"
+  },
+  "gates": {
+    "repository_complete": {
+      "passed": true,
+      "evidence": {
+        "README.md": true,
+        "requirements.txt": true,
+        "requirements.lock.txt": true,
+        "config/default.json": true,
+        "run.sh": true,
+        "test.sh": true,
+        "Dockerfile": true,
+        ".dockerignore": true,
+        "DATA_NOTICE.md": true,
+        "docs/METHODOLOGY.zh-CN.md": true,
+        "docs/DATA_SOURCES.zh-CN.md": true,
+        "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md": true,
+        "demo/TRACKING_PLAN.zh-CN.md": true,
+        "data/raw/employ.xlsx": true,
+        "data/raw/h15_nominal.csv": true,
+        "data/raw/h15_real.csv": true,
+        "data/raw/release_dates_50.txt": true
+      }
+    },
+    "isolated_reproduction": {
+      "passed": false,
+      "evidence": {
+        "three_hop_reproduction": {
+          "seed": 20261680,
+          "checks": [
+            {
+              "event_id": "NFP_201212_REL_20130104",
+              "hop": 1,
+              "original_p_i": 0.4461657261470315,
+              "reproduced_p_i": 0.4461657261470315,
+              "original_n_i": 63.5128838585354,
+              "reproduced_n_i": 63.5128838585354,
+              "absolute_delta": 0.0
+            },
+            {
+              "event_id": "NFP_201209_REL_20121005",
+              "hop": 2,
+              "original_p_i": 0.502263303669318,
+              "reproduced_p_i": 0.502263303669318,
+              "original_n_i": 21.06495016347412,
+              "reproduced_n_i": 21.06495016347412,
+              "absolute_delta": 0.0
+            },
+            {
+              "event_id": "NFP_201812_REL_20190104",
+              "hop": 3,
+              "original_p_i": 0.43573997568031536,
+              "reproduced_p_i": 0.43573997568031536,
+              "original_n_i": 14.861855942812628,
+              "reproduced_n_i": 14.861855942812628,
+              "absolute_delta": 0.0
+            }
+          ],
+          "maximum_absolute_delta": 0.0
+        },
+        "clean_git_clone": {
+          "passes": false,
+          "reason": "clean_git_clone_audit_not_run"
+        }
+      }
+    },
+    "per_hop_probability_and_effective_n": {
+      "passed": true,
+      "evidence": {
+        "evidence_rows": 492
+      }
+    },
+    "non_naive_model": {
+      "passed": true,
+      "evidence": {
+        "proposed_brier": 0.11927979325096628,
+        "naive_brier": 0.1284301630229179
+      }
+    },
+    "intrinsic_vs_external_separated": {
+      "passed": true,
+      "evidence": {
+        "rows": 164
+      }
+    },
+    "principled_stopping": {
+      "passed": true,
+      "evidence": {
+        "criteria": [
+          "credible bound",
+          "EVSI",
+          "review cost",
+          "terminal state",
+          "maximum-hop guardrail",
+          "first actionable stop execution"
+        ]
+      }
+    },
+    "confirmation_n_ge_50": {
+      "passed": true,
+      "evidence": 164
+    },
+    "brier_lt_0_15": {
+      "passed": true,
+      "evidence": 0.11927979325096628
+    },
+    "terminal_positives_ge_10": {
+      "passed": true,
+      "evidence": 22
+    },
+    "positive_skill_vs_climatology": {
+      "passed": false,
+      "evidence": -0.005603269315452186
+    },
+    "root_ablation_improves": {
+      "passed": true,
+      "evidence": {
+        "full": 0.11927979325096628,
+        "no_root": 0.12124425057949062
+      }
+    },
+    "reliability_report": {
+      "passed": true,
+      "evidence": {
+        "bins": [
+          {
+            "bin": 1,
+            "n": 17,
+            "mean_probability": 0.04547347820786385,
+            "observed_rate": 0.11764705882352941,
+            "absolute_gap": 0.07217358061566556,
+            "min_probability": 0.03834549060265144,
+            "max_probability": 0.04952531573158338
+          },
+          {
+            "bin": 2,
+            "n": 17,
+            "mean_probability": 0.05185161384397005,
+            "observed_rate": 0.058823529411764705,
+            "absolute_gap": 0.006971915567794654,
+            "min_probability": 0.04993579527242916,
+            "max_probability": 0.053266634679920974
+          },
+          {
+            "bin": 3,
+            "n": 17,
+            "mean_probability": 0.05490816866036506,
+            "observed_rate": 0.058823529411764705,
+            "absolute_gap": 0.003915360751399644,
+            "min_probability": 0.05342496268733021,
+            "max_probability": 0.05618729652050117
+          },
+          {
+            "bin": 4,
+            "n": 17,
+            "mean_probability": 0.05691642374759017,
+            "observed_rate": 0.058823529411764705,
+            "absolute_gap": 0.001907105664174534,
+            "min_probability": 0.05633140805988867,
+            "max_probability": 0.05741810952730124
+          },
+          {
+            "bin": 5,
+            "n": 16,
+            "mean_probability": 0.06179461193479781,
+            "observed_rate": 0.1875,
+            "absolute_gap": 0.1257053880652022,
+            "min_probability": 0.05759110150422887,
+            "max_probability": 0.07858955888970845
+          },
+          {
+            "bin": 6,
+            "n": 16,
+            "mean_probability": 0.08108664976987082,
+            "observed_rate": 0.0,
+            "absolute_gap": 0.08108664976987082,
+            "min_probability": 0.07864473223862972,
+            "max_probability": 0.08343912529619062
+          },
+          {
+            "bin": 7,
+            "n": 16,
+            "mean_probability": 0.08435738357606568,
+            "observed_rate": 0.3125,
+            "absolute_gap": 0.22814261642393432,
+            "min_probability": 0.08353970182566438,
+            "max_probability": 0.08545990713761178
+          },
+          {
+            "bin": 8,
+            "n": 16,
+            "mean_probability": 0.08690594993225746,
+            "observed_rate": 0.1875,
+            "absolute_gap": 0.10059405006774254,
+            "min_probability": 0.08557555491924346,
+            "max_probability": 0.0876706162102019
+          },
+          {
+            "bin": 9,
+            "n": 16,
+            "mean_probability": 0.08860025234339378,
+            "observed_rate": 0.1875,
+            "absolute_gap": 0.09889974765660622,
+            "min_probability": 0.08784320343858722,
+            "max_probability": 0.08917005446350863
+          },
+          {
+            "bin": 10,
+            "n": 16,
+            "mean_probability": 0.09028243423831579,
+            "observed_rate": 0.1875,
+            "absolute_gap": 0.09721756576168421,
+            "min_probability": 0.08924944874383932,
+            "max_probability": 0.09263508348404303
+          }
+        ],
+        "expected_calibration_error": 0.08018775395185505
+      }
+    },
+    "hop_decay_report": {
+      "passed": true,
+      "evidence": [
+        {
+          "hop": 1,
+          "events": 164,
+          "prefix_successes": 57,
+          "prefix_rate": 0.3475609756097561
+        },
+        {
+          "hop": 2,
+          "events": 164,
+          "prefix_successes": 39,
+          "prefix_rate": 0.23780487804878048
+        },
+        {
+          "hop": 3,
+          "events": 164,
+          "prefix_successes": 22,
+          "prefix_rate": 0.13414634146341464
+        }
+      ]
+    },
+    "epistemic_ci": {
+      "passed": true,
+      "evidence": {
+        "sources": [
+          "measurement",
+          "link parameters",
+          "regime drift",
+          "external cutoff",
+          "common frailty"
+        ],
+        "scope": "each prefix and full chain"
+      }
+    },
+    "oracle_90ci_coverage_ge_0_85": {
+      "passed": true,
+      "evidence": 0.92
+    },
+    "ci_width_error_positive_significant": {
+      "passed": true,
+      "evidence": {
+        "spearman_rho": 0.7213962156353297,
+        "permutation_p_value_two_sided": 0.0002,
+        "median_ci_width": 0.1414700838709792,
+        "narrow_mean_absolute_error": 0.14249011279506346,
+        "wide_mean_absolute_error": 0.22531883335345895,
+        "direction_ok": true
+      }
+    },
+    "evidence_strength_bayesian_direction": {
+      "passed": true,
+      "evidence": {
+        "controlled_change": "only hop-1 evidence changes; p2, p3 and cutoff draws are paired",
+        "weak_evidence_30pct": {
+          "changed_hop_mean": 0.31794917446067283,
+          "changed_hop_effective_n": 20,
+          "chain_mean": 0.07465470203691295,
+          "chain_ci_lower": 0.039097003643783886,
+          "chain_ci_upper": 0.11576346277372296,
+          "chain_ci_width": 0.07666645912993908
+        },
+        "strong_evidence_60pct": {
+          "changed_hop_mean": 0.5989880212710389,
+          "changed_hop_effective_n": 200,
+          "chain_mean": 0.14065369487524185,
+          "chain_ci_lower": 0.12083410390228332,
+          "chain_ci_upper": 0.16157563747884382,
+          "chain_ci_width": 0.040741533576560504
+        },
+        "center_moves_up": true,
+        "ci_narrows": true,
+        "seed": 73019,
+        "draws": 120000
+      }
+    },
+    "rare_method_calibration_n_ge_20": {
+      "passed": true,
+      "evidence": {
+        "scope": "same macro-release link estimator on known 2005-2010 NFP outcomes",
+        "minimum_known_outcomes": 16,
+        "rare_event_clause_applicable": false,
+        "fallback_triggered": false,
+        "records": [
+          {
+            "hop": 1,
+            "known_outcomes": 69,
+            "predicted_soft_rate": 0.29408086947280504,
+            "observed_primary_rate": 0.3333333333333333,
+            "absolute_calibration_error": 0.039252463860528275,
+            "method": "prefix_conditional_latent_fractional_logistic"
+          },
+          {
+            "hop": 2,
+            "known_outcomes": 23,
+            "predicted_soft_rate": 0.5081318950648898,
+            "observed_primary_rate": 0.6956521739130435,
+            "absolute_calibration_error": 0.1875202788481537,
+            "method": "prefix_conditional_latent_fractional_logistic"
+          },
+          {
+            "hop": 3,
+            "known_outcomes": 16,
+            "predicted_soft_rate": 0.40749867862746403,
+            "observed_primary_rate": 0.3125,
+            "absolute_calibration_error": 0.09499867862746403,
+            "method": "prefix_conditional_latent_fractional_logistic"
+          }
+        ],
+        "note": "No confirmation outcome is used. The >=20 rare-method clause is required only if the <5 fallback is triggered; raw counts remain disclosed even when not applicable."
+      }
+    },
+    "three_hop_reproduction_within_0_05": {
+      "passed": true,
+      "evidence": {
+        "seed": 20261680,
+        "checks": [
+          {
+            "event_id": "NFP_201212_REL_20130104",
+            "hop": 1,
+            "original_p_i": 0.4461657261470315,
+            "reproduced_p_i": 0.4461657261470315,
+            "original_n_i": 63.5128838585354,
+            "reproduced_n_i": 63.5128838585354,
+            "absolute_delta": 0.0
+          },
+          {
+            "event_id": "NFP_201209_REL_20121005",
+            "hop": 2,
+            "original_p_i": 0.502263303669318,
+            "reproduced_p_i": 0.502263303669318,
+            "original_n_i": 21.06495016347412,
+            "reproduced_n_i": 21.06495016347412,
+            "absolute_delta": 0.0
+          },
+          {
+            "event_id": "NFP_201812_REL_20190104",
+            "hop": 3,
+            "original_p_i": 0.43573997568031536,
+            "reproduced_p_i": 0.43573997568031536,
+            "original_n_i": 14.861855942812628,
+            "reproduced_n_i": 14.861855942812628,
+            "absolute_delta": 0.0
+          }
+        ],
+        "maximum_absolute_delta": 0.0
+      }
+    },
+    "live_decision_rule_matches_executable": {
+      "passed": true,
+      "evidence": {
+        "active_precommits": [
+          "NFP_202608_REL_20260904_A004"
+        ],
+        "expected_break_even_probability": 0.20800000000000002,
+        "expected_maximum_ci_width": 0.3
+      }
+    },
+    "complete_report": {
+      "passed": true,
+      "evidence": {
+        "main": "reports/SUBMISSION_REPORT.zh-CN.md",
+        "live_chinese_report_required_after_seal": true
+      }
+    },
+    "prospective_current_macro_demo": {
+      "passed": false,
+      "evidence": {
+        "valid_pre_release_commitments": 1,
+        "all_valid_pre_release_commitments_including_withdrawn": 1,
+        "withdrawn_event_ids": [
+          "CPI_202608_REL_20260911",
+          "NFP_202608_REL_20260904",
+          "NFP_202608_REL_20260904_A002",
+          "NFP_202608_REL_20260904_A003"
+        ],
+        "precommit_records": [
+          {
+            "valid": false,
+            "hash_valid": true,
+            "bindings_valid": false,
+            "source_bindings_valid": true,
+            "timeline_valid": true,
+            "path": "/Users/henry/Graph Agent/MacrochainPrediction/demo/precommitted/CPI_202608_REL_20260911.json",
+            "precommit_sha256": "8798381681dc3c43ce451c6797db0027adb0172e83a7e386aff7d9dab3094d0c",
+            "status": "precommitted_awaiting_release",
+            "event_id": "CPI_202608_REL_20260911",
+            "eligible_for_submission": false
+          },
+          {
+            "valid": false,
+            "hash_valid": true,
+            "bindings_valid": false,
+            "source_bindings_valid": true,
+            "timeline_valid": true,
+            "path": "/Users/henry/Graph Agent/MacrochainPrediction/demo/precommitted/NFP_202608_REL_20260904.json",
+            "precommit_sha256": "c2b42df36c7710720f95063a2581830f1d2d6c145b227c699d02642faefca8a0",
+            "status": "precommitted_awaiting_release",
+            "event_id": "NFP_202608_REL_20260904",
+            "eligible_for_submission": false
+          },
+          {
+            "valid": false,
+            "hash_valid": true,
+            "bindings_valid": false,
+            "source_bindings_valid": true,
+            "timeline_valid": true,
+            "path": "/Users/henry/Graph Agent/MacrochainPrediction/demo/precommitted/NFP_202608_REL_20260904_A002.json",
+            "precommit_sha256": "5aa590e81e3d8ea1c20da9c33e6a8fe88b953172440af75b9302851dc052617d",
+            "status": "precommitted_awaiting_release",
+            "event_id": "NFP_202608_REL_20260904_A002",
+            "eligible_for_submission": false
+          },
+          {
+            "valid": false,
+            "hash_valid": true,
+            "bindings_valid": false,
+            "source_bindings_valid": true,
+            "timeline_valid": true,
+            "path": "/Users/henry/Graph Agent/MacrochainPrediction/demo/precommitted/NFP_202608_REL_20260904_A003.json",
+            "precommit_sha256": "9218926c6ad62b03f5b058ca28308c2bf193143b5357225ee02c15fff6cb9a6f",
+            "status": "precommitted_awaiting_release",
+            "event_id": "NFP_202608_REL_20260904_A003",
+            "eligible_for_submission": false
+          },
+          {
+            "valid": true,
+            "hash_valid": true,
+            "bindings_valid": true,
+            "source_bindings_valid": true,
+            "timeline_valid": true,
+            "path": "/Users/henry/Graph Agent/MacrochainPrediction/demo/precommitted/NFP_202608_REL_20260904_A004.json",
+            "precommit_sha256": "4a845ee0bb55c1ab4dd01aabc69c80d8be9f04e44a4f127a498514a2440c7783",
+            "status": "precommitted_awaiting_release",
+            "event_id": "NFP_202608_REL_20260904_A004",
+            "eligible_for_submission": true
+          }
+        ],
+        "valid_prospective_seals": 0,
+        "records": [],
+        "passes": false
+      }
+    },
+    "six_month_tracking_plan": {
+      "passed": true,
+      "evidence": "demo/TRACKING_PLAN.zh-CN.md"
+    }
+  },
+  "failed_required_gates": [
+    "isolated_reproduction",
+    "prospective_current_macro_demo"
+  ],
+  "claim_policy": "S_READY means the explicit challenge-aligned machine gates pass. Diagnostic failures, label-access limitations and amendments remain mandatory disclosures and are never tuning prompts.",
+  "supplemental_integrity_gate": {
+    "passed": true,
+    "evidence": "reports/data_quality.json"
+  }
+}

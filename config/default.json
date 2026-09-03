@@ -1,0 +1,81 @@
+{
+  "project": {
+    "seed": 20260903,
+    "timezone": "America/New_York",
+    "model_version": "latent-gold-v1.0.1-amendment001",
+    "interval_level": 0.9
+  },
+  "data": {
+    "development_start": "2005:01",
+    "development_end": "2010:11",
+    "confirmation_start": "2011:01",
+    "confirmation_end": "2024:12",
+    "volatility_lookback_sessions": 60,
+    "minimum_scale_sessions": 40,
+    "materiality_sigma": 1.0,
+    "primary_terminal": "gold_gld",
+    "response_window": "previous_market_close_to_release_day_close"
+  },
+  "measurement": {
+    "states": {
+      "policy": ["policy_h15_2y", "policy_h15_1y", "policy_zt"],
+      "inflation": ["inflation_be5", "inflation_be10"],
+      "real_rate": ["real_h15_5y", "real_h15_10y", "real_tip"],
+      "gold": ["gold_gld", "gold_gc"],
+      "dollar": ["dollar_dxy", "dollar_uup"]
+    },
+    "main": {
+      "policy": "policy_h15_2y",
+      "inflation": "inflation_be5",
+      "real_rate": "real_h15_5y",
+      "gold": "gold_gld",
+      "dollar": "dollar_dxy"
+    },
+    "prior_variance": 4.0,
+    "covariance_shrinkage": 0.25,
+    "ridge": 0.000001,
+    "gold_student_df": 5.0,
+    "iterations": 40
+  },
+  "model": {
+    "prior_sd_intercept": 1.5,
+    "prior_sd_coefficient": 0.75,
+    "time_half_life_years": 4.0,
+    "parameter_drift_sd_per_year": 0.08,
+    "posterior_draws": 4000,
+    "minimum_reference_events": 5,
+    "unscheduled_cutoff_prior_alpha": 1.0,
+    "unscheduled_cutoff_prior_beta": 19.0,
+    "scheduled_cutoff_prior_alpha": 19.0,
+    "scheduled_cutoff_prior_beta": 1.0
+  },
+  "stopping": {
+    "success_gain": 1.0,
+    "failure_loss": 0.25,
+    "transaction_cost": 0.01,
+    "review_cost": 0.01,
+    "minimum_evsi": 0.002,
+    "review_equivalent_evidence": 8,
+    "maximum_interval_width": 0.3,
+    "maximum_hops": 6
+  },
+  "evaluation": {
+    "minimum_confirmation_events": 50,
+    "maximum_brier": 0.15,
+    "minimum_oracle_coverage": 0.85,
+    "minimum_terminal_positives": 10,
+    "minimum_reliability_bin_size": 8,
+    "minimum_ci_error_spearman": 0.0,
+    "maximum_reproduction_delta": 0.05,
+    "require_non_naive_improvement": true,
+    "require_positive_skill_vs_climatology": false,
+    "require_root_ablation_improvement": true
+  },
+  "oracle": {
+    "rows": 1600,
+    "draws": 800,
+    "minimum_hops": 1,
+    "maximum_hops": 6,
+    "seed": 20260904
+  }
+}

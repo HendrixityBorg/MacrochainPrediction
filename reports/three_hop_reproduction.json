@@ -1,0 +1,33 @@
+{
+  "seed": 20261680,
+  "checks": [
+    {
+      "event_id": "NFP_201212_REL_20130104",
+      "hop": 1,
+      "original_p_i": 0.4461657261470315,
+      "reproduced_p_i": 0.4461657261470315,
+      "original_n_i": 63.5128838585354,
+      "reproduced_n_i": 63.5128838585354,
+      "absolute_delta": 0.0
+    },
+    {
+      "event_id": "NFP_201209_REL_20121005",
+      "hop": 2,
+      "original_p_i": 0.502263303669318,
+      "reproduced_p_i": 0.502263303669318,
+      "original_n_i": 21.06495016347412,
+      "reproduced_n_i": 21.06495016347412,
+      "absolute_delta": 0.0
+    },
+    {
+      "event_id": "NFP_201812_REL_20190104",
+      "hop": 3,
+      "original_p_i": 0.43573997568031536,
+      "reproduced_p_i": 0.43573997568031536,
+      "original_n_i": 14.861855942812628,
+      "reproduced_n_i": 14.861855942812628,
+      "absolute_delta": 0.0
+    }
+  ],
+  "maximum_absolute_delta": 0.0
+}

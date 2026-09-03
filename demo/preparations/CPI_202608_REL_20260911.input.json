@@ -1,0 +1,66 @@
+{
+  "event_id": "CPI_202608_REL_20260911",
+  "topic": "cpi",
+  "release_time_utc": "2026-09-11T12:30:00Z",
+  "seal_deadline_utc": "2026-09-11T12:45:00Z",
+  "root_measure": "core_cpi_first_release_mom_pct",
+  "root_actual": null,
+  "root_consensus_or_nowcast": 0.203341742698412,
+  "root_scale": 0.13461419765634342,
+  "expectation_asof_utc": "2026-09-03T04:16:00Z",
+  "scale_asof_utc": "2026-09-03T04:16:00Z",
+  "pre_event_features": {
+    "pre_event_real_rate": null,
+    "policy_regime": "not_used_by_locked_model",
+    "attention_proxy": null,
+    "feature_policy": "locked model uses only standardized root magnitude and sign"
+  },
+  "source_records": [
+    {
+      "source_id": "bls_cpi_schedule",
+      "url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+      "retrieved_at_utc": "2026-09-03T04:14:00Z",
+      "local_path": "demo/evidence/CPI_202608_bls_schedule_20260903.json",
+      "sha256": "2ebde54ad8374388f3822567d74d147a884fe0f7d612e05aa84e4d1355b8d3f2"
+    },
+    {
+      "source_id": "cleveland_fed_core_cpi_nowcast",
+      "url": "https://www.clevelandfed.org/-/media/files/webcharts/inflationnowcasting/nowcast_month.json?sc_lang=en",
+      "retrieved_at_utc": "2026-09-03T04:16:00Z",
+      "local_path": "demo/evidence/CPI_202608_cleveland_snapshot_20260902.json",
+      "sha256": "ae4663ce49540c5889650f7857c541b7b35b831ba2ddc814aba10f294c43857e"
+    },
+    {
+      "source_id": "cpi_core_nowcast_error_trailing_60_scale",
+      "url": "local-derived://cpi-core-nowcast-error-trailing-60",
+      "retrieved_at_utc": "2026-09-03T04:16:00Z",
+      "local_path": "demo/evidence/CPI_202608_root_scale_20260902.json",
+      "sha256": "56abe02a7145c4fdba29b276f4c95125f164ffca04c92857f537b7c84c14c183"
+    }
+  ],
+  "outcome_windows": {
+    "policy": {
+      "main": "H.15 2Y nominal yield",
+      "window": "previous valid market close to 2026-09-11 close",
+      "scale": "prior 60 valid daily changes, minimum 40, ending before release"
+    },
+    "real_rate": {
+      "main": "H.15 5Y inflation-indexed yield",
+      "window": "previous valid market close to 2026-09-11 close",
+      "scale": "prior 60 valid daily changes, minimum 40, ending before release"
+    },
+    "gold": {
+      "main": "GLD adjusted close",
+      "window": "previous valid market close to 2026-09-11 close",
+      "scale": "prior 60 valid close-to-close log returns, minimum 40, ending before release"
+    }
+  },
+  "decision_rule": {
+    "open_only_if_ci_lower_above_break_even": true,
+    "break_even_probability": 0.26,
+    "maximum_ci_width": 0.3,
+    "position_rule": "No position unless lower 90% bound exceeds 0.26; abstain when width exceeds 0.30; no discretionary override."
+  },
+  "tracking_due_utc": "2027-03-11T12:45:00Z",
+  "notes": "Expectation, scale, windows and decision rule are precommitted. After release, add only root_actual and root_actual_source, then seal before the deadline."
+}

@@ -1,0 +1,54 @@
+{
+  "status": "frozen_post_label_nonperformance_bugfix",
+  "protocol_sha256": "9fe0b38919e998b37d69c37c211ce5b7cf837bd38aff44a24c94e764951f23dc",
+  "frozen_at_utc": "2026-09-03T03:57:57.304079+00:00",
+  "previous_protocol_sha256": "4be688b56ed1616fbca76bed0df84cff469ed338f6b260f7e679116d0eed4476",
+  "previous_frozen_at_utc": "2026-09-03T03:54:22.286472+00:00",
+  "amendment_file": "preregistration/AMENDMENT_001_ZERO_RESPONSE_AND_APPLICABILITY.zh-CN.md",
+  "amendment_sha256": "b177b65528027e732ae0c3441eb1694ca6751a2cb71777da5c192f13f22b39a4",
+  "files": [
+    {
+      "path": "config/default.json",
+      "sha256": "29036c6a62ec7eff5c0c94be59144ceb59f79a288b351a8b0ea1e0afe66bf0bc"
+    },
+    {
+      "path": "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md",
+      "sha256": "b93c7719ab0292f1d98bd3a1ebd9528dad80e76bcc39c894e0a07f4d0d560ae3"
+    },
+    {
+      "path": "preregistration/S_GRADE_MATRIX.json",
+      "sha256": "3010a8c091ed5826eef59bb3b0123f2c6e1edda36841a7ce34e89caea8ed3c22"
+    },
+    {
+      "path": "src/macro_gold_latent/data.py",
+      "sha256": "76b36a44bff59fc45719953c4498d987cc2034b2f2a6b52ed3d7aec8269705db"
+    },
+    {
+      "path": "src/macro_gold_latent/latent.py",
+      "sha256": "bc25afa4a9bea959b828d0488e0fe391678c1eb5c19db4cae433785ad8be064c"
+    },
+    {
+      "path": "src/macro_gold_latent/model.py",
+      "sha256": "9f4fe9f06d1e7c12db7af622fcec3a59c29b507e794f8870b138d70ab19800ba"
+    },
+    {
+      "path": "src/macro_gold_latent/stopping.py",
+      "sha256": "1497e631e5df23304953e6cc9060dc2f47139b9adf402f3b342dfb9c4858c493"
+    },
+    {
+      "path": "src/macro_gold_latent/evaluate.py",
+      "sha256": "1c5ec0838297d0c3be6aa3518fbd2bc592e9580d5949ebd6d1bf75a04a1bd2a9"
+    },
+    {
+      "path": "src/macro_gold_latent/oracle.py",
+      "sha256": "0a503a268673b1dd3918ecd6fe85fca02ba9d96942b19c4c6acf1bd96c3ebd77"
+    },
+    {
+      "path": "src/macro_gold_latent/gates.py",
+      "sha256": "74f902224e0637d00418e6e1aa359285e802b6958ad78cc4684825a403da04fb"
+    }
+  ],
+  "external_timestamp": null,
+  "requires_independent_acceptance": true,
+  "warning": "Confirmation labels existed before this bugfix lock. Full S evidence requires explicit independent acceptance of the mechanical amendment."
+}

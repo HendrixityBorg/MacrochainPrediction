@@ -1,0 +1,139 @@
+{
+  "passes": true,
+  "checks": {
+    "event_ids_unique": true,
+    "candidate_universe_71_plus_168": true,
+    "confirmation_evaluable_ge_50": true,
+    "no_scale_time_leakage": true,
+    "standardization_recomputes": true,
+    "frozen_event_hash_matches": true,
+    "base_lock_precedes_first_label_generation": true,
+    "base_to_amendment_lock_chain_valid": true,
+    "all_available_raw_source_hashes_match": true
+  },
+  "events": {
+    "total": 239,
+    "by_split": {
+      "development": 71,
+      "confirmation": 168
+    },
+    "confirmation_evaluable": 164,
+    "primary_missing": 6
+  },
+  "exclusions": {
+    "duplicate_ids": [],
+    "missing_primary_event_ids": [
+      "NFP_200703_REL_20070406",
+      "NFP_201003_REL_20100402",
+      "NFP_201203_REL_20120406",
+      "NFP_201503_REL_20150403",
+      "NFP_202103_REL_20210402",
+      "NFP_202303_REL_20230407"
+    ],
+    "scale_time_leaks": [],
+    "z_mismatches": []
+  },
+  "lock_timeline": {
+    "base_lock": "2026-09-03T03:54:22.286472+00:00",
+    "first_label_generation": "2026-09-03T03:54:43.646988+00:00",
+    "amended_lock": "2026-09-03T06:55:51.054430+00:00",
+    "base_protocol_sha256": "4be688b56ed1616fbca76bed0df84cff469ed338f6b260f7e679116d0eed4476",
+    "amended_protocol_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+    "amendment_chain": [
+      {
+        "amendment_file": "preregistration/AMENDMENT_001_ZERO_RESPONSE_AND_APPLICABILITY.zh-CN.md",
+        "amendment_sha256": "b177b65528027e732ae0c3441eb1694ca6751a2cb71777da5c192f13f22b39a4",
+        "frozen_at_utc": "2026-09-03T03:57:57.304079+00:00"
+      },
+      {
+        "amendment_file": "preregistration/AMENDMENT_002_LIVE_DEMO_TOPIC.zh-CN.md",
+        "amendment_sha256": "bb2bcd99adcc7dc3335f21d04fdacb87eca17fce9b5813f2f07516f58da8fafa",
+        "frozen_at_utc": "2026-09-03T05:41:19.599345+00:00"
+      },
+      {
+        "amendment_file": "preregistration/AMENDMENT_003_SUBMISSION_GOVERNANCE.zh-CN.md",
+        "amendment_sha256": "1de85d64adc48fc2c42d984d5c4d257064fc0dcb08b4b53e7222581eb24a00c1",
+        "frozen_at_utc": "2026-09-03T06:20:49.915260+00:00"
+      },
+      {
+        "amendment_file": "preregistration/AMENDMENT_004_EXECUTION_AND_SUBMISSION_INTEGRITY.zh-CN.md",
+        "amendment_sha256": "a22d65e434db0c7297b4a03106a062534a15011d3783bfe7522c636b03cfdf74",
+        "frozen_at_utc": "2026-09-03T06:55:51.054148+00:00"
+      }
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "philadelphia_fed_employ_first_releases",
+      "path": "data/raw/employ.xlsx",
+      "available": true,
+      "hash_matches": true,
+      "redistributable": true
+    },
+    {
+      "source_id": "alfred_employment_situation_release_dates",
+      "path": "data/raw/release_dates_50.txt",
+      "available": true,
+      "hash_matches": true,
+      "redistributable": true
+    },
+    {
+      "source_id": "federal_reserve_h15_nominal",
+      "path": "data/raw/h15_nominal.csv",
+      "available": true,
+      "hash_matches": true,
+      "redistributable": true
+    },
+    {
+      "source_id": "federal_reserve_h15_real",
+      "path": "data/raw/h15_real.csv",
+      "available": true,
+      "hash_matches": true,
+      "redistributable": true
+    },
+    {
+      "source_id": "yahoo_ZT=F",
+      "path": "data/raw/yahoo_zt.json",
+      "available": false,
+      "hash_matches": false,
+      "redistributable": false
+    },
+    {
+      "source_id": "yahoo_TIP",
+      "path": "data/raw/yahoo_tip.json",
+      "available": false,
+      "hash_matches": false,
+      "redistributable": false
+    },
+    {
+      "source_id": "yahoo_GLD",
+      "path": "data/raw/yahoo_gld.json",
+      "available": false,
+      "hash_matches": false,
+      "redistributable": false
+    },
+    {
+      "source_id": "yahoo_GC=F",
+      "path": "data/raw/yahoo_gc.json",
+      "available": false,
+      "hash_matches": false,
+      "redistributable": false
+    },
+    {
+      "source_id": "yahoo_DX-Y.NYB",
+      "path": "data/raw/yahoo_dxy.json",
+      "available": false,
+      "hash_matches": false,
+      "redistributable": false
+    },
+    {
+      "source_id": "yahoo_UUP",
+      "path": "data/raw/yahoo_uup.json",
+      "available": false,
+      "hash_matches": false,
+      "redistributable": false
+    }
+  ],
+  "raw_sources_available": 4,
+  "note": "Raw sources are optional in offline review. Every available raw source must match; the frozen normalized file and manifest are the required isolated input."
+}

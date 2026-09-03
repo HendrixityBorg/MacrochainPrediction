@@ -1,0 +1,8 @@
+{
+  "mode": "non_destructive_rebuild_audit",
+  "matches_frozen_exactly": true,
+  "frozen_rows": 239,
+  "rebuilt_rows": 239,
+  "frozen_sha256": "208f786576e187dc63ae2446844df5735b7b2f2f1936483f3c89edc164a7a775",
+  "note": "Amended protocol never overwrites confirmation v1; a differing rebuild requires a new dataset version."
+}

@@ -1,0 +1,11 @@
+{
+  "batch_id": "EXTERNAL_TOPIC_V1",
+  "topic": "FILL_WITH_MACRO_EVENT_FAMILY",
+  "created_at_utc": "",
+  "protocol_sha256": "9fe0b38919e998b37d69c37c211ce5b7cf837bd38aff44a24c94e764951f23dc",
+  "model_run_sha256": "f98ef64c2925d394171b5235740ff00e055d50a12d43efb5c939e1885ff6aa12",
+  "custodian_attestation_reference": "",
+  "prediction_file_sha256": "",
+  "minimum_events": 50,
+  "status": "prepared_before_label_access"
+}

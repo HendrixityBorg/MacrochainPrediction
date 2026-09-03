@@ -1,0 +1,16 @@
+{
+  "weak_evidence_30pct": {
+    "mean": 0.3000621674384214,
+    "ci_lower": 0.1471423546784334,
+    "ci_upper": 0.4768177837170777,
+    "ci_width": 0.32967542903864433
+  },
+  "strong_evidence_60pct": {
+    "mean": 0.5499189056425805,
+    "ci_lower": 0.44397593943413116,
+    "ci_upper": 0.6537881904149441,
+    "ci_width": 0.2098122509808129
+  },
+  "center_moves_up": true,
+  "ci_narrows": true
+}

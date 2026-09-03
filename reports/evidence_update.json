@@ -1,0 +1,23 @@
+{
+  "controlled_change": "only hop-1 evidence changes; p2, p3 and cutoff draws are paired",
+  "weak_evidence_30pct": {
+    "changed_hop_mean": 0.31794917446067283,
+    "changed_hop_effective_n": 20,
+    "chain_mean": 0.07465470203691295,
+    "chain_ci_lower": 0.039097003643783886,
+    "chain_ci_upper": 0.11576346277372296,
+    "chain_ci_width": 0.07666645912993908
+  },
+  "strong_evidence_60pct": {
+    "changed_hop_mean": 0.5989880212710389,
+    "changed_hop_effective_n": 200,
+    "chain_mean": 0.14065369487524185,
+    "chain_ci_lower": 0.12083410390228332,
+    "chain_ci_upper": 0.16157563747884382,
+    "chain_ci_width": 0.040741533576560504
+  },
+  "center_moves_up": true,
+  "ci_narrows": true,
+  "seed": 73019,
+  "draws": 120000
+}

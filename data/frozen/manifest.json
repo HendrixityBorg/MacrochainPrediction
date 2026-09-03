@@ -1,0 +1,91 @@
+{
+  "dataset_version": "nfp_gold_confirmation_v1",
+  "generated_at_utc": "2026-09-03T03:54:43.646988+00:00",
+  "protocol_sha256": "4be688b56ed1616fbca76bed0df84cff469ed338f6b260f7e679116d0eed4476",
+  "event_file": "data/frozen/events.csv",
+  "event_file_sha256": "208f786576e187dc63ae2446844df5735b7b2f2f1936483f3c89edc164a7a775",
+  "events_total": 239,
+  "primary_complete": {
+    "development": 69,
+    "confirmation": 164
+  },
+  "confirmation_label_access_warning": "Raw price histories were locally accessible; third-party custody attestation remains required for full S evidence.",
+  "sources": [
+    {
+      "source_id": "philadelphia_fed_employ_first_releases",
+      "url": "https://www.philadelphiafed.org/-/media/FRBP/Assets/Surveys-And-Data/real-time-data/data-files/xlsx/employ_level_first_second_third.xlsx",
+      "path": "data/raw/employ.xlsx",
+      "sha256": "8af43817875de1075966ebb668f42ddd7367db908d7897a59744917ef167f755",
+      "cached": true
+    },
+    {
+      "source_id": "alfred_employment_situation_release_dates",
+      "url": "https://alfred.stlouisfed.org/release/downloaddates?ff=txt&rid=50",
+      "path": "data/raw/release_dates_50.txt",
+      "sha256": "b796dbd0eac6d9fd3e17ef1280bf85abe0e8b6e91df1205809e70b9ba0cf5a4b",
+      "cached": true
+    },
+    {
+      "source_id": "federal_reserve_h15_nominal",
+      "url": "https://www.federalreserve.gov/datadownload/Output.aspx?filetype=csv&from=&label=include&lastobs=&layout=seriescolumn&rel=H15&series=bf17364827e38702b42a58cf8eaa3f78&to=&type=package",
+      "path": "data/raw/h15_nominal.csv",
+      "sha256": "dd00d34890aea66542962d4e00c3650e37e7303bdcdea95963616a6ca09fce87",
+      "cached": true
+    },
+    {
+      "source_id": "federal_reserve_h15_real",
+      "url": "https://www.federalreserve.gov/datadownload/Output.aspx?rel=H15&series=0b98a66d3ff5e1ea0fbf88adc59b387f&lastobs=&from=&to=&filetype=csv&label=include&layout=seriescolumn&type=package",
+      "path": "data/raw/h15_real.csv",
+      "sha256": "5be7cb777f2a50c090ec837ab67ad98e90e36ff23935d9d8e1e1bbdb97ea0142",
+      "cached": true
+    },
+    {
+      "source_id": "yahoo_ZT=F",
+      "redistributable": false,
+      "url": "https://query2.finance.yahoo.com/v8/finance/chart/ZT%3DF?period1=1072915200&period2=1893456000&interval=1d&events=history",
+      "path": "data/raw/yahoo_zt.json",
+      "sha256": "1f36bff6184615be1adeb576578d5ad37ce794b249c13a30005be74f8262dee4",
+      "cached": true
+    },
+    {
+      "source_id": "yahoo_TIP",
+      "redistributable": false,
+      "url": "https://query2.finance.yahoo.com/v8/finance/chart/TIP?period1=1072915200&period2=1893456000&interval=1d&events=history",
+      "path": "data/raw/yahoo_tip.json",
+      "sha256": "9198e3f8407f96f1376cec3bff2883b5a1730e9692a4acc4b4e124d9001589b9",
+      "cached": true
+    },
+    {
+      "source_id": "yahoo_GLD",
+      "redistributable": false,
+      "url": "https://query2.finance.yahoo.com/v8/finance/chart/GLD?period1=1072915200&period2=1893456000&interval=1d&events=history",
+      "path": "data/raw/yahoo_gld.json",
+      "sha256": "cffc9bd91365864e1969d125a13ee2eeae3f44374a8337e4a94eddc8ffad287e",
+      "cached": true
+    },
+    {
+      "source_id": "yahoo_GC=F",
+      "redistributable": false,
+      "url": "https://query2.finance.yahoo.com/v8/finance/chart/GC%3DF?period1=1072915200&period2=1893456000&interval=1d&events=history",
+      "path": "data/raw/yahoo_gc.json",
+      "sha256": "dde2a4acfa0b6fafad13fd03b21e79cf06b521cf30e1ed0662dd6da52c3e6f78",
+      "cached": true
+    },
+    {
+      "source_id": "yahoo_DX-Y.NYB",
+      "redistributable": false,
+      "url": "https://query2.finance.yahoo.com/v8/finance/chart/DX-Y.NYB?period1=1072915200&period2=1893456000&interval=1d&events=history",
+      "path": "data/raw/yahoo_dxy.json",
+      "sha256": "2abdecea5830986f7a96a4a77f51a66ae7015a1d96488f3b6807200e2e1f0585",
+      "cached": true
+    },
+    {
+      "source_id": "yahoo_UUP",
+      "redistributable": false,
+      "url": "https://query2.finance.yahoo.com/v8/finance/chart/UUP?period1=1072915200&period2=1893456000&interval=1d&events=history",
+      "path": "data/raw/yahoo_uup.json",
+      "sha256": "a4840dacc2e010d8281489df6cb8f77cc34ce1661bdac1c6031f392e01b7aedb",
+      "cached": true
+    }
+  ]
+}

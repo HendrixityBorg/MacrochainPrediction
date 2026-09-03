@@ -1,0 +1,16 @@
+{
+  "source_id": "cleveland_fed_inflation_nowcast_month_20260902",
+  "source_url": "https://www.clevelandfed.org/-/media/files/webcharts/inflationnowcasting/nowcast_month.json?sc_lang=en",
+  "retrieved_at_utc": "2026-09-03T04:16:00Z",
+  "upstream_payload_sha256": "75d586379cba3b7d8a412a46ea9c3184b4756fb840f52d88b6f3e3ad816503a5",
+  "chart_canonical_sha256": "da872fb8a09e168b35b9d49cb1c82012e9a0d952a6a8fd0fb62518bffb109d93",
+  "chart_comment": "2026-09-02 00:00",
+  "reference_period": "2026-08",
+  "forecast_date_label": "09/02",
+  "headline_cpi_mom_nowcast_pct": 0.359180537639179,
+  "core_cpi_mom_nowcast_pct": 0.203341742698412,
+  "headline_pce_mom_nowcast_pct": 0.35365703803959,
+  "core_pce_mom_nowcast_pct": 0.274534658779718,
+  "interpretation": "Cleveland Fed model nowcast; not a market survey consensus",
+  "extraction_rule": "Select chart subcaption 2026-8 and the last non-empty CPI/Core CPI value jointly available strictly before release."
+}

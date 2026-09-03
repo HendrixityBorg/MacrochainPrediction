@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MacroGoldEventRecord",
+  "type": "object",
+  "required": [
+    "event_id", "topic", "reference_period", "release_date", "split",
+    "root_response", "root_z", "policy_h15_2y_z", "real_h15_5y_z", "gold_gld_z"
+  ],
+  "properties": {
+    "event_id": {"type": "string"},
+    "topic": {"enum": ["nfp", "cpi"]},
+    "reference_period": {"type": "string"},
+    "release_date": {"type": "string", "format": "date"},
+    "split": {"enum": ["development", "confirmation", "live_demo"]},
+    "evidence_status": {"type": "string"},
+    "root_response": {"type": "number"},
+    "root_z": {"type": "number"},
+    "external_cutoff": {"type": "integer", "minimum": 0, "maximum": 1},
+    "scheduled_cutoff": {"type": "integer", "minimum": 0, "maximum": 1}
+  },
+  "additionalProperties": true
+}
+

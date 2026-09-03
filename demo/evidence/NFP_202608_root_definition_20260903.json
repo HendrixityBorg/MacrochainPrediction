@@ -1,0 +1,30 @@
+{
+  "source_id": "nfp_first_release_trailing_reference_class",
+  "source_url": "https://www.philadelphiafed.org/surveys-and-data/real-time-data-research/employ",
+  "upstream_local_path": "data/raw/employ.xlsx",
+  "upstream_sha256": "8af43817875de1075966ebb668f42ddd7367db908d7897a59744917ef167f755",
+  "upstream_retrieved_at_utc": "2026-09-02T16:53:02.192062Z",
+  "computed_at_utc": "2026-09-03T05:28:57Z",
+  "reference_period": "2026:08",
+  "root_measure": "total_nonfarm_payroll_first_release_monthly_change_thousands",
+  "expectation_method": "median of the preceding 12 available Philadelphia Fed first-release monthly changes, exactly matching the locked historical root transformation",
+  "expected_change_thousands": 68.5,
+  "scale_method": "sample standard deviation (ddof=1) of the preceding 60 available root innovations, exactly matching macro_gold_latent.data._root_innovations",
+  "root_scale_thousands": 124.42677605270522,
+  "last_12_first_release_observations": [
+    {"reference_period": "2025:06", "change_thousands": 147.0},
+    {"reference_period": "2025:07", "change_thousands": 73.0},
+    {"reference_period": "2025:08", "change_thousands": 22.0},
+    {"reference_period": "2025:11", "change_thousands": 64.0},
+    {"reference_period": "2025:12", "change_thousands": 50.0},
+    {"reference_period": "2026:01", "change_thousands": 130.0},
+    {"reference_period": "2026:02", "change_thousands": -92.0},
+    {"reference_period": "2026:03", "change_thousands": 178.0},
+    {"reference_period": "2026:04", "change_thousands": 115.0},
+    {"reference_period": "2026:05", "change_thousands": 172.0},
+    {"reference_period": "2026:06", "change_thousands": 57.0},
+    {"reference_period": "2026:07", "change_thousands": -23.0}
+  ],
+  "missing_period_note": "The provider has no first-release values for 2025:09 and 2025:10. The locked implementation uses the preceding 12 available observations rather than imputing or changing the method after seeing an outcome.",
+  "interpretation": "This is a documented reference-class expectation, not a survey consensus. The released BLS headline is standardized as (actual - 68.5) / 124.42677605270522."
+}

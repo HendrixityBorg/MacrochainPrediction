@@ -1,0 +1,38 @@
+{
+  "comparison_status": "NON_IDENTICAL_COHORTS_DO_NOT_TREAT_AS_HEAD_TO_HEAD_MODEL_TEST",
+  "current_project": "macro-gold-latent-s",
+  "v2_project": "cpi-chain-uncertainty-s/reports/v2",
+  "metrics": {
+    "current": {
+      "evidence_status": "confirmation_protocol_locked_with_post_label_amendment_pending_acceptance",
+      "evaluation_events": 164,
+      "terminal_successes": 22,
+      "brier_main": 0.11927979325096628,
+      "brier_naive": 0.1284301630229179,
+      "brier_climatology": 0.1186151605614449,
+      "ece": 0.08018775395185505,
+      "oracle_ci90_coverage": 0.92,
+      "ci_width_error_spearman_rho": 0.7213962156353297,
+      "main_minus_naive_year_block_ci90": [-0.014223706512432847, -0.004140228527542503]
+    },
+    "v2": {
+      "evidence_status": "exploratory_v1_labels_seen",
+      "evaluation_events": 50,
+      "terminal_successes": 8,
+      "brier_main": 0.12409061748436578,
+      "brier_naive": 0.1510457969803377,
+      "brier_climatology": 0.14840277777777777,
+      "ece": 0.08108293417910253,
+      "oracle_ci90_coverage": 0.9577777777777777,
+      "ci_width_error_spearman_rho": 0.6648012158039702,
+      "main_minus_naive_moving_block_ci90": [-0.06200044193664921, 0.006412511327752026]
+    }
+  },
+  "derived_comparisons": {
+    "current_brier_minus_v2_brier": -0.0048108242333995,
+    "current_minus_own_climatology": 0.0006646326895213634,
+    "v2_minus_own_climatology": -0.02431216029341199,
+    "current_ece_minus_v2_ece": -0.0008951802272474801
+  },
+  "conclusion": "Current is materially stronger for S-grade evidence readiness and has a lower raw Brier, but it does not dominate v2 on every metric. V2 has better within-cohort skill versus climatology and higher oracle coverage; current has independent confirmation scale, robust superiority to the naive baseline, a stronger width-error association, a multi-measurement latent model, and a genuinely prospective sealing workflow."
+}

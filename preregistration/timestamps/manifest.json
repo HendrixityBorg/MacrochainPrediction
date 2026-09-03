@@ -1,0 +1,18 @@
+{
+  "status": "granted_and_verified",
+  "timestamp_utc": "2026-09-03T04:00:33Z",
+  "tsa": "DigiCert RFC3161 http://timestamp.digicert.com",
+  "policy_oid": "2.16.840.1.114412.7.1",
+  "serial_number": "71BED1EBE755E83A1C2553CFA28BA42F",
+  "message_imprint_sha256": "8e3009a000a252475d8c4758c494242e9f5ae781783b7094fd2096a8d9458e1c",
+  "files": {
+    "preregistration/PROTOCOL_LOCK.json": "8e3009a000a252475d8c4758c494242e9f5ae781783b7094fd2096a8d9458e1c",
+    "preregistration/timestamps/PROTOCOL_LOCK.tsq": "25a600ac039d8161b4dc9cdecee5196e782df43f585d792b1322a3b32555dfff",
+    "preregistration/timestamps/PROTOCOL_LOCK.tsr": "19d54f845ab78b4a08ae7981cfefad83517ec2d3fb0786987eb857fd7057ef6e",
+    "preregistration/timestamps/PROTOCOL_LOCK.tsr.txt": "53b4b98d8148e1b00a0741d2e8b87451089963dbb64fee31ff396eaf2d94c6b3",
+    "preregistration/timestamps/digicert_root_g4.cer": "709be12e9319a94329b4415774a3d0638ba500e5c2434e9f7c61ece53808434e",
+    "preregistration/timestamps/digicert_tsa_intermediate.pem": "5e13de210e735b614d6ec948361aadef9dd6c0ef575382a75f57fd59e183b90e"
+  },
+  "limitation": "This timestamp is after first confirmation-label generation and therefore proves only amendment immutability, not pre-label independence."
+}
+

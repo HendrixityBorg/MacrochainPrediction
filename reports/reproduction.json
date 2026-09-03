@@ -1,0 +1,59 @@
+{
+  "command": "python -m macro_gold_latent.cli run --offline",
+  "dataset_sha256": "208f786576e187dc63ae2446844df5735b7b2f2f1936483f3c89edc164a7a775",
+  "protocol_lock": {
+    "valid": true,
+    "reason": "ok",
+    "protocol_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+    "current_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+    "files": [
+      {
+        "path": "config/default.json",
+        "sha256": "4fce7acd03cc268243cc3fd89d42051afb443a17e7ffc73f26048b5b96a76812"
+      },
+      {
+        "path": "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md",
+        "sha256": "c6629e2c8bb16d8061f34b72da8091903f3059daaef917db9309fb60b3daeeb5"
+      },
+      {
+        "path": "preregistration/S_GRADE_MATRIX.json",
+        "sha256": "ae13f65ef01d264cd0762fa8ee4cc9aa7f98689ae4417ede6ccdd4362a0035bb"
+      },
+      {
+        "path": "src/macro_gold_latent/data.py",
+        "sha256": "27ae8c74f47f34c703238f93fb50f1223ef7e88e8e11fb1ca8dbeebad66a276a"
+      },
+      {
+        "path": "src/macro_gold_latent/latent.py",
+        "sha256": "bc25afa4a9bea959b828d0488e0fe391678c1eb5c19db4cae433785ad8be064c"
+      },
+      {
+        "path": "src/macro_gold_latent/model.py",
+        "sha256": "b27f273920cd11d0ebaa5a8cf5021c44f189e414a504c94e7a88c0bba61a01cf"
+      },
+      {
+        "path": "src/macro_gold_latent/stopping.py",
+        "sha256": "4b0c8f4c4e816a7c177e6c49fe83a5521a403323a53bb12916ce852e2d7cd1d7"
+      },
+      {
+        "path": "src/macro_gold_latent/evaluate.py",
+        "sha256": "1c5ec0838297d0c3be6aa3518fbd2bc592e9580d5949ebd6d1bf75a04a1bd2a9"
+      },
+      {
+        "path": "src/macro_gold_latent/oracle.py",
+        "sha256": "0a503a268673b1dd3918ecd6fe85fca02ba9d96942b19c4c6acf1bd96c3ebd77"
+      },
+      {
+        "path": "src/macro_gold_latent/gates.py",
+        "sha256": "3fc889ba0df7ac74e56ad411ed18276d73feea29c84486792eb46eb59a9579c8"
+      }
+    ],
+    "frozen_at_utc": "2026-09-03T06:55:51.054430+00:00"
+  },
+  "outputs": {
+    "evaluation.json": "1952ccbe0730cf41a59be1c51bf49f17b835f90d9ffaef4f54a8ae53758525a5",
+    "oracle.json": "764bec186326e18c67d7ed5bc5d20801c23ca31cffad69e4dc9a05c892f22817",
+    "prediction_ledger.csv": "48d5ff1edd4371301bf5a0c33dcab9a0b16862c831bcd19fbd911e52027f49d8",
+    "three_hop_reproduction.json": "14b0f478deb5d47e3637085550014adf5d3f839a7df1b320c08ad072b662f304"
+  }
+}

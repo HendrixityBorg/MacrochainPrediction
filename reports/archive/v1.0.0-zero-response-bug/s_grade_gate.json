@@ -1,0 +1,410 @@
+{
+  "status": "NOT_S_READY",
+  "full_s_evidence_complete": false,
+  "protocol_lock": {
+    "valid": true,
+    "reason": "ok",
+    "protocol_sha256": "4be688b56ed1616fbca76bed0df84cff469ed338f6b260f7e679116d0eed4476",
+    "current_sha256": "4be688b56ed1616fbca76bed0df84cff469ed338f6b260f7e679116d0eed4476",
+    "files": [
+      {
+        "path": "config/default.json",
+        "sha256": "f7673aabd65023015eae013833de3c19841b106a29423e3aa22223fff95f118a"
+      },
+      {
+        "path": "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md",
+        "sha256": "df0d4ab991a26f7be0f17b573ada4376329a766bf7b1bbfc53889a0006ae9671"
+      },
+      {
+        "path": "preregistration/S_GRADE_MATRIX.json",
+        "sha256": "d28ecc62ebc000bb11c4c2f3abe63cfa81381c6d1b664c8b1d762ccf1af14212"
+      },
+      {
+        "path": "src/macro_gold_latent/data.py",
+        "sha256": "76b36a44bff59fc45719953c4498d987cc2034b2f2a6b52ed3d7aec8269705db"
+      },
+      {
+        "path": "src/macro_gold_latent/latent.py",
+        "sha256": "bc25afa4a9bea959b828d0488e0fe391678c1eb5c19db4cae433785ad8be064c"
+      },
+      {
+        "path": "src/macro_gold_latent/model.py",
+        "sha256": "29782bbda6ce896e95277b90b997b16f11d85c3cb46d3c338cc0989b76903c32"
+      },
+      {
+        "path": "src/macro_gold_latent/stopping.py",
+        "sha256": "1497e631e5df23304953e6cc9060dc2f47139b9adf402f3b342dfb9c4858c493"
+      },
+      {
+        "path": "src/macro_gold_latent/evaluate.py",
+        "sha256": "e9a8b518f0db9f6ab3c9789884a11e7ad56a46697ecb298a7f168646f5638f33"
+      },
+      {
+        "path": "src/macro_gold_latent/oracle.py",
+        "sha256": "0a503a268673b1dd3918ecd6fe85fca02ba9d96942b19c4c6acf1bd96c3ebd77"
+      },
+      {
+        "path": "src/macro_gold_latent/gates.py",
+        "sha256": "4584b2f4cd1751e4133cb665a6c0f2e82d2f7f25a998a6e005c16511893a315e"
+      }
+    ],
+    "frozen_at_utc": "2026-09-03T03:54:22.286472+00:00"
+  },
+  "gates": {
+    "repository_complete": {
+      "passed": true,
+      "evidence": {
+        "README.md": true,
+        "requirements.txt": true,
+        "config/default.json": true,
+        "run.sh": true,
+        "test.sh": true,
+        "Dockerfile": true,
+        "docs/METHODOLOGY.zh-CN.md": true,
+        "docs/DATA_SOURCES.zh-CN.md": true,
+        "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md": true,
+        "demo/TRACKING_PLAN.zh-CN.md": true
+      }
+    },
+    "isolated_reproduction": {
+      "passed": true,
+      "evidence": {
+        "seed": 20261680,
+        "checks": [
+          {
+            "event_id": "NFP_201212_REL_20130104",
+            "hop": 1,
+            "original_p_i": 0.46457901206367685,
+            "reproduced_p_i": 0.46457901206367685,
+            "original_n_i": 56.17014407301568,
+            "reproduced_n_i": 56.17014407301568,
+            "absolute_delta": 0.0
+          },
+          {
+            "event_id": "NFP_201209_REL_20121005",
+            "hop": 2,
+            "original_p_i": 0.5741548671411618,
+            "reproduced_p_i": 0.5741548671411618,
+            "original_n_i": 20.09885868138306,
+            "reproduced_n_i": 20.09885868138306,
+            "absolute_delta": 0.0
+          },
+          {
+            "event_id": "NFP_201812_REL_20190104",
+            "hop": 3,
+            "original_p_i": 0.4357380235545997,
+            "reproduced_p_i": 0.4357380235545997,
+            "original_n_i": 14.861855942812628,
+            "reproduced_n_i": 14.861855942812628,
+            "absolute_delta": 0.0
+          }
+        ],
+        "maximum_absolute_delta": 0.0
+      }
+    },
+    "per_hop_probability_and_effective_n": {
+      "passed": true,
+      "evidence": {
+        "evidence_rows": 492
+      }
+    },
+    "non_naive_model": {
+      "passed": true,
+      "evidence": {
+        "proposed_brier": 0.14466584957997694,
+        "naive_brier": 0.15584840426811025
+      }
+    },
+    "intrinsic_vs_external_separated": {
+      "passed": true,
+      "evidence": {
+        "rows": 164
+      }
+    },
+    "principled_stopping": {
+      "passed": true,
+      "evidence": {
+        "criteria": [
+          "credible bound",
+          "EVSI",
+          "review cost",
+          "terminal state",
+          "maximum-hop guardrail"
+        ]
+      }
+    },
+    "confirmation_n_ge_50": {
+      "passed": true,
+      "evidence": 133
+    },
+    "brier_lt_0_15": {
+      "passed": true,
+      "evidence": 0.14466584957997694
+    },
+    "reliability_report": {
+      "passed": true,
+      "evidence": {
+        "bins": [
+          {
+            "bin": 1,
+            "n": 14,
+            "mean_probability": 0.05425642876062363,
+            "observed_rate": 0.14285714285714285,
+            "absolute_gap": 0.08860071409651922,
+            "min_probability": 0.047477633122409615,
+            "max_probability": 0.058464767447367345
+          },
+          {
+            "bin": 2,
+            "n": 14,
+            "mean_probability": 0.061499230583069074,
+            "observed_rate": 0.07142857142857142,
+            "absolute_gap": 0.00992934084550235,
+            "min_probability": 0.05889586684566427,
+            "max_probability": 0.06353594944992
+          },
+          {
+            "bin": 3,
+            "n": 14,
+            "mean_probability": 0.0652456602786516,
+            "observed_rate": 0.07142857142857142,
+            "absolute_gap": 0.006182911149919826,
+            "min_probability": 0.06354050144196954,
+            "max_probability": 0.06646163370930629
+          },
+          {
+            "bin": 4,
+            "n": 13,
+            "mean_probability": 0.06690004520681449,
+            "observed_rate": 0.07692307692307693,
+            "absolute_gap": 0.01002303171626244,
+            "min_probability": 0.0664904177417784,
+            "max_probability": 0.06734359102459021
+          },
+          {
+            "bin": 5,
+            "n": 13,
+            "mean_probability": 0.07015091117329944,
+            "observed_rate": 0.23076923076923078,
+            "absolute_gap": 0.16061831959593134,
+            "min_probability": 0.06734965651733711,
+            "max_probability": 0.0825952530750763
+          },
+          {
+            "bin": 6,
+            "n": 13,
+            "mean_probability": 0.08570311866930512,
+            "observed_rate": 0.07692307692307693,
+            "absolute_gap": 0.008780041746228193,
+            "min_probability": 0.08260374326668898,
+            "max_probability": 0.08900668570160342
+          },
+          {
+            "bin": 7,
+            "n": 13,
+            "mean_probability": 0.09012229253877022,
+            "observed_rate": 0.3076923076923077,
+            "absolute_gap": 0.2175700151535375,
+            "min_probability": 0.0891078237121969,
+            "max_probability": 0.09155635197266657
+          },
+          {
+            "bin": 8,
+            "n": 13,
+            "mean_probability": 0.09285225657703171,
+            "observed_rate": 0.3076923076923077,
+            "absolute_gap": 0.214840051115276,
+            "min_probability": 0.09165033940616536,
+            "max_probability": 0.09368645494585345
+          },
+          {
+            "bin": 9,
+            "n": 13,
+            "mean_probability": 0.09461070969717024,
+            "observed_rate": 0.15384615384615385,
+            "absolute_gap": 0.059235444148983615,
+            "min_probability": 0.09377166813143062,
+            "max_probability": 0.09527531286563962
+          },
+          {
+            "bin": 10,
+            "n": 13,
+            "mean_probability": 0.0964127439814248,
+            "observed_rate": 0.23076923076923078,
+            "absolute_gap": 0.13435648678780598,
+            "min_probability": 0.09533779361814683,
+            "max_probability": 0.09873431646639746
+          }
+        ],
+        "expected_calibration_error": 0.08974801202044741
+      }
+    },
+    "hop_decay_report": {
+      "passed": true,
+      "evidence": [
+        {
+          "hop": 1,
+          "events": 133,
+          "prefix_successes": 56,
+          "prefix_rate": 0.42105263157894735
+        },
+        {
+          "hop": 2,
+          "events": 133,
+          "prefix_successes": 39,
+          "prefix_rate": 0.2932330827067669
+        },
+        {
+          "hop": 3,
+          "events": 133,
+          "prefix_successes": 22,
+          "prefix_rate": 0.16541353383458646
+        }
+      ]
+    },
+    "epistemic_ci": {
+      "passed": true,
+      "evidence": {
+        "sources": [
+          "measurement",
+          "link parameters",
+          "regime drift",
+          "external cutoff",
+          "common frailty"
+        ]
+      }
+    },
+    "oracle_90ci_coverage_ge_0_85": {
+      "passed": true,
+      "evidence": 0.92
+    },
+    "ci_width_error_positive_significant": {
+      "passed": true,
+      "evidence": {
+        "spearman_rho": 0.6798339131410617,
+        "permutation_p_value_two_sided": 0.0002,
+        "median_ci_width": 0.1565898433699337,
+        "narrow_mean_absolute_error": 0.16970694942333997,
+        "wide_mean_absolute_error": 0.26265211348769174,
+        "direction_ok": true
+      }
+    },
+    "evidence_strength_bayesian_direction": {
+      "passed": true,
+      "evidence": {
+        "weak_evidence_30pct": {
+          "mean": 0.3000621674384214,
+          "ci_lower": 0.1471423546784334,
+          "ci_upper": 0.4768177837170777,
+          "ci_width": 0.32967542903864433
+        },
+        "strong_evidence_60pct": {
+          "mean": 0.5499189056425805,
+          "ci_lower": 0.44397593943413116,
+          "ci_upper": 0.6537881904149441,
+          "ci_width": 0.2098122509808129
+        },
+        "center_moves_up": true,
+        "ci_narrows": true
+      }
+    },
+    "rare_method_calibration_n_ge_20": {
+      "passed": false,
+      "evidence": {
+        "scope": "same macro-release link estimator on known 2005-2010 NFP outcomes",
+        "minimum_known_outcomes": 16,
+        "records": [
+          {
+            "hop": 1,
+            "known_outcomes": 61,
+            "predicted_soft_rate": 0.313570211390896,
+            "observed_primary_rate": 0.36065573770491804,
+            "absolute_calibration_error": 0.04708552631402202,
+            "method": "prefix_conditional_latent_fractional_logistic"
+          },
+          {
+            "hop": 2,
+            "known_outcomes": 22,
+            "predicted_soft_rate": 0.5357310332136569,
+            "observed_primary_rate": 0.7272727272727273,
+            "absolute_calibration_error": 0.1915416940590704,
+            "method": "prefix_conditional_latent_fractional_logistic"
+          },
+          {
+            "hop": 3,
+            "known_outcomes": 16,
+            "predicted_soft_rate": 0.40749867862746403,
+            "observed_primary_rate": 0.3125,
+            "absolute_calibration_error": 0.09499867862746403,
+            "method": "prefix_conditional_latent_fractional_logistic"
+          }
+        ],
+        "note": "No confirmation outcome is used. Rare-event fallback is not triggered when conditional n>=5; this track record documents the estimator if fallback is needed."
+      }
+    },
+    "three_hop_reproduction_within_0_05": {
+      "passed": true,
+      "evidence": {
+        "seed": 20261680,
+        "checks": [
+          {
+            "event_id": "NFP_201212_REL_20130104",
+            "hop": 1,
+            "original_p_i": 0.46457901206367685,
+            "reproduced_p_i": 0.46457901206367685,
+            "original_n_i": 56.17014407301568,
+            "reproduced_n_i": 56.17014407301568,
+            "absolute_delta": 0.0
+          },
+          {
+            "event_id": "NFP_201209_REL_20121005",
+            "hop": 2,
+            "original_p_i": 0.5741548671411618,
+            "reproduced_p_i": 0.5741548671411618,
+            "original_n_i": 20.09885868138306,
+            "reproduced_n_i": 20.09885868138306,
+            "absolute_delta": 0.0
+          },
+          {
+            "event_id": "NFP_201812_REL_20190104",
+            "hop": 3,
+            "original_p_i": 0.4357380235545997,
+            "reproduced_p_i": 0.4357380235545997,
+            "original_n_i": 14.861855942812628,
+            "reproduced_n_i": 14.861855942812628,
+            "absolute_delta": 0.0
+          }
+        ],
+        "maximum_absolute_delta": 0.0
+      }
+    },
+    "complete_report": {
+      "passed": true,
+      "evidence": "reports/SUBMISSION_REPORT.zh-CN.md"
+    },
+    "independent_custody_attestation": {
+      "passed": false,
+      "evidence": {
+        "status": "missing"
+      }
+    },
+    "prospective_current_macro_demo": {
+      "passed": false,
+      "evidence": {
+        "valid_prospective_seals": 0,
+        "records": [],
+        "passes": false
+      }
+    },
+    "six_month_tracking_plan": {
+      "passed": true,
+      "evidence": "demo/TRACKING_PLAN.zh-CN.md"
+    }
+  },
+  "failed_required_gates": [
+    "rare_method_calibration_n_ge_20",
+    "independent_custody_attestation",
+    "prospective_current_macro_demo"
+  ],
+  "claim_policy": "S_READY is permitted only when failed_required_gates is empty; empirical failures are immutable evidence, not tuning prompts."
+}

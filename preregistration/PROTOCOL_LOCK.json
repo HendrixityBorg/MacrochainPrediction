@@ -1,0 +1,77 @@
+{
+  "status": "frozen_protocol_amendment_chain",
+  "protocol_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+  "frozen_at_utc": "2026-09-03T06:55:51.054430+00:00",
+  "previous_protocol_sha256": "f5f00f4fbd8bf876e91d06b83e4a49c0daae046bf06214a09adaf90bf313e650",
+  "previous_frozen_at_utc": "2026-09-03T06:20:49.915870+00:00",
+  "base_protocol_sha256": "4be688b56ed1616fbca76bed0df84cff469ed338f6b260f7e679116d0eed4476",
+  "amendment_file": "preregistration/AMENDMENT_004_EXECUTION_AND_SUBMISSION_INTEGRITY.zh-CN.md",
+  "amendment_sha256": "a22d65e434db0c7297b4a03106a062534a15011d3783bfe7522c636b03cfdf74",
+  "amendment_chain": [
+    {
+      "amendment_file": "preregistration/AMENDMENT_001_ZERO_RESPONSE_AND_APPLICABILITY.zh-CN.md",
+      "amendment_sha256": "b177b65528027e732ae0c3441eb1694ca6751a2cb71777da5c192f13f22b39a4",
+      "frozen_at_utc": "2026-09-03T03:57:57.304079+00:00"
+    },
+    {
+      "amendment_file": "preregistration/AMENDMENT_002_LIVE_DEMO_TOPIC.zh-CN.md",
+      "amendment_sha256": "bb2bcd99adcc7dc3335f21d04fdacb87eca17fce9b5813f2f07516f58da8fafa",
+      "frozen_at_utc": "2026-09-03T05:41:19.599345+00:00"
+    },
+    {
+      "amendment_file": "preregistration/AMENDMENT_003_SUBMISSION_GOVERNANCE.zh-CN.md",
+      "amendment_sha256": "1de85d64adc48fc2c42d984d5c4d257064fc0dcb08b4b53e7222581eb24a00c1",
+      "frozen_at_utc": "2026-09-03T06:20:49.915260+00:00"
+    },
+    {
+      "amendment_file": "preregistration/AMENDMENT_004_EXECUTION_AND_SUBMISSION_INTEGRITY.zh-CN.md",
+      "amendment_sha256": "a22d65e434db0c7297b4a03106a062534a15011d3783bfe7522c636b03cfdf74",
+      "frozen_at_utc": "2026-09-03T06:55:51.054148+00:00"
+    }
+  ],
+  "files": [
+    {
+      "path": "config/default.json",
+      "sha256": "4fce7acd03cc268243cc3fd89d42051afb443a17e7ffc73f26048b5b96a76812"
+    },
+    {
+      "path": "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md",
+      "sha256": "c6629e2c8bb16d8061f34b72da8091903f3059daaef917db9309fb60b3daeeb5"
+    },
+    {
+      "path": "preregistration/S_GRADE_MATRIX.json",
+      "sha256": "ae13f65ef01d264cd0762fa8ee4cc9aa7f98689ae4417ede6ccdd4362a0035bb"
+    },
+    {
+      "path": "src/macro_gold_latent/data.py",
+      "sha256": "27ae8c74f47f34c703238f93fb50f1223ef7e88e8e11fb1ca8dbeebad66a276a"
+    },
+    {
+      "path": "src/macro_gold_latent/latent.py",
+      "sha256": "bc25afa4a9bea959b828d0488e0fe391678c1eb5c19db4cae433785ad8be064c"
+    },
+    {
+      "path": "src/macro_gold_latent/model.py",
+      "sha256": "b27f273920cd11d0ebaa5a8cf5021c44f189e414a504c94e7a88c0bba61a01cf"
+    },
+    {
+      "path": "src/macro_gold_latent/stopping.py",
+      "sha256": "4b0c8f4c4e816a7c177e6c49fe83a5521a403323a53bb12916ce852e2d7cd1d7"
+    },
+    {
+      "path": "src/macro_gold_latent/evaluate.py",
+      "sha256": "1c5ec0838297d0c3be6aa3518fbd2bc592e9580d5949ebd6d1bf75a04a1bd2a9"
+    },
+    {
+      "path": "src/macro_gold_latent/oracle.py",
+      "sha256": "0a503a268673b1dd3918ecd6fe85fca02ba9d96942b19c4c6acf1bd96c3ebd77"
+    },
+    {
+      "path": "src/macro_gold_latent/gates.py",
+      "sha256": "3fc889ba0df7ac74e56ad411ed18276d73feea29c84486792eb46eb59a9579c8"
+    }
+  ],
+  "external_timestamp": null,
+  "requires_independent_acceptance": false,
+  "warning": "This is a chained amendment. Historical model/label changes remain immutable and disclosed; no participant-defined external signature is required. Live-demo amendments must be frozen before the live outcome."
+}

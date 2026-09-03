@@ -1,0 +1,353 @@
+{
+  "evidence_boundary": "development-only fit; confirmation batch labels never enter prediction",
+  "confirmation_events": 164,
+  "terminal_successes": 22,
+  "terminal_rate": 0.13414634146341464,
+  "brier": {
+    "latent_conditional_dynamic": 0.11927979325096628,
+    "naive_marginal_product": 0.1284301630229179,
+    "conditional_beta_chain": 0.11946041290684678,
+    "climatology": 0.1186151605614449,
+    "always_zero": 0.13414634146341464,
+    "primary_only": 0.11744631234227935,
+    "proxy_only": 0.12738229445377175,
+    "no_root_ablation": 0.12124425057949062,
+    "direct_terminal_logistic": 0.11654609463239946
+  },
+  "brier_skill_vs_climatology": -0.005603269315452186,
+  "non_naive_minus_naive_brier": -0.00915036977195162,
+  "reliability": {
+    "bins": [
+      {
+        "bin": 1,
+        "n": 17,
+        "mean_probability": 0.04547347820786385,
+        "observed_rate": 0.11764705882352941,
+        "absolute_gap": 0.07217358061566556,
+        "min_probability": 0.03834549060265144,
+        "max_probability": 0.04952531573158338
+      },
+      {
+        "bin": 2,
+        "n": 17,
+        "mean_probability": 0.05185161384397005,
+        "observed_rate": 0.058823529411764705,
+        "absolute_gap": 0.006971915567794654,
+        "min_probability": 0.04993579527242916,
+        "max_probability": 0.053266634679920974
+      },
+      {
+        "bin": 3,
+        "n": 17,
+        "mean_probability": 0.05490816866036506,
+        "observed_rate": 0.058823529411764705,
+        "absolute_gap": 0.003915360751399644,
+        "min_probability": 0.05342496268733021,
+        "max_probability": 0.05618729652050117
+      },
+      {
+        "bin": 4,
+        "n": 17,
+        "mean_probability": 0.05691642374759017,
+        "observed_rate": 0.058823529411764705,
+        "absolute_gap": 0.001907105664174534,
+        "min_probability": 0.05633140805988867,
+        "max_probability": 0.05741810952730124
+      },
+      {
+        "bin": 5,
+        "n": 16,
+        "mean_probability": 0.06179461193479781,
+        "observed_rate": 0.1875,
+        "absolute_gap": 0.1257053880652022,
+        "min_probability": 0.05759110150422887,
+        "max_probability": 0.07858955888970845
+      },
+      {
+        "bin": 6,
+        "n": 16,
+        "mean_probability": 0.08108664976987082,
+        "observed_rate": 0.0,
+        "absolute_gap": 0.08108664976987082,
+        "min_probability": 0.07864473223862972,
+        "max_probability": 0.08343912529619062
+      },
+      {
+        "bin": 7,
+        "n": 16,
+        "mean_probability": 0.08435738357606568,
+        "observed_rate": 0.3125,
+        "absolute_gap": 0.22814261642393432,
+        "min_probability": 0.08353970182566438,
+        "max_probability": 0.08545990713761178
+      },
+      {
+        "bin": 8,
+        "n": 16,
+        "mean_probability": 0.08690594993225746,
+        "observed_rate": 0.1875,
+        "absolute_gap": 0.10059405006774254,
+        "min_probability": 0.08557555491924346,
+        "max_probability": 0.0876706162102019
+      },
+      {
+        "bin": 9,
+        "n": 16,
+        "mean_probability": 0.08860025234339378,
+        "observed_rate": 0.1875,
+        "absolute_gap": 0.09889974765660622,
+        "min_probability": 0.08784320343858722,
+        "max_probability": 0.08917005446350863
+      },
+      {
+        "bin": 10,
+        "n": 16,
+        "mean_probability": 0.09028243423831579,
+        "observed_rate": 0.1875,
+        "absolute_gap": 0.09721756576168421,
+        "min_probability": 0.08924944874383932,
+        "max_probability": 0.09263508348404303
+      }
+    ],
+    "expected_calibration_error": 0.08018775395185505
+  },
+  "hop_decay": [
+    {
+      "hop": 1,
+      "events": 164,
+      "prefix_successes": 57,
+      "prefix_rate": 0.3475609756097561
+    },
+    {
+      "hop": 2,
+      "events": 164,
+      "prefix_successes": 39,
+      "prefix_rate": 0.23780487804878048
+    },
+    {
+      "hop": 3,
+      "events": 164,
+      "prefix_successes": 22,
+      "prefix_rate": 0.13414634146341464
+    }
+  ],
+  "ci_width_error": {
+    "spearman_rho": 0.7213962156353297,
+    "permutation_p_value_two_sided": 0.0002,
+    "median_ci_width": 0.1414700838709792,
+    "narrow_mean_absolute_error": 0.14249011279506346,
+    "wide_mean_absolute_error": 0.22531883335345895,
+    "direction_ok": true
+  },
+  "rare_method_calibration": {
+    "scope": "same macro-release link estimator on known 2005-2010 NFP outcomes",
+    "minimum_known_outcomes": 16,
+    "rare_event_clause_applicable": false,
+    "fallback_triggered": false,
+    "records": [
+      {
+        "hop": 1,
+        "known_outcomes": 69,
+        "predicted_soft_rate": 0.29408086947280504,
+        "observed_primary_rate": 0.3333333333333333,
+        "absolute_calibration_error": 0.039252463860528275,
+        "method": "prefix_conditional_latent_fractional_logistic"
+      },
+      {
+        "hop": 2,
+        "known_outcomes": 23,
+        "predicted_soft_rate": 0.5081318950648898,
+        "observed_primary_rate": 0.6956521739130435,
+        "absolute_calibration_error": 0.1875202788481537,
+        "method": "prefix_conditional_latent_fractional_logistic"
+      },
+      {
+        "hop": 3,
+        "known_outcomes": 16,
+        "predicted_soft_rate": 0.40749867862746403,
+        "observed_primary_rate": 0.3125,
+        "absolute_calibration_error": 0.09499867862746403,
+        "method": "prefix_conditional_latent_fractional_logistic"
+      }
+    ],
+    "note": "No confirmation outcome is used. The >=20 rare-method clause is required only if the <5 fallback is triggered; raw counts remain disclosed even when not applicable."
+  },
+  "failure_cases": [
+    {
+      "event_id": "NFP_201605_REL_20160603",
+      "probability": 0.04108764074928131,
+      "outcome": 1,
+      "absolute_error": 0.9589123592507187,
+      "ci_width": 0.1110248609141859,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_201509_REL_20151002",
+      "probability": 0.04665034246226253,
+      "outcome": 1,
+      "absolute_error": 0.9533496575377375,
+      "ci_width": 0.1003024414170593,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_201811_REL_20181207",
+      "probability": 0.0501905617682297,
+      "outcome": 1,
+      "absolute_error": 0.9498094382317703,
+      "ci_width": 0.11409795619011406,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_201208_REL_20120907",
+      "probability": 0.05604727160143491,
+      "outcome": 1,
+      "absolute_error": 0.9439527283985651,
+      "ci_width": 0.11819206983045624,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_202212_REL_20230106",
+      "probability": 0.05723805285758875,
+      "outcome": 1,
+      "absolute_error": 0.9427619471424112,
+      "ci_width": 0.13351840712186008,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_202302_REL_20230310",
+      "probability": 0.057627979449245574,
+      "outcome": 1,
+      "absolute_error": 0.9423720205507544,
+      "ci_width": 0.13879093664748082,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_202406_REL_20240705",
+      "probability": 0.05787389545366711,
+      "outcome": 1,
+      "absolute_error": 0.9421261045463329,
+      "ci_width": 0.13998147797850816,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_202208_REL_20220902",
+      "probability": 0.057966342470155426,
+      "outcome": 1,
+      "absolute_error": 0.9420336575298446,
+      "ci_width": 0.1385724375527622,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_201510_REL_20151106",
+      "probability": 0.0837817727943156,
+      "outcome": 1,
+      "absolute_error": 0.9162182272056844,
+      "ci_width": 0.14805519082094906,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_201607_REL_20160805",
+      "probability": 0.08406544323668327,
+      "outcome": 1,
+      "absolute_error": 0.9159345567633167,
+      "ci_width": 0.14899108569892375,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_201411_REL_20141205",
+      "probability": 0.0841681661766128,
+      "outcome": 1,
+      "absolute_error": 0.9158318338233872,
+      "ci_width": 0.1456535711540642,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "event_id": "NFP_202007_REL_20200807",
+      "probability": 0.08492669568485922,
+      "outcome": 1,
+      "absolute_error": 0.9150733043151408,
+      "ci_width": 0.1635500708729023,
+      "hop_outcomes": [
+        1,
+        1,
+        1
+      ]
+    }
+  ],
+  "baseline_details": {
+    "direct_terminal_logistic": {
+      "name": "direct_terminal_logistic",
+      "role": "predictive comparator only; has no auditable per-hop decomposition",
+      "fit_boundary": "development only",
+      "training_events": 69,
+      "coefficient": [
+        -2.232694156929526,
+        -0.16909683875510914,
+        0.24999093596414662
+      ],
+      "covariance": [
+        [
+          0.27103726942937373,
+          -0.18492592598543925,
+          -0.01574664153887925
+        ],
+        [
+          -0.18492592598543922,
+          0.3350787840981273,
+          0.0031824549617102153
+        ],
+        [
+          -0.015746641538879246,
+          0.003182454961710216,
+          0.13815080303263544
+        ]
+      ],
+      "confirmation_events": 164,
+      "brier": 0.11654609463239946
+    }
+  }
+}

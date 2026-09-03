@@ -1,0 +1,36 @@
+{
+  "marginal_naive_product": 0.023335410199742394,
+  "conditional_beta_chain": 0.07661971830985916,
+  "climatology": 0.08450704225352113,
+  "proxy_only": 0.028169014084507043,
+  "direct_terminal_logistic": {
+    "name": "direct_terminal_logistic",
+    "role": "predictive comparator only; has no auditable per-hop decomposition",
+    "fit_boundary": "development only",
+    "training_events": 69,
+    "coefficient": [
+      -2.232694156929526,
+      -0.16909683875510914,
+      0.24999093596414662
+    ],
+    "covariance": [
+      [
+        0.27103726942937373,
+        -0.18492592598543925,
+        -0.01574664153887925
+      ],
+      [
+        -0.18492592598543922,
+        0.3350787840981273,
+        0.0031824549617102153
+      ],
+      [
+        -0.015746641538879246,
+        0.003182454961710216,
+        0.13815080303263544
+      ]
+    ],
+    "confirmation_events": 164,
+    "brier": 0.11654609463239946
+  }
+}

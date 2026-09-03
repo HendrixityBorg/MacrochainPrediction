@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+data/raw/*
+!data/raw/employ.xlsx
+!data/raw/h15_nominal.csv
+!data/raw/h15_real.csv
+!data/raw/release_dates_50.txt
+demo/sealed/*.tmp

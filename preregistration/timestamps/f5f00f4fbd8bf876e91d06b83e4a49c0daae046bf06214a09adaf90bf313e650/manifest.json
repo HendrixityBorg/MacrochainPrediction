@@ -1,0 +1,11 @@
+{
+  "protocol_sha256": "f5f00f4fbd8bf876e91d06b83e4a49c0daae046bf06214a09adaf90bf313e650",
+  "created_at_utc": "2026-09-03T06:20:51.582683+00:00",
+  "timestamp_authority": "DigiCert RFC 3161",
+  "files": {
+    "preregistration/PROTOCOL_LOCK.json": "e46e7ade2529dc3bfce518908899a8951a31d5d9b9521e6d05cbaa30b9c1c5b0",
+    "preregistration/timestamps/f5f00f4fbd8bf876e91d06b83e4a49c0daae046bf06214a09adaf90bf313e650/PROTOCOL_LOCK.tsq": "fc1b287e27629363e8d3782ef948e8d621e0e978388238601c0a74d2ab03eb94",
+    "preregistration/timestamps/f5f00f4fbd8bf876e91d06b83e4a49c0daae046bf06214a09adaf90bf313e650/PROTOCOL_LOCK.tsr": "502103444ff469d22b944540682ebecf13484aa1a42a8c85630a57521a2f225f",
+    "preregistration/timestamps/f5f00f4fbd8bf876e91d06b83e4a49c0daae046bf06214a09adaf90bf313e650/PROTOCOL_LOCK.tsr.txt": "e18ec57e6746622480ede0afb944746c05a9c9643df195952245ec19c87a8317"
+  }
+}

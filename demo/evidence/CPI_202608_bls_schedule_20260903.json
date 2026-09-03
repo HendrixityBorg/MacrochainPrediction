@@ -1,0 +1,12 @@
+{
+  "source_id": "bls_cpi_schedule_20260903",
+  "source_url": "https://www.bls.gov/schedule/news_release/cpi.htm",
+  "retrieved_at_utc": "2026-09-03T04:14:00Z",
+  "retrieval_transport": "web search/open capture; direct curl returned HTTP 403",
+  "reference_month": "August 2026",
+  "release_date": "2026-09-11",
+  "release_time_eastern": "08:30",
+  "release_time_utc": "2026-09-11T12:30:00Z",
+  "claim": "The BLS CPI release calendar listed August 2026 CPI for September 11, 2026 at 08:30 Eastern Time.",
+  "limitation": "This compact evidence record preserves the extracted schedule claim, not a byte-for-byte copy of the upstream HTML."
+}
