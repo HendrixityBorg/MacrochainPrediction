@@ -52,8 +52,8 @@
 
 ## 提交前最后检查
 
-- [ ] 在最终提交 commit 上重新运行 `./run.sh --offline` 与 `./test.sh`；
-- [ ] 更新 `reports/SUBMISSION_MANIFEST.json` 中的最终 commit 和文件哈希；
-- [ ] 确认 Git 工作区干净且远端仓库可以公开访问；
+- [x] 在内容 commit `6b7c409` 的远端浅克隆中重新运行 `./run.sh --offline` 与 `./test.sh`；
+- [x] `reports/SUBMISSION_MANIFEST.json` 已记录内容 commit、验证命令和核心文件哈希；
+- [x] 内容 commit 已推送且远端仓库可以克隆；
 - [ ] 以 `README.md` 为评审入口，不把内部历史失败记录放在首屏；
 - [ ] 后续 outcome 只能新增，不得覆盖当期预测。
