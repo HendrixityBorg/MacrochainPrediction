@@ -27,6 +27,12 @@ def selected_live_demo_payload() -> dict[str, Any] | None:
     return read_json(Path(selected["path"]))
 
 
+def latest_live_failure() -> dict[str, Any] | None:
+    directory = ROOT / "demo" / "failures"
+    files = sorted(directory.glob("*.json")) if directory.exists() else []
+    return read_json(files[-1]) if files else None
+
+
 def chinese_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any]) -> str:
     """Render the complete prospective macro-chain record in Chinese."""
     record = payload["input"]
@@ -178,6 +184,7 @@ def chinese_report(
     real_coefficients = structural["real_rate_given_policy_and_inflation"]["coefficients"]
     gold_coefficients = structural["gold_given_real_rate_and_dollar"]["coefficients"]
     failures = evaluation["failure_cases"][:3]
+    live_failure = latest_live_failure()
     lines = [
         "# SX-CH-001 黄金潜变量链提交报告", "",
         f"> 机器状态：**{state}**。未通过项：`{', '.join(failed) if failed else '无'}`。", "",
@@ -196,7 +203,13 @@ def chinese_report(
             f"`demo/runs/{live_payload['input']['event_id']}.zh-CN.md`。", "",
         ]
     else:
-        lines += ["该 precommit 不等于完成演示，只有发布后在截止时间前补入官方 actual 并生成 root seal 才计入 S 门禁。", ""]
+        if live_failure and live_failure.get("status") == "MISSED_SEAL_WINDOW_FAIL_CLOSED":
+            lines += [
+                "A004 未在 12:45 UTC 截止前形成 root seal；截止后实际调用被程序拒绝，因此该记录不计入 S 门禁。",
+                "完整失败证据见 `demo/failures/NFP_202608_REL_20260904_A004.zh-CN.md`。", "",
+            ]
+        else:
+            lines += ["该 precommit 不等于完成演示，只有发布后在截止时间前补入官方 actual 并生成 root seal 才计入 S 门禁。", ""]
     lines += [
         "## 图与公式", "",
         "```text", "macro surprise S → policy path M → real rate R → gold G",
@@ -269,6 +282,15 @@ def chinese_report(
             f"- 实际停止：第 {live_stop['hop']} 跳 `{live_stop['state']}` / `{live_stop['reason']}`；",
             f"- seal SHA-256：`{live_payload['seal_sha256']}`。", "",
         ]
+    elif live_failure and live_failure.get("status") == "MISSED_SEAL_WINDOW_FAIL_CLOSED":
+        diagnostic = live_failure["post_window_diagnostic_not_a_seal"]
+        lines += [
+            "## 真实当期演示失败关闭", "",
+            "- A004 封存窗口已错过；程序拒绝截止后的 seal input，未生成 sealed record；",
+            f"- BLS 截止后核对 actual={live_failure['official_actual_observed_after_deadline']['value_thousands']:.1f} 千人；",
+            f"- 仅供复盘的链概率={diagnostic['chain_probability']:.6f}；90% CI=[{diagnostic['ci90'][0]:.6f}, {diagnostic['ci90'][1]:.6f}]；",
+            "- 上述结果不是有效实时 seal，不得计入提交门禁。", "",
+        ]
     lines += [
         "## 局限性与盲点", "",
         "1. 日频 close-to-close 窗口会混入发布后其他新闻，因果识别弱于 30 分钟期货窗口；",
@@ -276,7 +298,7 @@ def chinese_report(
         "3. 现有本地原始价格历史意味着确认批弱于真正第三方托管 holdout；本项目完整披露，但不设置题面之外的签名硬门；",
         ("4. NFP actual 已在窗口内封存；收盘与 T+2 下游 outcome 仍只能按追踪计划追加，不得写成发布时已验证；"
          if live_payload else
-         "4. NFP 已有不可覆盖的发布前 precommit，但在官方 actual 发布并按时 root-seal 前仍不得声称全 S；CPI 旧承诺仅保留审计痕迹；"),
+         "4. A004 错过封存截止并已失败关闭；截止后诊断不等于前瞻演示，必须对新事件重新事前承诺；"),
         "5. 黄金同时受美元、安全港、流动性和央行需求影响；这些属于显式干扰项，而不是事后解释链路成功；",
         "6. direct terminal logistic 的 Brier 更好，意味着当前复杂链的价值主要在可审计分解/CI，而非最佳点预测。", "",
         "## 扩展方向", "",

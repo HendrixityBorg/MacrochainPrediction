@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "event_id": "NFP_202608_REL_20260904_A004",
+  "status": "MISSED_SEAL_WINDOW_FAIL_CLOSED",
+  "eligible_for_submission": false,
+  "release_time_utc": "2026-09-04T12:30:00Z",
+  "seal_deadline_utc": "2026-09-04T12:45:00Z",
+  "manual_recovery_started_at_utc": "2026-09-04T13:55:29.524911Z",
+  "rejection_observed_at_utc": "2026-09-04T13:57:25.011421Z",
+  "precommit_sha256": "4a845ee0bb55c1ab4dd01aabc69c80d8be9f04e44a4f127a498514a2440c7783",
+  "failure": {
+    "reason": "The scheduled run produced no evidence or seal before the committed deadline. Manual recovery began 70 minutes after the deadline.",
+    "command_attempted": "prepare-seal-input --event-id NFP_202608_REL_20260904_A004 --actual 162",
+    "program_rejection": "seal input can only be prepared inside the committed release window",
+    "seal_input_written": false,
+    "sealed_record_written": false,
+    "submission_gate_consequence": "prospective_current_macro_demo remains failed"
+  },
+  "official_actual_observed_after_deadline": {
+    "value_thousands": 162.0,
+    "indicator": "Total nonfarm payroll employment, seasonally adjusted monthly change",
+    "reference_period": "2026-08",
+    "observation_is_valid_seal_evidence": false,
+    "summary_url": "https://www.bls.gov/news.release/empsit.nr0.htm",
+    "table_b1_url": "https://www.bls.gov/news.release/empsit.t17.htm",
+    "summary_statement": "Total nonfarm payroll employment increased by 162,000 in August.",
+    "table_b1_change_thousands": 162.0,
+    "cross_check": "MATCH"
+  },
+  "post_window_diagnostic_not_a_seal": {
+    "root_expected_thousands": 68.5,
+    "root_scale_thousands": 124.42677605270522,
+    "root_z": 0.7514459746220128,
+    "p_i": [
+      0.4030823929031814,
+      0.5207170437216464,
+      0.4076300075935264
+    ],
+    "n_i": [
+      63.5128838585354,
+      21.06495016347412,
+      14.861855942812628
+    ],
+    "intrinsic_probability": 0.08587545771267878,
+    "interruption_probability": 0.011438855399611108,
+    "chain_probability": 0.08490789047335276,
+    "ci90": [
+      0.019072796749964746,
+      0.19620627131694737
+    ],
+    "ci_width": 0.17713347456698264,
+    "execution_stop": {
+      "hop": 1,
+      "state": "STOP_ABSTAIN",
+      "reason": "wide_ci_and_review_evsi_below_cost",
+      "prefix_probability": 0.3984394158434333,
+      "ci90": [
+        0.18485375045331667,
+        0.6431852094797608
+      ]
+    },
+    "terminal_counterfactual": {
+      "state": "STOP_REJECT",
+      "reason": "ci_upper_below_break_even",
+      "note": "Not executed because the chain already stopped at hop 1, and not submission-eligible because the seal window was missed."
+    },
+    "uncertainty_variance_shares": {
+      "link_parameter": 0.43132953591087614,
+      "measurement": 0.0024979777948388278,
+      "regime_drift": 0.46573691527188893,
+      "common_frailty": 0.10724731339527369,
+      "external_cutoff": 0.0002931457444814768,
+      "note": "One-block-at-a-time ratios may overlap and need not sum to one."
+    }
+  },
+  "automation_audit": {
+    "matching_scheduled_run_thread_found": false,
+    "repository_artifacts_found_before_manual_recovery": false,
+    "exact_nonexecution_cause_established": false,
+    "official_product_constraint": "Local scheduled tasks require the computer to remain on and the desktop app to remain running.",
+    "documentation_url": "https://learn.chatgpt.com/docs/automations?surface=app"
+  },
+  "audit_policy": "This record documents an operational failure. It must never be converted into or counted as an on-time prospective seal. A new event requires a new pre-release commitment."
+}

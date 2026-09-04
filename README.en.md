@@ -40,8 +40,9 @@ disclosed even when the challenge does not define them as hard gates.
 Current locked result: 164 valid confirmation chains, 22 terminal successes,
 Brier 0.1193 versus 0.1284 for the required naive marginal product, oracle 90%
 CI coverage 0.920. The status remains `NOT_S_READY`: a clean remote-clone
-reproduction has passed, but the 2026-09-04 NFP demonstration is precommitted and cannot be
-root-sealed before the release. The full model's slight underperformance versus climatology remains a disclosed diagnostic,
+reproduction passed, but A004 missed its 2026-09-04 seal deadline and the code rejected the
+post-deadline recovery attempt. It cannot be backfilled; a new prospective macro event is required.
+The full model's slight underperformance versus climatology remains a disclosed diagnostic,
 not an omitted result. The earlier CPI commitment is retained as
 `WITHDRAWN_NOT_USED_FOR_SUBMISSION`. See `docs/S_GRADE_STATUS.zh-CN.md` and
 `reports/CURRENT_VS_V2.zh-CN.md`.
