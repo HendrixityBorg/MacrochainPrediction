@@ -31,7 +31,9 @@ MACRO_GOLD_PYTHON=python3.11 ./setup.sh
 | `reports/stop_trace.csv` | `a099f9404e1136d857d27407092d7d3098b7cdd18b7c6e5dc36d167b195aacc2` | PASS |
 
 `run --offline` 后只有 `reports/s_grade_gate.json` 因当时尚未包含本审计文件而发生预期变化。加入本审计后，
-隔离复现硬门可通过；尚未通过的唯一题面硬门仍是 2026-09-04 发布后的真实当期演示 seal。
+该次干净克隆证明离线模型和测试可复现。之后新增的当期 NFP 记录另由
+`macro_gold_latent.cli verify-current-demo` 核验其 Git 证据和预测—下游结果时间顺序；最终提交版本应在
+最新 commit 上再执行一次相同的干净克隆检查。
 
 Dockerfile 同样使用 `python:3.11-slim` 与固定依赖，但当前主机没有可用 Docker daemon，因此不虚构
 Docker 运行记录。机器可读证据见 `reports/submission_package_audit.json`。

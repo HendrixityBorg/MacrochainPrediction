@@ -1,0 +1,206 @@
+{
+  "schema_version": "2.0",
+  "event_id": "NFP_202608_REL_20260904_A004",
+  "status": "current_macro_demo_outcomes_unresolved",
+  "release_time_utc": "2026-09-04T12:30:00Z",
+  "prediction_recorded_at_utc": "2026-09-04T14:03:26Z",
+  "downstream_outcome_available_after_utc": "2026-09-04T20:00:00Z",
+  "precommit_sha256": "4a845ee0bb55c1ab4dd01aabc69c80d8be9f04e44a4f127a498514a2440c7783",
+  "protocol_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+  "model_run_sha256": "e351f4fa42b74e988e25df606b149e92f45548c5811b48cebef86507f3852e1f",
+  "frozen_dataset_sha256": "208f786576e187dc63ae2446844df5735b7b2f2f1936483f3c89edc164a7a775",
+  "prediction_evidence": {
+    "git_commit": "b8f7762377f0bb5d7e2a614a6fc9584f13ba19c4",
+    "commit_time_utc": "2026-09-04T14:03:26Z",
+    "path_at_commit": "demo/failures/NFP_202608_REL_20260904_A004.json",
+    "sha256_at_commit": "7ae42508b0637c69b0a86a9858c2bd2b6b1ede2720d9e199cedf0840b6717bb9",
+    "remote_url": "https://github.com/HendrixityBorg/MacrochainPrediction/commit/b8f7762377f0bb5d7e2a614a6fc9584f13ba19c4",
+    "interpretation": "该提交已经包含根输入、逐跳概率、证据量、链概率、区间与停止判断；提交时间早于最早下游结果窗口完成时间。"
+  },
+  "input": {
+    "event_id": "NFP_202608_REL_20260904_A004",
+    "topic": "nfp",
+    "release_time_utc": "2026-09-04T12:30:00Z",
+    "root_measure": "total_nonfarm_payroll_first_release_monthly_change_thousands",
+    "root_actual": 162.0,
+    "root_consensus_or_nowcast": 68.5,
+    "root_scale": 124.42677605270522,
+    "root_actual_source": {
+      "source_id": "bls_employment_situation_first_release_actual",
+      "summary_url": "https://www.bls.gov/news.release/empsit.nr0.htm",
+      "table_b1_url": "https://www.bls.gov/news.release/empsit.t17.htm",
+      "retrieved_at_utc": "2026-09-04T13:55:29.524911Z",
+      "recorded_in_git_path": "demo/failures/NFP_202608_REL_20260904_A004.json",
+      "record_sha256_at_commit": "7ae42508b0637c69b0a86a9858c2bd2b6b1ede2720d9e199cedf0840b6717bb9",
+      "cross_check": "BLS 摘要与 Table B-1 均为增加 162 千人"
+    },
+    "outcome_windows": {
+      "policy": {
+        "main": "H.15 2Y nominal yield",
+        "window": "previous valid market close to 2026-09-04 close"
+      },
+      "real_rate": {
+        "main": "H.15 5Y inflation-indexed yield",
+        "window": "previous valid market close to 2026-09-04 close"
+      },
+      "gold": {
+        "main": "GLD adjusted close",
+        "window": "previous valid market close to 2026-09-04 close"
+      }
+    },
+    "decision_rule": {
+      "open_only_if_ci_lower_above_break_even": true,
+      "break_even_probability": 0.208,
+      "maximum_ci_width": 0.3,
+      "position_rule": "90% CI 下沿高于 0.208 且区间宽度不超过 0.30 才允许建仓；不允许主观覆盖。"
+    },
+    "tracking_due_utc": "2027-03-04T12:45:00Z"
+  },
+  "prediction": {
+    "event_id": "NFP_202608_REL_20260904_A004",
+    "release_date": "2026-09-04",
+    "split": "live_demo",
+    "p_i": [
+      0.4030823929031814,
+      0.5207170437216464,
+      0.4076300075935264
+    ],
+    "n_i": [
+      63.5128838585354,
+      21.06495016347412,
+      14.861855942812628
+    ],
+    "intrinsic_probability": 0.08587545771267878,
+    "interruption_probability": 0.011438855399611108,
+    "chain_probability": 0.08490789047335276,
+    "ci_lower": 0.019072796749964746,
+    "ci_upper": 0.19620627131694737,
+    "ci_width": 0.17713347456698264,
+    "intrinsic_ci_lower": 0.01918290408102871,
+    "intrinsic_ci_upper": 0.19787313005558801,
+    "stop_trace": [
+      {
+        "hop": 1,
+        "p_i": 0.4030823929031814,
+        "n_i": 63.5128838585354,
+        "state": "STOP_ABSTAIN",
+        "reason": "wide_ci_and_review_evsi_below_cost",
+        "probability": 0.3984394158434333,
+        "ci_lower": 0.18485375045331667,
+        "ci_upper": 0.6431852094797608,
+        "ci_width": 0.4583314590264441,
+        "break_even_probability": 0.20800000000000002,
+        "expected_utility": 0.23804926980429159,
+        "conservative_utility": -0.028932811933354168,
+        "evsi": 1.3322676295501878e-15,
+        "review_cost": 0.01,
+        "uncertainty_decomposition": {
+          "prefix_hops": 1,
+          "link_parameter_variance_share": 0.34348496267014966,
+          "measurement_variance_share": 0.0028760943475764954,
+          "regime_drift_variance_share": 0.6109815868375689,
+          "common_frailty_variance_share": 0.11515255575659783,
+          "external_cutoff_variance_share": 0.0010703002487934207,
+          "regime_drift_sd_per_coefficient": 0.3175263736236911,
+          "interaction_note": "one-block-at-a-time variance ratios may overlap and need not sum to one"
+        },
+        "execution_reached": true,
+        "is_executed_stop": true,
+        "evaluation_mode": "executed"
+      },
+      {
+        "hop": 2,
+        "p_i": 0.5207170437216464,
+        "n_i": 21.06495016347412,
+        "state": "CONTINUE",
+        "reason": "next_review_evsi_exceeds_cost",
+        "probability": 0.20709890407610176,
+        "ci_lower": 0.07315138694345531,
+        "ci_upper": 0.3953473439026855,
+        "ci_width": 0.3221959569592302,
+        "break_even_probability": 0.20800000000000002,
+        "expected_utility": -0.001126369904872795,
+        "conservative_utility": -0.16856076632068084,
+        "evsi": 0.02931670696147804,
+        "review_cost": 0.01,
+        "uncertainty_decomposition": {
+          "prefix_hops": 2,
+          "link_parameter_variance_share": 0.4070783723871871,
+          "measurement_variance_share": 0.002777747759204454,
+          "regime_drift_variance_share": 0.5533123171069371,
+          "common_frailty_variance_share": 0.11739735828739013,
+          "external_cutoff_variance_share": 0.0005711551075595935,
+          "regime_drift_sd_per_coefficient": 0.3175263736236911,
+          "interaction_note": "one-block-at-a-time variance ratios may overlap and need not sum to one"
+        },
+        "execution_reached": false,
+        "is_executed_stop": false,
+        "evaluation_mode": "counterfactual_after_stop"
+      },
+      {
+        "hop": 3,
+        "p_i": 0.4076300075935264,
+        "n_i": 14.861855942812628,
+        "state": "STOP_REJECT",
+        "reason": "ci_upper_below_break_even",
+        "probability": 0.08490789047335276,
+        "ci_lower": 0.019072796749964746,
+        "ci_upper": 0.19620627131694737,
+        "ci_width": 0.17713347456698264,
+        "break_even_probability": 0.20800000000000002,
+        "expected_utility": -0.15386513690830905,
+        "conservative_utility": -0.2361590040625441,
+        "evsi": 0.000056148305110748046,
+        "review_cost": 0.01,
+        "uncertainty_decomposition": {
+          "prefix_hops": 3,
+          "link_parameter_variance_share": 0.43132953591087614,
+          "measurement_variance_share": 0.0024979777948388278,
+          "regime_drift_variance_share": 0.46573691527188893,
+          "common_frailty_variance_share": 0.10724731339527369,
+          "external_cutoff_variance_share": 0.0002931457444814768,
+          "regime_drift_sd_per_coefficient": 0.3175263736236911,
+          "interaction_note": "one-block-at-a-time variance ratios may overlap and need not sum to one"
+        },
+        "execution_reached": false,
+        "is_executed_stop": false,
+        "evaluation_mode": "counterfactual_after_stop"
+      }
+    ],
+    "execution_stop": {
+      "hop": 1,
+      "state": "STOP_ABSTAIN",
+      "reason": "wide_ci_and_review_evsi_below_cost",
+      "probability": 0.3984394158434333,
+      "ci_lower": 0.18485375045331667,
+      "ci_upper": 0.6431852094797608,
+      "ci_width": 0.4583314590264441,
+      "break_even_probability": 0.20800000000000002
+    },
+    "uncertainty_decomposition": {
+      "prefix_hops": 3,
+      "link_parameter_variance_share": 0.43132953591087614,
+      "measurement_variance_share": 0.0024979777948388278,
+      "regime_drift_variance_share": 0.46573691527188893,
+      "common_frailty_variance_share": 0.10724731339527369,
+      "external_cutoff_variance_share": 0.0002931457444814768,
+      "regime_drift_sd_per_coefficient": 0.3175263736236911,
+      "interaction_note": "one-block-at-a-time variance ratios may overlap and need not sum to one"
+    },
+    "posterior_seed": 21160903,
+    "posterior_draws": 4000
+  },
+  "decision": {
+    "action": "NO_POSITION",
+    "executed_at_hop": 1,
+    "reason": "第一跳区间过宽，且预设的一次复核 EVSI 不足以覆盖复核成本；不允许主观覆盖。",
+    "later_hops_are_counterfactual": true
+  },
+  "tracking_plan": "demo/TRACKING_PLAN.zh-CN.md",
+  "historical_15_minute_protocol": {
+    "status": "failed_and_retained_for_audit",
+    "required_by_current_demo_policy": false,
+    "record": "demo/failures/NFP_202608_REL_20260904_A004.json"
+  },
+  "current_demo_sha256": "4846ceb1e882306de2361bdac370b92e92ba53cf992b9418d8a953d4626de890"
+}

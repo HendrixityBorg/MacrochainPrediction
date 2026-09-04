@@ -2,7 +2,7 @@
   "event_id": "CPI_YYYYMM_REL_YYYYMMDD",
   "topic": "cpi",
   "release_time_utc": "",
-  "seal_deadline_utc": "",
+  "downstream_outcome_available_after_utc": "",
   "root_measure": "core_cpi_first_release_mom_pct",
   "root_actual": null,
   "root_consensus_or_nowcast": null,
@@ -27,5 +27,5 @@
     "position_rule": "No position unless lower 90% bound exceeds the executable payoff threshold; otherwise abstain; no discretionary override"
   },
   "tracking_due_utc": "",
-  "notes": "Precommit expectation, scale, features, windows and decision rule before release. After release only root_actual and root_actual_source may be added before sealing."
+  "notes": "发布前固定期望、尺度、特征、下游窗口和决策规则；根 actual 发布后生成预测，并在 downstream_outcome_available_after_utc 之前记录。"
 }

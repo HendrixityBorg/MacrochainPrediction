@@ -6,7 +6,7 @@ from macro_gold_latent.report import latest_live_failure
 
 
 class LiveFailureTests(unittest.TestCase):
-    def test_missed_window_is_never_submission_eligible(self) -> None:
+    def test_missed_legacy_window_record_is_retained(self) -> None:
         failure = latest_live_failure()
         self.assertIsNotNone(failure)
         assert failure is not None

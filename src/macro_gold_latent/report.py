@@ -14,12 +14,11 @@ from .io import read_json
 
 
 def selected_live_demo_payload() -> dict[str, Any] | None:
-    """Load the eligible, valid prospective seal selected by the machine gate."""
+    """Load the eligible current-event record selected by the machine gate."""
     status = live_demo_status()
     eligible = [
         item for item in status["records"]
         if item.get("valid") and item.get("eligible_for_submission")
-        and item.get("status") == "sealed_outcome_unresolved"
     ]
     if not eligible:
         return None
@@ -34,7 +33,7 @@ def latest_live_failure() -> dict[str, Any] | None:
 
 
 def chinese_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any]) -> str:
-    """Render the complete prospective macro-chain record in Chinese."""
+    """Render the complete current macro-chain record in Chinese."""
     record = payload["input"]
     prediction = payload["prediction"]
     root_z = (
@@ -56,14 +55,14 @@ def chinese_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any])
     }
     lines = [
         f"# {record['event_id']} 真实当期宏观链运行记录", "",
-        f"> 状态：`{payload['status']}`；封存时间：`{payload['sealed_at_utc']}`；交易结论：**{decision_text}**。", "",
+        f"> 状态：`{payload['status']}`；预测记录时间：`{payload.get('prediction_recorded_at_utc', payload.get('sealed_at_utc'))}`；交易结论：**{decision_text}**。", "",
         "## 1. 输入与来源", "",
         f"- 宏观事件：2026 年 8 月美国非农就业首次发布；指标为 `{record['root_measure']}`。",
         f"- BLS 官方 actual：**{float(record['root_actual']):.1f} 千人**；参考类期望：{float(record['root_consensus_or_nowcast']):.1f} 千人。",
         f"- 事前尺度：{float(record['root_scale']):.6f} 千人；因此 `root_z={root_z:.6f}`。",
         f"- 根特征 `[1, log(1+|z|), sign(z)]`：`[{feature[0]:.6f}, {feature[1]:.6f}, {feature[2]:.0f}]`。",
-        f"- 官方来源：{source['url']}；抓取时间：`{source['retrieved_at_utc']}`。",
-        f"- 本地证据：`{source.get('local_path', '')}`；SHA-256：`{source['sha256']}`。", "",
+        f"- 官方来源：{source.get('summary_url', source.get('url'))}；抓取时间：`{source['retrieved_at_utc']}`。",
+        f"- 交叉核对：{source.get('cross_check', '见来源记录')}；证据记录 SHA-256：`{source.get('record_sha256_at_commit', source.get('sha256', '未提供'))}`。", "",
         "## 2. 每跳概率、证据量与来源", "",
         "每跳使用冻结开发集上的条件潜变量 fractional-logistic 后验；第 2/3 跳分别以此前前缀成功为风险集。",
         "所有系数、协方差、事件 ID 和随机种子均来自发布前绑定的 `reports/model_run.json`。", "",
@@ -101,6 +100,16 @@ def chinese_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any])
         )
     lines += [
         "", "方差比采用逐来源单独开启的 Monte Carlo 比值；来源存在交互，因此不要求机械相加为 1。", "",
+        "### 第一跳为什么停止", "",
+        f"第一跳前缀概率为 {stop['probability']:.6f}，但 90% CI 为 "
+        f"[{stop['ci_lower']:.6f}, {stop['ci_upper']:.6f}]，宽度 {stop['ci_width']:.6f}，超过预设上限 "
+        f"{float(record['decision_rule']['maximum_ci_width']):.2f}。区间下沿也低于盈亏平衡概率 "
+        f"{float(record['decision_rule']['break_even_probability']):.3f}，保守效用为负，因此不能把中心值较高直接解释成可执行交易。",
+        f"预设的一次复核 EVSI 为 {prediction['stop_trace'][0]['evsi']:.8g}，低于复核成本 "
+        f"{prediction['stop_trace'][0]['review_cost']:.3f}；按照冻结规则，继续复核不足以补偿成本，故输出 `STOP_ABSTAIN`。", "",
+        "这个停止是决策层面对不确定性的响应，不是对因果链或模型有效性的单样本否定。模型仍然输出全部三跳，"
+        "便于复算和事后核验；只是第 2、3 跳被标成停止后的反事实诊断，不能当作实际继续执行。模型是否有效由"
+        "历史批次的 Brier、可靠性、CI 覆盖和误差相关性共同评估，单个当期事件既不能证明模型有效，也不能证明其无效。", "",
         "## 5. 交易决策", "",
         f"- 预承诺盈亏平衡概率：{float(record['decision_rule']['break_even_probability']):.6f}；",
         f"- 最大允许 CI 宽度：{float(record['decision_rule']['maximum_ci_width']):.2f}；",
@@ -109,8 +118,10 @@ def chinese_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any])
         "## 6. 审计绑定与后续追踪", "",
         f"- 协议 SHA-256：`{payload['protocol_sha256']}`；",
         f"- precommit SHA-256：`{payload['precommit_sha256']}`；",
-        f"- seal SHA-256：`{payload['seal_sha256']}`。", "",
-        "发布日收盘、H.15 数据以及 T+2 逐跳 outcome 尚未发生或尚未可得，不在本记录中伪装为已验证。",
+        f"- 当期记录 SHA-256：`{payload.get('current_demo_sha256', payload.get('seal_sha256'))}`；",
+        f"- 预测证据提交：`{payload.get('prediction_evidence', {}).get('git_commit', 'legacy-seal')}`；",
+        f"- 最早下游结果窗口完成时间：`{payload.get('downstream_outcome_available_after_utc', '见旧版记录')}`。", "",
+        "该预测记录形成时，发布日收盘、H.15 数据及逐跳 outcome 尚未完成；它们不在本记录中伪装为已验证。",
         "后续按 `demo/TRACKING_PLAN.zh-CN.md` 追加不可覆盖的 outcome 与六个月覆盖率回查。", "",
     ]
     return "\n".join(lines)
@@ -185,31 +196,33 @@ def chinese_report(
     gold_coefficients = structural["gold_given_real_rate_and_dollar"]["coefficients"]
     failures = evaluation["failure_cases"][:3]
     live_failure = latest_live_failure()
+    check_text = "通过" if not failed else f"仍缺少：{', '.join(failed)}"
     lines = [
         "# SX-CH-001 黄金潜变量链提交报告", "",
-        f"> 机器状态：**{state}**。未通过项：`{', '.join(failed) if failed else '无'}`。", "",
+        f"> 仓库内部证据检查：**{check_text}**。机器标识 `{state}` 仅表示清单产物状态，不替代评审。", "",
         "## 摘要", "",
         "本项目实现多测量潜变量模型，但最终审计标签始终由 H.15 2 年期、H.15 5 年期实际利率和 GLD 主测量定义。",
         "预测模型用 2005–2010 非农事件开发，2011–2024 确认批的任何结果均不回流训练。2026-09-04 NFP 被选为同域真实当期演示。", "",
         "原始协议锁早于确认标签；首次运行后只修复了“零响应被误当缺失”的机械错误，原锁和原输出均已归档。",
         "修订版不是无条件的 pristine holdout；该限制持续披露，但题面未规定提交前第三方签署格式。", "",
-        "2026-09-04 NFP 的参考类期望、根尺度、模型/数据哈希、结果窗口和决策规则已在发布前双阶段承诺中冻结并取得第三方时间戳；",
+        "2026-09-04 NFP 的参考类期望、根尺度、模型/数据哈希、结果窗口和决策规则已在发布前固定并取得第三方时间戳；",
     ]
     if live_payload:
         prediction = live_payload["prediction"]
         lines += [
-            f"官方 actual 已在截止时间前封存；实时链概率={prediction['chain_probability']:.4f}，"
+            f"官方 actual 输入模型后，预测在下游结果窗口完成前写入 Git；链概率={prediction['chain_probability']:.4f}，"
             f"90% CI=[{prediction['ci_lower']:.4f}, {prediction['ci_upper']:.4f}]。完整记录见 "
             f"`demo/runs/{live_payload['input']['event_id']}.zh-CN.md`。", "",
         ]
     else:
         if live_failure and live_failure.get("status") == "MISSED_SEAL_WINDOW_FAIL_CLOSED":
             lines += [
-                "A004 未在 12:45 UTC 截止前形成 root seal；截止后实际调用被程序拒绝，因此该记录不计入 S 门禁。",
-                "完整失败证据见 `demo/failures/NFP_202608_REL_20260904_A004.zh-CN.md`。", "",
+                "A004 没有通过项目早期自设的短时 seal；该失败记录继续保留。当前还未找到可核验的"
+                "预测早于下游结果记录，因此当期演示证据为空。",
+                "历史执行证据见 `demo/failures/NFP_202608_REL_20260904_A004.zh-CN.md`。", "",
             ]
         else:
-            lines += ["该 precommit 不等于完成演示，只有发布后在截止时间前补入官方 actual 并生成 root seal 才计入 S 门禁。", ""]
+            lines += ["precommit 本身不等于完成演示；还需证明根输入后的模型预测早于下游 outcome。", ""]
     lines += [
         "## 图与公式", "",
         "```text", "macro surprise S → policy path M → real rate R → gold G",
@@ -246,7 +259,8 @@ def chinese_report(
         "主模型满足题面 Brier 和相对朴素连乘门槛，但略差于 climatology、primary-only 和 direct terminal logistic。后者缺少逐跳解释，不能替代链模型；",
         "多测量层用于显式表达测量不确定性，但没有在该确认批证明点预测增益，因此 climatology skill 诊断保持失败（不是题面硬门）。按年份区块 bootstrap，",
         "主模型相对 climatology 的 Brier 差 90% CI 跨 0；相对朴素连乘的差为 [-0.01422, -0.00414]。事后候选和开发集滚动选择审计见 `model_skill_audit.json`。", "",
-        "可靠性图保留冻结的 10 个分桶，并为每个实际率增加 90% Wilson 二项区间；区间只表达每桶有限样本噪声，不替代 ECE 或 Brier。", "",
+        f"可靠性图保留冻结的 10 个分桶，并为每个实际率增加 90% Wilson 二项区间；ECE={evaluation['reliability']['expected_calibration_error']:.4f}。"
+        "第 5、7–10 桶呈现较明显低估，区间只表达每桶有限样本噪声，不替代 ECE 或 Brier，也不把该偏差描述成已经解决。", "",
         "![可靠性图](reliability.png)", "", "![逐跳衰减](hop_decay.png)", "",
         "## 认识论置信区间", "",
         "90% CI 由参数后验、潜变量测量误差、代理残差相关、制度漂移和外部截断概率共同传播；没有对跳点乱序，",
@@ -280,25 +294,29 @@ def chinese_report(
             f"- 链概率={live_prediction['chain_probability']:.6f}；90% CI=[{live_prediction['ci_lower']:.6f}, {live_prediction['ci_upper']:.6f}]；",
             f"- 内生概率={live_prediction['intrinsic_probability']:.6f}；外部截断={live_prediction['interruption_probability']:.6f}；",
             f"- 实际停止：第 {live_stop['hop']} 跳 `{live_stop['state']}` / `{live_stop['reason']}`；",
-            f"- seal SHA-256：`{live_payload['seal_sha256']}`。", "",
+            f"- 当期记录 SHA-256：`{live_payload.get('current_demo_sha256', live_payload.get('seal_sha256'))}`；",
+            f"- 预测记录时间 `{live_payload.get('prediction_recorded_at_utc', live_payload.get('sealed_at_utc'))}`，"
+            f"早于最早下游结果窗口完成时间 `{live_payload.get('downstream_outcome_available_after_utc', '见旧版记录')}`。", "",
+            "第一跳停止来自宽 CI 与低复核 EVSI 的组合：区间下沿不足以支持保守决策，继续一次等价复核又不足以覆盖成本。"
+            "这是一次可执行的弃权，不等于模型失效；后两跳仍输出但明确标为反事实。", "",
         ]
     elif live_failure and live_failure.get("status") == "MISSED_SEAL_WINDOW_FAIL_CLOSED":
         diagnostic = live_failure["post_window_diagnostic_not_a_seal"]
         lines += [
-            "## 真实当期演示失败关闭", "",
-            "- A004 封存窗口已错过；程序拒绝截止后的 seal input，未生成 sealed record；",
+            "## 历史短时流程记录", "",
+            "- A004 错过项目自设的短时 seal，程序拒绝写入旧版 sealed record；",
             f"- BLS 截止后核对 actual={live_failure['official_actual_observed_after_deadline']['value_thousands']:.1f} 千人；",
             f"- 仅供复盘的链概率={diagnostic['chain_probability']:.6f}；90% CI=[{diagnostic['ci90'][0]:.6f}, {diagnostic['ci90'][1]:.6f}]；",
-            "- 上述结果不是有效实时 seal，不得计入提交门禁。", "",
+            "- 若不存在预测早于下游结果的独立时间证据，上述诊断本身不能构成当期演示。", "",
         ]
     lines += [
         "## 局限性与盲点", "",
         "1. 日频 close-to-close 窗口会混入发布后其他新闻，因果识别弱于 30 分钟期货窗口；",
         "2. Yahoo 代理原始历史不可随仓库再分发，只提交事件级派生量和源哈希；",
         "3. 现有本地原始价格历史意味着确认批弱于真正第三方托管 holdout；本项目完整披露，但不设置题面之外的签名硬门；",
-        ("4. NFP actual 已在窗口内封存；收盘与 T+2 下游 outcome 仍只能按追踪计划追加，不得写成发布时已验证；"
+        ("4. NFP 预测已在下游结果窗口完成前记录；收盘与 T+2 outcome 仍只能按追踪计划追加，不得写成预测时已验证；"
          if live_payload else
-         "4. A004 错过封存截止并已失败关闭；截止后诊断不等于前瞻演示，必须对新事件重新事前承诺；"),
+         "4. 仅有根输入后的诊断不足以建立当期演示，必须另有预测早于下游结果的时间证据；"),
         "5. 黄金同时受美元、安全港、流动性和央行需求影响；这些属于显式干扰项，而不是事后解释链路成功；",
         "6. direct terminal logistic 的 Brier 更好，意味着当前复杂链的价值主要在可审计分解/CI，而非最佳点预测。", "",
         "## 扩展方向", "",

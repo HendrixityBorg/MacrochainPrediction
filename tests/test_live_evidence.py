@@ -2,10 +2,11 @@ from __future__ import annotations
 
 import statistics
 import unittest
+from unittest.mock import patch
 
 from macro_gold_latent.config import ROOT
 from macro_gold_latent.data import _first_releases, _root_innovations
-from macro_gold_latent.demo import verify_precommitted
+from macro_gold_latent.demo import verify_current_demo, verify_precommitted
 from macro_gold_latent.io import read_json
 
 
@@ -49,6 +50,22 @@ class LiveEvidenceTests(unittest.TestCase):
         check = verify_precommitted(ROOT / withdrawal["precommit_path"])
         self.assertTrue(check["hash_valid"])
         self.assertFalse(check["valid"])
+
+    def test_current_nfp_prediction_precedes_downstream_outcomes(self) -> None:
+        path = ROOT / "demo" / "current" / "NFP_202608_REL_20260904_A004.json"
+        check = verify_current_demo(path)
+        self.assertTrue(check["valid"])
+        self.assertTrue(check["git_evidence_valid"])
+        self.assertTrue(check["prediction_matches_prior_commit"])
+        self.assertTrue(check["timeline_valid"])
+
+    def test_current_demo_can_be_verified_from_distributed_snapshot_without_git(self) -> None:
+        path = ROOT / "demo" / "current" / "NFP_202608_REL_20260904_A004.json"
+        with patch("macro_gold_latent.demo._git_file_at_commit", side_effect=FileNotFoundError):
+            check = verify_current_demo(path)
+        self.assertTrue(check["valid"])
+        self.assertFalse(check["git_evidence_valid"])
+        self.assertTrue(check["evidence_snapshot_valid"])
 
 
 if __name__ == "__main__":

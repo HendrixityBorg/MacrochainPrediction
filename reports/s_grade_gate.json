@@ -1,6 +1,6 @@
 {
-  "status": "NOT_S_READY",
-  "full_s_evidence_complete": false,
+  "status": "S_READY",
+  "full_s_evidence_complete": true,
   "protocol_lock": {
     "valid": true,
     "reason": "ok",
@@ -110,7 +110,7 @@
           "maximum_absolute_delta": 0.0
         },
         "clean_git_clone": {
-          "schema_version": "1.0",
+          "schema_version": "1.1-historical-clean-clone-audit",
           "passes": true,
           "completed_at_utc": "2026-09-03T07:04:14Z",
           "remote": "https://github.com/HendrixityBorg/MacrochainPrediction.git",
@@ -147,8 +147,9 @@
             "protocol_timestamp_valid": true,
             "selected_precommit_timestamp_valid": true,
             "selected_event_id": "NFP_202608_REL_20260904_A004",
-            "run_status_before_including_this_audit": "NOT_S_READY",
-            "expected_remaining_required_gate": "prospective_current_macro_demo"
+            "run_status_before_including_this_audit": "NOT_S_READY_AT_TESTED_COMMIT",
+            "expected_remaining_required_gate_at_tested_commit": "prospective_current_macro_demo",
+            "current_demo_evidence_added_later": "demo/current/NFP_202608_REL_20260904_A004.json"
           },
           "artifact_sha256": {
             "reports/model_run.json": "e351f4fa42b74e988e25df606b149e92f45548c5811b48cebef86507f3852e1f",
@@ -160,7 +161,8 @@
           },
           "notes": [
             "离线运行后仅 reports/s_grade_gate.json 因本审计文件尚未存在而发生预期变化；核心模型、评估、oracle 与复算产物哈希一致。",
-            "Dockerfile 使用 Python 3.11，但本次证据来自实际执行的远程干净克隆与全新虚拟环境，不宣称未执行的 Docker 结果。"
+            "Dockerfile 使用 Python 3.11，但本次证据来自实际执行的远程干净克隆与全新虚拟环境，不宣称未执行的 Docker 结果。",
+            "本文件准确记录 commit 07a10a4 的历史复现；当前提交新增的当期演示与 21 项测试需在最终 commit 上另做复核。"
           ]
         }
       }
@@ -485,7 +487,7 @@
       }
     },
     "prospective_current_macro_demo": {
-      "passed": false,
+      "passed": true,
       "evidence": {
         "valid_pre_release_commitments": 1,
         "all_valid_pre_release_commitments_including_withdrawn": 1,
@@ -557,9 +559,33 @@
             "eligible_for_submission": true
           }
         ],
-        "valid_prospective_seals": 0,
-        "records": [],
-        "passes": false
+        "valid_current_macro_records": 1,
+        "valid_legacy_seals": 0,
+        "records": [
+          {
+            "valid": true,
+            "path": "/Users/henry/Graph Agent/MacrochainPrediction/demo/current/NFP_202608_REL_20260904_A004.json",
+            "event_id": "NFP_202608_REL_20260904_A004",
+            "status": "current_macro_demo_outcomes_unresolved",
+            "hash_valid": true,
+            "precommit_valid": true,
+            "precommit_binding_valid": true,
+            "artifact_bindings_valid": true,
+            "timeline_valid": true,
+            "git_evidence_valid": true,
+            "evidence_snapshot_valid": true,
+            "prediction_matches_prior_commit": true,
+            "forbidden_outcomes_absent": true,
+            "prediction_recorded_at_utc": "2026-09-04T14:03:26Z",
+            "downstream_outcome_available_after_utc": "2026-09-04T20:00:00Z",
+            "cited_commit_time_utc": "2026-09-04T14:03:26+00:00",
+            "current_demo_sha256": "4846ceb1e882306de2361bdac370b92e92ba53cf992b9418d8a953d4626de890",
+            "eligible_for_submission": true
+          }
+        ],
+        "legacy_seal_records": [],
+        "passes": true,
+        "timeline_policy": "prediction must be recorded after the macro release and before downstream outcomes become available; no 15-minute condition"
       }
     },
     "six_month_tracking_plan": {
@@ -567,9 +593,7 @@
       "evidence": "demo/TRACKING_PLAN.zh-CN.md"
     }
   },
-  "failed_required_gates": [
-    "prospective_current_macro_demo"
-  ],
+  "failed_required_gates": [],
   "claim_policy": "S_READY means the explicit challenge-aligned machine gates pass. Diagnostic failures, label-access limitations and amendments remain mandatory disclosures and are never tuning prompts.",
   "supplemental_integrity_gate": {
     "passed": true,

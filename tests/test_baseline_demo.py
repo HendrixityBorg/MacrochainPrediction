@@ -178,6 +178,24 @@ class BaselineDemoTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "differs from executable payoff formula"):
                 precommit(input_path, root=root)
 
+    def test_active_precommit_uses_downstream_outcome_deadline_without_short_seal(self) -> None:
+        now = datetime.now(timezone.utc).replace(microsecond=0)
+        payload = self._live_payload(now)
+        payload.pop("seal_deadline_utc")
+        payload["downstream_outcome_available_after_utc"] = (now + timedelta(hours=8)).isoformat()
+        with tempfile.TemporaryDirectory() as directory:
+            root = self._temporary_evidence_root(directory)
+            input_path = root / "input.json"
+            input_path.write_text(json.dumps(payload), encoding="utf-8")
+            lock = {"valid": True, "protocol_sha256": "protocol-test"}
+            with patch("macro_gold_latent.demo.verify_lock", return_value=lock), patch("macro_gold_latent.demo._now", return_value=now):
+                committed = precommit(input_path, root=root)
+        self.assertEqual(
+            committed["input"]["downstream_outcome_available_after_utc"],
+            payload["downstream_outcome_available_after_utc"],
+        )
+        self.assertNotIn("seal_deadline_utc", committed["input"])
+
 
 if __name__ == "__main__":
     unittest.main()

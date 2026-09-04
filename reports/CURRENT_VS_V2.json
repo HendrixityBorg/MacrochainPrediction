@@ -34,5 +34,5 @@
     "v2_minus_own_climatology": -0.02431216029341199,
     "current_ece_minus_v2_ece": -0.0008951802272474801
   },
-  "conclusion": "Current is materially stronger for S-grade evidence readiness and has a lower raw Brier, but it does not dominate v2 on every metric. V2 has better within-cohort skill versus climatology and higher oracle coverage; current has independent confirmation scale, robust superiority to the naive baseline, a stronger width-error association, a multi-measurement latent model, and a genuinely prospective sealing workflow."
+  "conclusion": "当前版本的证据链更完整且原始 Brier 更低，但并非所有指标都优于 v2。v2 的组内 climatology skill 和 oracle coverage 更好；当前版本拥有更大的确认集、相对朴素基线更稳定的优势、更强的区间宽度—误差关系、多测量潜变量模型，以及早于下游结果形成的当期事件记录。"
 }

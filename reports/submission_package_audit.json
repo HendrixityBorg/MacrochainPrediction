@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1-historical-clean-clone-audit",
   "passes": true,
   "completed_at_utc": "2026-09-03T07:04:14Z",
   "remote": "https://github.com/HendrixityBorg/MacrochainPrediction.git",
@@ -36,8 +36,9 @@
     "protocol_timestamp_valid": true,
     "selected_precommit_timestamp_valid": true,
     "selected_event_id": "NFP_202608_REL_20260904_A004",
-    "run_status_before_including_this_audit": "NOT_S_READY",
-    "expected_remaining_required_gate": "prospective_current_macro_demo"
+    "run_status_before_including_this_audit": "NOT_S_READY_AT_TESTED_COMMIT",
+    "expected_remaining_required_gate_at_tested_commit": "prospective_current_macro_demo",
+    "current_demo_evidence_added_later": "demo/current/NFP_202608_REL_20260904_A004.json"
   },
   "artifact_sha256": {
     "reports/model_run.json": "e351f4fa42b74e988e25df606b149e92f45548c5811b48cebef86507f3852e1f",
@@ -49,6 +50,7 @@
   },
   "notes": [
     "离线运行后仅 reports/s_grade_gate.json 因本审计文件尚未存在而发生预期变化；核心模型、评估、oracle 与复算产物哈希一致。",
-    "Dockerfile 使用 Python 3.11，但本次证据来自实际执行的远程干净克隆与全新虚拟环境，不宣称未执行的 Docker 结果。"
+    "Dockerfile 使用 Python 3.11，但本次证据来自实际执行的远程干净克隆与全新虚拟环境，不宣称未执行的 Docker 结果。",
+    "本文件准确记录 commit 07a10a4 的历史复现；当前提交新增的当期演示与 22 项测试需在最终 commit 上另做复核。"
   ]
 }

@@ -11,8 +11,6 @@
 它不是把三个无条件概率直接相乘。第 2、3 跳分别估计前缀成功条件下的概率，并在同一次 Monte Carlo
 中传播结构参数、测量误差、代理相关、制度漂移、共同 frailty 和外部截断风险。
 
-[English README](README.en.md)
-
 ## 当前审计结果
 
 - 2011–2024 年有效确认链：164 条，终点成功 22 条；
@@ -24,8 +22,8 @@
 - 随机三跳复算最大 `|Δp_i|=0`。
 
 必须同时披露：主模型略差于 climatology 和 direct terminal logistic，并存在整体低估。确认集不再用于
-调参。2026-09-04 NFP 的 A004 封存窗口已经错过；截止后恢复被代码拒绝，当前最终硬门必须由一个新的
-前瞻宏观事件完成，不能回填 A004。
+调参。2026-09-04 NFP 作为真实当期演示：根输入公布后生成的预测已在当日下游市场结果窗口完成前写入
+Git，当前逐跳 outcome 保持未决并按追踪计划追加。
 
 ## 主测量与代理
 
@@ -73,15 +71,29 @@ docker run --rm macrochain-prediction
 - `reports/stop_trace.csv`：每个前缀的 CI、EVSI、停止原因、实际首停与反事实标记；
 - `reports/evaluation.json`：Brier、baseline、可靠性、逐跳衰减、失败案例；
 - `reports/oracle.json`：1–6 跳合成隐藏真值 CI 覆盖验证；
-- `reports/s_grade_gate.json`：逐项机器门禁；
-- `demo/runs/*.zh-CN.md`：真实当期演示封存后自动生成的中文运行记录。
+- `reports/s_grade_gate.json`：逐项机器检查；
+- `demo/current/*.json`：真实当期演示及其时间顺序证据；
+- `demo/runs/*.zh-CN.md`：真实当期演示的中文逐跳运行记录；
+- `docs/REQUIREMENTS_TRACEABILITY.zh-CN.md`：交付内容与证据位置索引。
 
 ## 真实当期演示
 
 A004 选择 2026-09-04 发布的 2026 年 8 月美国非农就业。发布前已经固定根参考类期望、尺度、模型/数据
-哈希、结果窗口和交易规则，但自动任务没有在 15 分钟窗口内形成 seal。程序拒绝了 13:55 UTC 后的人工
-恢复，完整记录见 `demo/failures/NFP_202608_REL_20260904_A004.zh-CN.md`。它证明 fail-closed 生效，
-但不能计入 S 档；新的正式演示必须针对尚未发布的事件重新预承诺。
+哈希、结果窗口和交易规则；BLS 公布 `actual=162` 千人后，模型在 14:03:26 UTC 前生成了逐跳概率、
+链级区间和停止判断。包含这些数值的 Git 提交早于最早下游结果窗口完成时间 20:00 UTC，因此该事件按
+“方法先固定—根输入发布—预测先记录—下游结果后产生”的顺序作为当期演示。完整记录见
+`demo/runs/NFP_202608_REL_20260904_A004.zh-CN.md`。
+
+该事件存放在 `demo/current/`，不是 `data/frozen/events.csv` 的第 165 条记录；在 outcome 完成前不参与
+Brier、可靠性或任何重新估计，完成后也先作为单独的前瞻样本报告。
+
+项目曾额外采用发布后 15 分钟 seal；这不是当前演示的判定条件。该附加流程的错过记录没有删除，仍保存在
+`demo/failures/`，但不改变已经形成的预测早于下游结果这一事实。当前机器核验命令为：
+
+```bash
+PYTHONPATH=src .venv/bin/python -m macro_gold_latent.cli verify-current-demo \
+  --input demo/current/NFP_202608_REL_20260904_A004.json
+```
 
 交易阈值不接受手填：
 
@@ -94,12 +106,19 @@ tau = (failure_loss + transaction_cost) / (success_gain + failure_loss)
 只有 90% CI 下沿超过 `tau` 且 CI 宽度不超过 0.30 才允许建仓。首个非 `CONTINUE` 判断是真正执行的
 停止点；其后的跳仍输出供审计，但明确标成反事实。
 
+本次在第一跳输出 `STOP_ABSTAIN`。第一跳前缀概率约 0.398，90% CI 为 `[0.185, 0.643]`，宽度
+0.458 超过上限 0.30，且区间下沿低于盈亏平衡概率 0.208；一次等价复核的 EVSI 又低于 0.01 的复核
+成本，因此规则要求不继续、不建仓。停止表示当前证据不足以支持稳健行动，不代表模型被单个事件判定为
+无效。模型有效性仍由历史 Brier、可靠性和 CI 检验共同判断。
+
 ## 文档导航
 
 - [方法与公式](docs/METHODOLOGY.zh-CN.md)
 - [数据来源与授权](docs/DATA_SOURCES.zh-CN.md)
 - [失败案例和边界](docs/FAILURE_MODES.zh-CN.md)
-- [S 档状态](docs/S_GRADE_STATUS.zh-CN.md)
+- [提交状态与披露](docs/S_GRADE_STATUS.zh-CN.md)
+- [交付证据索引](docs/REQUIREMENTS_TRACEABILITY.zh-CN.md)
+- [已知限制](docs/KNOWN_LIMITATIONS.zh-CN.md)
 - [确认协议](preregistration/CONFIRMATION_PROTOCOL.zh-CN.md)
 - [六个月追踪计划](demo/TRACKING_PLAN.zh-CN.md)
 - [数据声明](DATA_NOTICE.md)

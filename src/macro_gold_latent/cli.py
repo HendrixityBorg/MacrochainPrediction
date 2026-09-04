@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-from datetime import datetime
 import json
 from pathlib import Path
 import sys
@@ -11,13 +10,13 @@ from .config import ROOT, load_config
 from .baselines import add_direct_terminal_baseline
 from .audit_ledger import latent_state_rows
 from .data import acquire, build_dataset, build_events, load_events
-from .demo import precommit, prepare_seal_input, seal, validate_decision_rule
+from .demo import precommit, verify_current_demo
 from .external_confirmation import audit_bundle
 from .evaluate import evaluate
 from .gates import evaluate_gates
 from .io import read_csv, read_json, sha256_file, write_csv, write_json
 from .locking import freeze, freeze_amendment, verify_lock
-from .model import predict_locked_root, reproduce_three_hops, run_model
+from .model import reproduce_three_hops, run_model
 from .oracle import run_oracle
 from .quality import audit as audit_quality, markdown as quality_markdown
 from .report import (
@@ -163,43 +162,10 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
     return gate
 
 
-def command_seal_demo(args: argparse.Namespace) -> int:
-    config = load_config(args.config)
-    model_path = ROOT / "reports" / "model_run.json"
-    if not model_path.exists():
-        raise FileNotFoundError("run the offline model before sealing a demo")
-    live = read_json(Path(args.input))
-    validate_decision_rule(live, config)
-    root_z = (float(live["root_actual"]) - float(live["root_consensus_or_nowcast"])) / float(live["root_scale"])
-    release_date = datetime.fromisoformat(live["release_time_utc"].replace("Z", "+00:00")).date().isoformat()
-    prediction = predict_locked_root(
-        read_json(model_path), load_events(), event_id=live["event_id"], release_date=release_date,
-        root_z=root_z, config=config,
-    )
-    result = seal(Path(args.input), prediction)
-    write_live_demo_report(result, read_json(model_path))
-    print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0
-
-
 def command_precommit_demo(args: argparse.Namespace) -> int:
     result = precommit(Path(args.input))
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0
-
-
-def command_prepare_seal_input(args: argparse.Namespace) -> int:
-    result = prepare_seal_input(
-        event_id=args.event_id,
-        root_actual=args.actual,
-        actual_source_path=Path(args.actual_source_file),
-        actual_source_url=args.actual_source_url,
-        output_path=Path(args.output),
-    )
-    print(json.dumps(result, ensure_ascii=False, indent=2))
-    return 0
-
-
 def parser() -> argparse.ArgumentParser:
     root = argparse.ArgumentParser(prog="macro-gold-s")
     root.add_argument("--config", default=str(ROOT / "config" / "default.json"))
@@ -214,16 +180,10 @@ def parser() -> argparse.ArgumentParser:
     run.add_argument("--refresh", action="store_true")
     commands.add_parser("oracle")
     commands.add_parser("verify")
+    current_parser = commands.add_parser("verify-current-demo")
+    current_parser.add_argument("--input", required=True)
     precommit_parser = commands.add_parser("precommit-demo")
     precommit_parser.add_argument("--input", required=True)
-    prepare_parser = commands.add_parser("prepare-seal-input")
-    prepare_parser.add_argument("--event-id", required=True)
-    prepare_parser.add_argument("--actual", required=True, type=float)
-    prepare_parser.add_argument("--actual-source-file", required=True)
-    prepare_parser.add_argument("--actual-source-url", required=True)
-    prepare_parser.add_argument("--output", required=True)
-    seal_parser = commands.add_parser("seal-demo")
-    seal_parser.add_argument("--input", required=True)
     external_parser = commands.add_parser("audit-external-batch")
     external_parser.add_argument("--bundle", required=True)
     external_parser.add_argument("--unlocked", action="store_true")
@@ -242,12 +202,12 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "oracle":
         print(json.dumps(run_oracle(load_config(args.config)), ensure_ascii=False, indent=2))
         return 0
-    if args.command == "seal-demo":
-        return command_seal_demo(args)
+    if args.command == "verify-current-demo":
+        result = verify_current_demo(Path(args.input))
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0 if result["valid"] else 2
     if args.command == "precommit-demo":
         return command_precommit_demo(args)
-    if args.command == "prepare-seal-input":
-        return command_prepare_seal_input(args)
     if args.command == "audit-external-batch":
         result = audit_bundle(Path(args.bundle), unlocked=args.unlocked)
         print(json.dumps(result, ensure_ascii=False, indent=2))
