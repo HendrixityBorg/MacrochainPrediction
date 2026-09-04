@@ -52,8 +52,8 @@
 
 ## 提交前最后检查
 
-- [x] 在内容 commit `6b7c409` 的远端浅克隆中重新运行 `./run.sh --offline` 与 `./test.sh`；
+- [x] 在内容 commit `3ad7a1b` 的远端浅克隆中重新运行 `./run.sh --offline` 与 `./test.sh`；
 - [x] `reports/SUBMISSION_MANIFEST.json` 已记录内容 commit、验证命令和核心文件哈希；
 - [x] 内容 commit 已推送且远端仓库可以克隆；
-- [ ] 以 `README.md` 为评审入口，不把内部历史失败记录放在首屏；
-- [ ] 后续 outcome 只能新增，不得覆盖当期预测。
+- [x] 以 `README.md` 为评审入口，提交包只呈现最终模型与唯一当期演示；
+- [x] 后续 outcome 只能新增，不得覆盖当期预测。

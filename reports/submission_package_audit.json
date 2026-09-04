@@ -1,9 +1,9 @@
 {
-  "schema_version": "1.1-historical-clean-clone-audit",
+  "schema_version": "2.0-clean-clone-audit",
   "passes": true,
-  "completed_at_utc": "2026-09-03T07:04:14Z",
+  "completed_at_utc": "2026-09-04T15:42:22Z",
   "remote": "https://github.com/HendrixityBorg/MacrochainPrediction.git",
-  "tested_commit": "07a10a4bac9c1899683dac79076e160147716ea2",
+  "tested_commit": "3ad7a1be89655e8458bb5657b97196d1ce148bf6",
   "environment": {
     "os": "Darwin 25.5.0 arm64",
     "python": "3.11.9",
@@ -11,46 +11,47 @@
     "fresh_virtual_environment": true
   },
   "isolation": {
+    "clone_depth": 1,
     "source_was_fresh_remote_clone": true,
     "original_workspace_virtualenv_copied": false,
-    "official_raw_inputs_present": [
-      "data/raw/employ.xlsx",
-      "data/raw/h15_nominal.csv",
-      "data/raw/h15_real.csv",
-      "data/raw/release_dates_50.txt"
-    ],
-    "yahoo_raw_histories_present": false,
-    "network_used_by_offline_model_run": false
+    "offline_model_run_used_network": false,
+    "older_prediction_commit_available": false,
+    "distributed_prediction_snapshot_used": true
   },
   "commands": [
-    "git clone https://github.com/HendrixityBorg/MacrochainPrediction.git <temporary-directory>",
+    "git clone --depth 1 https://github.com/HendrixityBorg/MacrochainPrediction.git <temporary-directory>",
     "MACRO_GOLD_PYTHON=python3.11 ./setup.sh",
     "./run.sh --offline",
     "./test.sh",
-    ".venv/bin/python scripts/verify_protocol_timestamp.py",
-    ".venv/bin/python scripts/verify_live_precommit_timestamp.py NFP_202608_REL_20260904_A004"
+    "PYTHONPATH=src .venv/bin/python -m macro_gold_latent.cli verify-current-demo --input demo/current/NFP_202608_REL_20260904_A004.json",
+    "PYTHONPATH=src .venv/bin/python scripts/verify_protocol_timestamp.py",
+    "PYTHONPATH=src .venv/bin/python scripts/verify_live_precommit_timestamp.py NFP_202608_REL_20260904_A004"
   ],
   "results": {
-    "tests_run": 18,
-    "tests_passed": 18,
+    "pipeline_status": "S_READY",
+    "failed_required_gates": [],
+    "tests_run": 15,
+    "tests_passed": 15,
+    "current_demo_valid": true,
+    "current_demo_actual_source_valid": true,
+    "current_demo_snapshot_valid": true,
+    "current_demo_prediction_matches": true,
     "protocol_timestamp_valid": true,
     "selected_precommit_timestamp_valid": true,
-    "selected_event_id": "NFP_202608_REL_20260904_A004",
-    "run_status_before_including_this_audit": "NOT_S_READY_AT_TESTED_COMMIT",
-    "expected_remaining_required_gate_at_tested_commit": "prospective_current_macro_demo",
-    "current_demo_evidence_added_later": "demo/current/NFP_202608_REL_20260904_A004.json"
+    "selected_event_id": "NFP_202608_REL_20260904_A004"
   },
   "artifact_sha256": {
     "reports/model_run.json": "e351f4fa42b74e988e25df606b149e92f45548c5811b48cebef86507f3852e1f",
     "reports/evaluation.json": "1952ccbe0730cf41a59be1c51bf49f17b835f90d9ffaef4f54a8ae53758525a5",
     "reports/oracle.json": "764bec186326e18c67d7ed5bc5d20801c23ca31cffad69e4dc9a05c892f22817",
-    "reports/reproduction.json": "5a67c4eb5b4ff10817fc1138042fc48be36375699d47810e792ad8776bab6aee",
+    "reports/three_hop_reproduction.json": "14b0f478deb5d47e3637085550014adf5d3f839a7df1b320c08ad072b662f304",
     "reports/prediction_ledger.csv": "48d5ff1edd4371301bf5a0c33dcab9a0b16862c831bcd19fbd911e52027f49d8",
-    "reports/stop_trace.csv": "a099f9404e1136d857d27407092d7d3098b7cdd18b7c6e5dc36d167b195aacc2"
+    "reports/stop_trace.csv": "a099f9404e1136d857d27407092d7d3098b7cdd18b7c6e5dc36d167b195aacc2",
+    "demo/current/NFP_202608_REL_20260904_A004.json": "ef1f0418a15a1ecb80fee37e4d3b79c7e07050b6b7241a4ab158626687633d3a"
   },
   "notes": [
-    "离线运行后仅 reports/s_grade_gate.json 因本审计文件尚未存在而发生预期变化；核心模型、评估、oracle 与复算产物哈希一致。",
-    "Dockerfile 使用 Python 3.11，但本次证据来自实际执行的远程干净克隆与全新虚拟环境，不宣称未执行的 Docker 结果。",
-    "本文件准确记录 commit 07a10a4 的历史复现；当前提交新增的当期演示与 22 项测试需在最终 commit 上另做复核。"
+    "浅克隆不含较早预测提交对象；当期验证器使用随仓库分发且经 SHA-256 绑定的预测快照完成数值复核。",
+    "核心模型、评估、区间验证、逐跳复算和当期演示文件与内容提交逐字节一致。",
+    "Dockerfile 使用 Python 3.11；本记录只声称实际执行过的远端浅克隆与全新虚拟环境流程。"
   ]
 }

@@ -1,15 +1,17 @@
 {
-  "schema_version": "1.0",
-  "generated_at_utc": "2026-09-04T14:37:36Z",
+  "schema_version": "2.0",
+  "generated_at_utc": "2026-09-04T15:42:22Z",
   "repository": "https://github.com/HendrixityBorg/MacrochainPrediction",
-  "content_commit": "6b7c409259c715f433ec7ff86685b23bfe7be751",
-  "content_commit_note": "该 commit 包含已验证的代码、中文文档、模型产物和当期演示；此 manifest 与最终复现说明作为随后一次纯文档提交加入。",
+  "content_commit": "3ad7a1be89655e8458bb5657b97196d1ce148bf6",
+  "content_commit_note": "该提交包含最终代码、中文文档、模型产物和唯一当期演示；本清单与隔离复现记录在随后一次审计提交中加入。",
   "entrypoints": {
     "readme": "README.md",
+    "submission_scope": "docs/SUBMISSION_SCOPE.zh-CN.md",
     "main_report": "reports/SUBMISSION_REPORT.zh-CN.md",
     "evidence_index": "docs/REQUIREMENTS_TRACEABILITY.zh-CN.md",
     "current_demo": "demo/runs/NFP_202608_REL_20260904_A004.zh-CN.md",
-    "limitations": "docs/KNOWN_LIMITATIONS.zh-CN.md"
+    "limitations": "docs/KNOWN_LIMITATIONS.zh-CN.md",
+    "clean_clone_audit": "reports/FINAL_REPRODUCTION_AUDIT.zh-CN.md"
   },
   "verification_commands": [
     "./setup.sh",
@@ -22,26 +24,36 @@
   "verified_results": {
     "pipeline_status": "S_READY_INTERNAL_IDENTIFIER",
     "failed_required_gates": [],
-    "tests_passed": 22,
+    "tests_passed": 15,
     "current_demo_valid": true,
+    "current_demo_actual_source_valid": true,
     "confirmation_events": 164,
+    "terminal_successes": 22,
     "brier": 0.11927979325096628,
-    "oracle_90ci_coverage": 0.92
+    "naive_product_brier": 0.1284301630229179,
+    "oracle_90ci_coverage": 0.92,
+    "ci_width_error_spearman_rho": 0.7213962156353297,
+    "ci_width_error_p_value": 0.0002
   },
   "sha256": {
-    "README.md": "363ee9ed00ecf5e9932755c1008ef28fd5dbc0e24f433dc4809bb6d89a159255",
-    "reports/SUBMISSION_REPORT.zh-CN.md": "4b6b1adb8d6ffd462db143922180e93dbd3a7f3ef4d47d5d6c370b941a526f9c",
+    "README.md": "af1c8abb4b2780e746e5fd34a3da846ebca75cf51fb5b430f4d86cd98a0073d0",
+    "docs/SUBMISSION_SCOPE.zh-CN.md": "e1ebd0e553d865f7ded8e02a63967866a8f3c19199f0f556d5daec0808b59158",
+    "reports/SUBMISSION_REPORT.zh-CN.md": "c840434f697adb9325d2fdcab82d8e3c8ca878db7a4441168686b54a9529afe5",
     "reports/model_run.json": "e351f4fa42b74e988e25df606b149e92f45548c5811b48cebef86507f3852e1f",
     "reports/evaluation.json": "1952ccbe0730cf41a59be1c51bf49f17b835f90d9ffaef4f54a8ae53758525a5",
     "reports/oracle.json": "764bec186326e18c67d7ed5bc5d20801c23ca31cffad69e4dc9a05c892f22817",
     "reports/three_hop_reproduction.json": "14b0f478deb5d47e3637085550014adf5d3f839a7df1b320c08ad072b662f304",
     "reports/prediction_ledger.csv": "48d5ff1edd4371301bf5a0c33dcab9a0b16862c831bcd19fbd911e52027f49d8",
     "reports/stop_trace.csv": "a099f9404e1136d857d27407092d7d3098b7cdd18b7c6e5dc36d167b195aacc2",
-    "demo/current/NFP_202608_REL_20260904_A004.json": "ba79a03d39b22d9281a96ee577ce0568a6953de1492274184c86fe7e59d45359"
+    "demo/current/NFP_202608_REL_20260904_A004.json": "ef1f0418a15a1ecb80fee37e4d3b79c7e07050b6b7241a4ab158626687633d3a",
+    "demo/evidence/NFP_202608_BLS_actual_20260904.json": "d2a3ca742062f8ef23c4730570ba0d0c74d01049fc2366fb8b731e8582ae538f",
+    "demo/evidence/NFP_202608_REL_20260904_prediction_snapshot.json": "c4def3050924c5a3543bdf8a7d76d0e5c746dfd3711a285d31774c2651a6b42f",
+    "demo/runs/NFP_202608_REL_20260904_A004.zh-CN.md": "07d3c74ec9db2324f79e0f617f598a1c5a0c50329e3fa9aafb5e164813995aec"
   },
   "disclosures": [
-    "主模型略差于 climatology、primary-only 与 direct terminal logistic。",
+    "主模型优于朴素连乘，但略差于 climatology、primary-only 与 direct terminal logistic。",
     "确认集存在整体低估和若干可靠性分桶偏差。",
-    "A004 下游 outcome 当前未决，不进入冻结确认集。"
+    "A004 下游 outcome 当前未决，不进入冻结确认集。",
+    "日频窗口不能单独证明严格的盘中结构因果顺序。"
   ]
 }
