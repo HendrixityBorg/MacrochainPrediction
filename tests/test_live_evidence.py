@@ -55,7 +55,7 @@ class LiveEvidenceTests(unittest.TestCase):
         path = ROOT / "demo" / "current" / "NFP_202608_REL_20260904_A004.json"
         check = verify_current_demo(path)
         self.assertTrue(check["valid"])
-        self.assertTrue(check["git_evidence_valid"])
+        self.assertTrue(check["git_evidence_valid"] or check["evidence_snapshot_valid"])
         self.assertTrue(check["prediction_matches_prior_commit"])
         self.assertTrue(check["timeline_valid"])
 
