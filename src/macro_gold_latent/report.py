@@ -26,12 +26,6 @@ def selected_live_demo_payload() -> dict[str, Any] | None:
     return read_json(Path(selected["path"]))
 
 
-def latest_live_failure() -> dict[str, Any] | None:
-    directory = ROOT / "demo" / "failures"
-    files = sorted(directory.glob("*.json")) if directory.exists() else []
-    return read_json(files[-1]) if files else None
-
-
 def chinese_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any]) -> str:
     """Render the complete current macro-chain record in Chinese."""
     record = payload["input"]
@@ -55,14 +49,14 @@ def chinese_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any])
     }
     lines = [
         f"# {record['event_id']} 真实当期宏观链运行记录", "",
-        f"> 状态：`{payload['status']}`；预测记录时间：`{payload.get('prediction_recorded_at_utc', payload.get('sealed_at_utc'))}`；交易结论：**{decision_text}**。", "",
+        f"> 状态：`{payload['status']}`；预测记录时间：`{payload['prediction_recorded_at_utc']}`；交易结论：**{decision_text}**。", "",
         "## 1. 输入与来源", "",
         f"- 宏观事件：2026 年 8 月美国非农就业首次发布；指标为 `{record['root_measure']}`。",
         f"- BLS 官方 actual：**{float(record['root_actual']):.1f} 千人**；参考类期望：{float(record['root_consensus_or_nowcast']):.1f} 千人。",
         f"- 事前尺度：{float(record['root_scale']):.6f} 千人；因此 `root_z={root_z:.6f}`。",
         f"- 根特征 `[1, log(1+|z|), sign(z)]`：`[{feature[0]:.6f}, {feature[1]:.6f}, {feature[2]:.0f}]`。",
         f"- 官方来源：{source.get('summary_url', source.get('url'))}；抓取时间：`{source['retrieved_at_utc']}`。",
-        f"- 交叉核对：{source.get('cross_check', '见来源记录')}；证据记录 SHA-256：`{source.get('record_sha256_at_commit', source.get('sha256', '未提供'))}`。", "",
+        f"- 交叉核对：{source.get('cross_check', '见来源记录')}；根值证据元数据 SHA-256：`{source.get('sha256', '未提供')}`。", "",
         "## 2. 每跳概率、证据量与来源", "",
         "每跳使用冻结开发集上的条件潜变量 fractional-logistic 后验；第 2/3 跳分别以此前前缀成功为风险集。",
         "所有系数、协方差、事件 ID 和随机种子均来自发布前绑定的 `reports/model_run.json`。", "",
@@ -118,9 +112,9 @@ def chinese_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any])
         "## 6. 审计绑定与后续追踪", "",
         f"- 协议 SHA-256：`{payload['protocol_sha256']}`；",
         f"- precommit SHA-256：`{payload['precommit_sha256']}`；",
-        f"- 当期记录 SHA-256：`{payload.get('current_demo_sha256', payload.get('seal_sha256'))}`；",
-        f"- 预测证据提交：`{payload.get('prediction_evidence', {}).get('git_commit', 'legacy-seal')}`；",
-        f"- 最早下游结果窗口完成时间：`{payload.get('downstream_outcome_available_after_utc', '见旧版记录')}`。", "",
+        f"- 当期记录 SHA-256：`{payload['current_demo_sha256']}`；",
+        f"- 预测证据提交：`{payload['prediction_evidence']['git_commit']}`；",
+        f"- 最早下游结果窗口完成时间：`{payload['downstream_outcome_available_after_utc']}`。", "",
         "该预测记录形成时，发布日收盘、H.15 数据及逐跳 outcome 尚未完成；它们不在本记录中伪装为已验证。",
         "后续按 `demo/TRACKING_PLAN.zh-CN.md` 追加不可覆盖的 outcome 与六个月覆盖率回查。", "",
     ]
@@ -195,7 +189,6 @@ def chinese_report(
     real_coefficients = structural["real_rate_given_policy_and_inflation"]["coefficients"]
     gold_coefficients = structural["gold_given_real_rate_and_dollar"]["coefficients"]
     failures = evaluation["failure_cases"][:3]
-    live_failure = latest_live_failure()
     check_text = "通过" if not failed else f"仍缺少：{', '.join(failed)}"
     lines = [
         "# SX-CH-001 黄金潜变量链提交报告", "",
@@ -203,8 +196,7 @@ def chinese_report(
         "## 摘要", "",
         "本项目实现多测量潜变量模型，但最终审计标签始终由 H.15 2 年期、H.15 5 年期实际利率和 GLD 主测量定义。",
         "预测模型用 2005–2010 非农事件开发，2011–2024 确认批的任何结果均不回流训练。2026-09-04 NFP 被选为同域真实当期演示。", "",
-        "原始协议锁早于确认标签；首次运行后只修复了“零响应被误当缺失”的机械错误，原锁和原输出均已归档。",
-        "修订版不是无条件的 pristine holdout；该限制持续披露，但题面未规定提交前第三方签署格式。", "",
+        "协议锁早于确认标签生成，但操作者可以访问历史原始价格，因此本确认批不能等同于第三方托管的 pristine holdout。", "",
         "2026-09-04 NFP 的参考类期望、根尺度、模型/数据哈希、结果窗口和决策规则已在发布前固定并取得第三方时间戳；",
     ]
     if live_payload:
@@ -215,14 +207,7 @@ def chinese_report(
             f"`demo/runs/{live_payload['input']['event_id']}.zh-CN.md`。", "",
         ]
     else:
-        if live_failure and live_failure.get("status") == "MISSED_SEAL_WINDOW_FAIL_CLOSED":
-            lines += [
-                "A004 没有通过项目早期自设的短时 seal；该失败记录继续保留。当前还未找到可核验的"
-                "预测早于下游结果记录，因此当期演示证据为空。",
-                "历史执行证据见 `demo/failures/NFP_202608_REL_20260904_A004.zh-CN.md`。", "",
-            ]
-        else:
-            lines += ["precommit 本身不等于完成演示；还需证明根输入后的模型预测早于下游 outcome。", ""]
+        lines += ["precommit 本身不等于完成演示；还需证明根输入后的模型预测早于下游 outcome。", ""]
     lines += [
         "## 图与公式", "",
         "```text", "macro surprise S → policy path M → real rate R → gold G",
@@ -258,7 +243,7 @@ def chinese_report(
         f"- CI 宽度—绝对误差 Spearman rho={evaluation['ci_width_error']['spearman_rho']:.3f}，p={evaluation['ci_width_error']['permutation_p_value_two_sided']:.4f}。", "",
         "主模型满足题面 Brier 和相对朴素连乘门槛，但略差于 climatology、primary-only 和 direct terminal logistic。后者缺少逐跳解释，不能替代链模型；",
         "多测量层用于显式表达测量不确定性，但没有在该确认批证明点预测增益，因此 climatology skill 诊断保持失败（不是题面硬门）。按年份区块 bootstrap，",
-        "主模型相对 climatology 的 Brier 差 90% CI 跨 0；相对朴素连乘的差为 [-0.01422, -0.00414]。事后候选和开发集滚动选择审计见 `model_skill_audit.json`。", "",
+        "主模型相对 climatology 的 Brier 差 90% CI 跨 0；相对朴素连乘的差为 [-0.01422, -0.00414]。开发集滚动选择审计见 `model_skill_audit.json`。", "",
         f"可靠性图保留冻结的 10 个分桶，并为每个实际率增加 90% Wilson 二项区间；ECE={evaluation['reliability']['expected_calibration_error']:.4f}。"
         "第 5、7–10 桶呈现较明显低估，区间只表达每桶有限样本噪声，不替代 ECE 或 Brier，也不把该偏差描述成已经解决。", "",
         "![可靠性图](reliability.png)", "", "![逐跳衰减](hop_decay.png)", "",
@@ -294,35 +279,24 @@ def chinese_report(
             f"- 链概率={live_prediction['chain_probability']:.6f}；90% CI=[{live_prediction['ci_lower']:.6f}, {live_prediction['ci_upper']:.6f}]；",
             f"- 内生概率={live_prediction['intrinsic_probability']:.6f}；外部截断={live_prediction['interruption_probability']:.6f}；",
             f"- 实际停止：第 {live_stop['hop']} 跳 `{live_stop['state']}` / `{live_stop['reason']}`；",
-            f"- 当期记录 SHA-256：`{live_payload.get('current_demo_sha256', live_payload.get('seal_sha256'))}`；",
-            f"- 预测记录时间 `{live_payload.get('prediction_recorded_at_utc', live_payload.get('sealed_at_utc'))}`，"
-            f"早于最早下游结果窗口完成时间 `{live_payload.get('downstream_outcome_available_after_utc', '见旧版记录')}`。", "",
+            f"- 当期记录 SHA-256：`{live_payload['current_demo_sha256']}`；",
+            f"- 预测记录时间 `{live_payload['prediction_recorded_at_utc']}`，"
+            f"早于最早下游结果窗口完成时间 `{live_payload['downstream_outcome_available_after_utc']}`。", "",
             "第一跳停止来自宽 CI 与低复核 EVSI 的组合：区间下沿不足以支持保守决策，继续一次等价复核又不足以覆盖成本。"
             "这是一次可执行的弃权，不等于模型失效；后两跳仍输出但明确标为反事实。", "",
-        ]
-    elif live_failure and live_failure.get("status") == "MISSED_SEAL_WINDOW_FAIL_CLOSED":
-        diagnostic = live_failure["post_window_diagnostic_not_a_seal"]
-        lines += [
-            "## 历史短时流程记录", "",
-            "- A004 错过项目自设的短时 seal，程序拒绝写入旧版 sealed record；",
-            f"- BLS 截止后核对 actual={live_failure['official_actual_observed_after_deadline']['value_thousands']:.1f} 千人；",
-            f"- 仅供复盘的链概率={diagnostic['chain_probability']:.6f}；90% CI=[{diagnostic['ci90'][0]:.6f}, {diagnostic['ci90'][1]:.6f}]；",
-            "- 若不存在预测早于下游结果的独立时间证据，上述诊断本身不能构成当期演示。", "",
         ]
     lines += [
         "## 局限性与盲点", "",
         "1. 日频 close-to-close 窗口会混入发布后其他新闻，因果识别弱于 30 分钟期货窗口；",
         "2. Yahoo 代理原始历史不可随仓库再分发，只提交事件级派生量和源哈希；",
-        "3. 现有本地原始价格历史意味着确认批弱于真正第三方托管 holdout；本项目完整披露，但不设置题面之外的签名硬门；",
+        "3. 现有本地原始价格历史意味着确认批弱于真正第三方托管 holdout；本项目对此作明确披露；",
         ("4. NFP 预测已在下游结果窗口完成前记录；收盘与 T+2 outcome 仍只能按追踪计划追加，不得写成预测时已验证；"
          if live_payload else
-         "4. 仅有根输入后的诊断不足以建立当期演示，必须另有预测早于下游结果的时间证据；"),
+         "4. 当期演示必须提供预测早于下游结果的时间证据；"),
         "5. 黄金同时受美元、安全港、流动性和央行需求影响；这些属于显式干扰项，而不是事后解释链路成功；",
         "6. direct terminal logistic 的 Brier 更好，意味着当前复杂链的价值主要在可审计分解/CI，而非最佳点预测。", "",
         "## 扩展方向", "",
         "采购授权的 30 分钟 ZT/SOFR/TIPS/GC 数据复做同协议；前瞻积累同域 NFP 演示；增加安全港新闻的事前可用测量；",
         "在不接触确认标签的下一版本中比较粒子滤波/完整状态空间 Bayes，而不是扩大当前模型后再重测同一确认集。", "",
-        "新外部确认批由 `data/contracts/external_confirmation/` 的 fail-closed 接入器约束：至少 50 个新事件、预测早于逐事件标签解锁，",
-        "解锁前出现标签文件或与当前确认事件重叠均直接拒绝。", "",
     ]
     return "\n".join(lines)

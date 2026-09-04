@@ -490,62 +490,7 @@
       "passed": true,
       "evidence": {
         "valid_pre_release_commitments": 1,
-        "all_valid_pre_release_commitments_including_withdrawn": 1,
-        "withdrawn_event_ids": [
-          "CPI_202608_REL_20260911",
-          "NFP_202608_REL_20260904",
-          "NFP_202608_REL_20260904_A002",
-          "NFP_202608_REL_20260904_A003"
-        ],
         "precommit_records": [
-          {
-            "valid": false,
-            "hash_valid": true,
-            "bindings_valid": false,
-            "source_bindings_valid": true,
-            "timeline_valid": true,
-            "path": "/Users/henry/Graph Agent/MacrochainPrediction/demo/precommitted/CPI_202608_REL_20260911.json",
-            "precommit_sha256": "8798381681dc3c43ce451c6797db0027adb0172e83a7e386aff7d9dab3094d0c",
-            "status": "precommitted_awaiting_release",
-            "event_id": "CPI_202608_REL_20260911",
-            "eligible_for_submission": false
-          },
-          {
-            "valid": false,
-            "hash_valid": true,
-            "bindings_valid": false,
-            "source_bindings_valid": true,
-            "timeline_valid": true,
-            "path": "/Users/henry/Graph Agent/MacrochainPrediction/demo/precommitted/NFP_202608_REL_20260904.json",
-            "precommit_sha256": "c2b42df36c7710720f95063a2581830f1d2d6c145b227c699d02642faefca8a0",
-            "status": "precommitted_awaiting_release",
-            "event_id": "NFP_202608_REL_20260904",
-            "eligible_for_submission": false
-          },
-          {
-            "valid": false,
-            "hash_valid": true,
-            "bindings_valid": false,
-            "source_bindings_valid": true,
-            "timeline_valid": true,
-            "path": "/Users/henry/Graph Agent/MacrochainPrediction/demo/precommitted/NFP_202608_REL_20260904_A002.json",
-            "precommit_sha256": "5aa590e81e3d8ea1c20da9c33e6a8fe88b953172440af75b9302851dc052617d",
-            "status": "precommitted_awaiting_release",
-            "event_id": "NFP_202608_REL_20260904_A002",
-            "eligible_for_submission": false
-          },
-          {
-            "valid": false,
-            "hash_valid": true,
-            "bindings_valid": false,
-            "source_bindings_valid": true,
-            "timeline_valid": true,
-            "path": "/Users/henry/Graph Agent/MacrochainPrediction/demo/precommitted/NFP_202608_REL_20260904_A003.json",
-            "precommit_sha256": "9218926c6ad62b03f5b058ca28308c2bf193143b5357225ee02c15fff6cb9a6f",
-            "status": "precommitted_awaiting_release",
-            "event_id": "NFP_202608_REL_20260904_A003",
-            "eligible_for_submission": false
-          },
           {
             "valid": true,
             "hash_valid": true,
@@ -560,7 +505,6 @@
           }
         ],
         "valid_current_macro_records": 1,
-        "valid_legacy_seals": 0,
         "records": [
           {
             "valid": true,
@@ -572,6 +516,7 @@
             "precommit_binding_valid": true,
             "artifact_bindings_valid": true,
             "timeline_valid": true,
+            "actual_source_valid": true,
             "git_evidence_valid": true,
             "evidence_snapshot_valid": true,
             "prediction_matches_prior_commit": true,
@@ -579,13 +524,12 @@
             "prediction_recorded_at_utc": "2026-09-04T14:03:26Z",
             "downstream_outcome_available_after_utc": "2026-09-04T20:00:00Z",
             "cited_commit_time_utc": "2026-09-04T14:03:26+00:00",
-            "current_demo_sha256": "4846ceb1e882306de2361bdac370b92e92ba53cf992b9418d8a953d4626de890",
+            "current_demo_sha256": "010965a13ef09dea0fbe7a667273efe5cff7a82f76d78669f3f5cb87da766c53",
             "eligible_for_submission": true
           }
         ],
-        "legacy_seal_records": [],
         "passes": true,
-        "timeline_policy": "prediction must be recorded after the macro release and before downstream outcomes become available; no 15-minute condition"
+        "timeline_policy": "prediction is recorded after the macro release and before downstream outcomes become available"
       }
     },
     "six_month_tracking_plan": {

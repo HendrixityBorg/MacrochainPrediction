@@ -11,7 +11,6 @@ from .baselines import add_direct_terminal_baseline
 from .audit_ledger import latent_state_rows
 from .data import acquire, build_dataset, build_events, load_events
 from .demo import precommit, verify_current_demo
-from .external_confirmation import audit_bundle
 from .evaluate import evaluate
 from .gates import evaluate_gates
 from .io import read_csv, read_json, sha256_file, write_csv, write_json
@@ -184,9 +183,6 @@ def parser() -> argparse.ArgumentParser:
     current_parser.add_argument("--input", required=True)
     precommit_parser = commands.add_parser("precommit-demo")
     precommit_parser.add_argument("--input", required=True)
-    external_parser = commands.add_parser("audit-external-batch")
-    external_parser.add_argument("--bundle", required=True)
-    external_parser.add_argument("--unlocked", action="store_true")
     return root
 
 
@@ -208,10 +204,6 @@ def main(argv: list[str] | None = None) -> int:
         return 0 if result["valid"] else 2
     if args.command == "precommit-demo":
         return command_precommit_demo(args)
-    if args.command == "audit-external-batch":
-        result = audit_bundle(Path(args.bundle), unlocked=args.unlocked)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-        return 0 if result["eligible"] else 2
     if args.command in {"run", "verify"}:
         if args.command == "verify":
             args.build_data = False

@@ -55,15 +55,7 @@ CI 宽度与误差关系及未来前瞻样本共同判断。若大量事件都�
 - 主模型 Brier 0.11928，climatology 为 0.11862，差异略偏向 climatology；
 - 平均预测为 0.0698，实际三跳率为 0.1341，存在整体低估；
 - 可靠性分桶并非处处贴近对角线，部分中高概率桶低估较明显；
-- 操作者可访问历史原始价格，Amendment 001 发生在标签打开后，确认批弱于第三方托管的 pristine
-  holdout；
+- 操作者可访问历史原始价格，确认批弱于第三方托管的 pristine holdout；
 - 日频 close-to-close 会混入发布后其他新闻，不能单独构成严格结构因果识别。
 
 这些结果没有用于重选模型、重设标签或事后校准。详细边界见 `docs/KNOWN_LIMITATIONS.zh-CN.md`。
-
-## 关于历史 15 分钟流程
-
-项目曾把发布后 15 分钟设为额外 seal 窗口，A004 没有在该窗口内完成，失败记录保存在 `demo/failures/`。
-现在的当期演示不再使用这一附加时限，而检查预测是否在下游 outcome 可观测前已经形成。协议口径变化记录
-在 `preregistration/AMENDMENT_005_CURRENT_DEMO_TIMELINE.zh-CN.md`；它不改模型、数据、预测值、交易
-决策或历史失败文件。

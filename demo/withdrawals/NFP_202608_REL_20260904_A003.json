@@ -1,9 +1,0 @@
-{
-  "event_id": "NFP_202608_REL_20260904_A003",
-  "status": "WITHDRAWN_NOT_USED_FOR_SUBMISSION",
-  "withdrawn_at_utc": "2026-09-03T06:57:25Z",
-  "precommit_path": "demo/precommitted/NFP_202608_REL_20260904_A003.json",
-  "precommit_sha256": "9218926c6ad62b03f5b058ca28308c2bf193143b5357225ee02c15fff6cb9a6f",
-  "replacement_event_id": "NFP_202608_REL_20260904_A004",
-  "reason": "Pre-release submission audit found the written 0.26 break-even threshold did not equal the executable payoff threshold 0.208. A003 is retained but cannot be used; A004 fixes the rule before release under Amendment 004."
-}

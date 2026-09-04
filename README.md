@@ -87,8 +87,7 @@ A004 选择 2026-09-04 发布的 2026 年 8 月美国非农就业。发布前已
 该事件存放在 `demo/current/`，不是 `data/frozen/events.csv` 的第 165 条记录；在 outcome 完成前不参与
 Brier、可靠性或任何重新估计，完成后也先作为单独的前瞻样本报告。
 
-项目曾额外采用发布后 15 分钟 seal；这不是当前演示的判定条件。该附加流程的错过记录没有删除，仍保存在
-`demo/failures/`，但不改变已经形成的预测早于下游结果这一事实。当前机器核验命令为：
+当前演示以“预测记录早于最早下游 outcome 可用时间”为时间隔离条件。机器核验命令为：
 
 ```bash
 PYTHONPATH=src .venv/bin/python -m macro_gold_latent.cli verify-current-demo \
@@ -117,6 +116,7 @@ tau = (failure_loss + transaction_cost) / (success_gain + failure_loss)
 - [数据来源与授权](docs/DATA_SOURCES.zh-CN.md)
 - [失败案例和边界](docs/FAILURE_MODES.zh-CN.md)
 - [提交状态与披露](docs/S_GRADE_STATUS.zh-CN.md)
+- [提交范围说明](docs/SUBMISSION_SCOPE.zh-CN.md)
 - [交付证据索引](docs/REQUIREMENTS_TRACEABILITY.zh-CN.md)
 - [已知限制](docs/KNOWN_LIMITATIONS.zh-CN.md)
 - [确认协议](preregistration/CONFIRMATION_PROTOCOL.zh-CN.md)
@@ -132,5 +132,5 @@ tau = (failure_loss + transaction_cost) / (success_gain + failure_loss)
 ## 诚实限制
 
 日频 close-to-close 窗口会混入宏观发布后的其他新闻，弱于授权的 30 分钟期货事件窗；潜变量能处理
-测量误差，却不能把同时发生的价格反应自动变成结构因果证明。所有修订、标签接触边界、负结果和
-撤回的历史预承诺都保留在仓库中。
+测量误差，却不能把同时发生的价格反应自动变成结构因果证明。标签接触边界、负结果和方法局限均在
+报告中披露。

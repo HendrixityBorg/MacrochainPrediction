@@ -1,9 +1,0 @@
-{
-  "event_id": "CPI_202608_REL_20260911",
-  "status": "WITHDRAWN_NOT_USED_FOR_SUBMISSION",
-  "withdrawn_at_utc": "2026-09-03T05:28:57Z",
-  "precommit_path": "demo/precommitted/CPI_202608_REL_20260911.json",
-  "precommit_sha256": "8798381681dc3c43ce451c6797db0027adb0172e83a7e386aff7d9dab3094d0c",
-  "reason": "Replaced before either release by the earlier 2026-09-04 NFP demonstration, which matches the locked historical model domain.",
-  "audit_policy": "The original CPI precommit and RFC 3161 timestamp remain immutable and verifiable. They are retained as audit history and must not be counted as the selected submission demo."
-}

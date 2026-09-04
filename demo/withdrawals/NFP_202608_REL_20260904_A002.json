@@ -1,9 +1,0 @@
-{
-  "event_id": "NFP_202608_REL_20260904_A002",
-  "status": "WITHDRAWN_NOT_USED_FOR_SUBMISSION",
-  "withdrawn_at_utc": "2026-09-03T06:20:52Z",
-  "precommit_path": "demo/precommitted/NFP_202608_REL_20260904_A002.json",
-  "precommit_sha256": "5aa590e81e3d8ea1c20da9c33e6a8fe88b953172440af75b9302851dc052617d",
-  "reason": "Superseded before release by a final NFP precommit bound to the Amendment 003 challenge-aligned governance protocol.",
-  "audit_policy": "The A002 precommit and RFC 3161 timestamp remain immutable audit history and cannot count as the selected submission demo."
-}

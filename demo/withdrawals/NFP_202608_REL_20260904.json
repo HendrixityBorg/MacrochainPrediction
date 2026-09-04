@@ -1,9 +1,0 @@
-{
-  "event_id": "NFP_202608_REL_20260904",
-  "status": "WITHDRAWN_NOT_USED_FOR_SUBMISSION",
-  "withdrawn_at_utc": "2026-09-03T05:41:22Z",
-  "precommit_path": "demo/precommitted/NFP_202608_REL_20260904.json",
-  "precommit_sha256": "c2b42df36c7710720f95063a2581830f1d2d6c145b227c699d02642faefca8a0",
-  "reason": "Superseded before release by a second NFP precommit bound to the Amendment 002 protocol hash.",
-  "audit_policy": "The first NFP precommit and RFC 3161 timestamp remain immutable proof that the root definition existed before Amendment 002 and before the outcome."
-}

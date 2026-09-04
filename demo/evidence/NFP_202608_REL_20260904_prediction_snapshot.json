@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "event_id": "NFP_202608_REL_20260904_A004",
+  "root_observation": {
+    "actual_thousands": 162.0,
+    "expected_thousands": 68.5,
+    "scale_thousands": 124.42677605270522,
+    "root_z": 0.7514459746220128
+  },
+  "recorded_prediction": {
+    "p_i": [
+      0.4030823929031814,
+      0.5207170437216464,
+      0.4076300075935264
+    ],
+    "n_i": [
+      63.5128838585354,
+      21.06495016347412,
+      14.861855942812628
+    ],
+    "intrinsic_probability": 0.08587545771267878,
+    "interruption_probability": 0.011438855399611108,
+    "chain_probability": 0.08490789047335276,
+    "ci90": [
+      0.019072796749964746,
+      0.19620627131694737
+    ],
+    "ci_width": 0.17713347456698264,
+    "execution_stop": {
+      "hop": 1,
+      "state": "STOP_ABSTAIN",
+      "reason": "wide_ci_and_review_evsi_below_cost",
+      "prefix_probability": 0.3984394158434333,
+      "ci90": [
+        0.18485375045331667,
+        0.6431852094797608
+      ]
+    },
+    "terminal_counterfactual": {
+      "state": "STOP_REJECT",
+      "reason": "ci_upper_below_break_even"
+    },
+    "uncertainty_variance_shares": {
+      "link_parameter": 0.43132953591087614,
+      "measurement": 0.0024979777948388278,
+      "regime_drift": 0.46573691527188893,
+      "common_frailty": 0.10724731339527369,
+      "external_cutoff": 0.0002931457444814768
+    }
+  },
+  "provenance": {
+    "prediction_commit": "b8f7762377f0bb5d7e2a614a6fc9584f13ba19c4",
+    "prediction_commit_time_utc": "2026-09-04T14:03:26Z",
+    "git_blob_oid": "8376a882346461ae6e49496d07947ae882add07e",
+    "git_blob_sha256": "7ae42508b0637c69b0a86a9858c2bd2b6b1ede2720d9e199cedf0840b6717bb9",
+    "note": "本快照只保留当期输入和模型输出；Git blob 用于完整历史仓库的交叉核对。"
+  }
+}

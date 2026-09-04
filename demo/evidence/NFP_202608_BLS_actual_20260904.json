@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "event_id": "NFP_202608_REL_20260904_A004",
+  "observation_period": "2026-08",
+  "release_time_utc": "2026-09-04T12:30:00Z",
+  "retrieved_at_utc": "2026-09-04T13:55:29.524911Z",
+  "verified_at_utc": "2026-09-04T15:36:09Z",
+  "publisher": "U.S. Bureau of Labor Statistics",
+  "measure": "total_nonfarm_payroll_first_release_monthly_change_thousands",
+  "actual": 162.0,
+  "unit": "thousand persons, seasonally adjusted monthly change",
+  "sources": [
+    {
+      "role": "release_summary",
+      "url": "https://www.bls.gov/news.release/empsit.nr0.htm",
+      "support": "The August 2026 release states that total nonfarm payroll employment increased by 162,000."
+    },
+    {
+      "role": "table_b1_cross_check",
+      "url": "https://www.bls.gov/news.release/empsit.t17.htm",
+      "support": "Table B-1 is the establishment-survey table used to cross-check the total nonfarm payroll change."
+    }
+  ],
+  "derivation": "The published change of 162,000 is represented as 162.0 thousand; no revision or later vintage is substituted.",
+  "scope": "This metadata records the released root observation only. The pre-release expectation and scale remain bound by the precommit evidence."
+}

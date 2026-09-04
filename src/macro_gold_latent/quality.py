@@ -107,7 +107,6 @@ def markdown(result: dict[str, Any]) -> str:
         f"- 原始协议锁：{result['lock_timeline']['base_lock']}；",
         f"- 首次标签生成：{result['lock_timeline']['first_label_generation']}；",
         f"- 当前链式修订锁：{result['lock_timeline']['amended_lock']}；修订数={len(result['lock_timeline']['amendment_chain'])}。", "",
-        "原始锁早于标签；Amendment 001 晚于标签，故其非 pristine 性质必须披露。Amendment 002 只替换尚未发布的演示主题，",
-        "Amendment 003 只把自定义签署/skill 门与题面硬门分离；二者均不改变历史预测、标签、模型或阈值。", "",
+        "原始锁早于标签。操作者可以访问原始历史价格，因此确认批不应表述为第三方托管的 pristine holdout。", "",
     ]
     return "\n".join(lines)

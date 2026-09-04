@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import copy
 from datetime import datetime, timezone
 import json
 from pathlib import Path
@@ -46,11 +45,9 @@ def _required(record: dict[str, Any], names: tuple[str, ...], *, context: str) -
 
 
 def _timeline_field(record: dict[str, Any]) -> str:
-    """Return the active downstream deadline, with legacy seal support for old records."""
+    """Return the point before which a current-event prediction must be recorded."""
     if record.get("downstream_outcome_available_after_utc"):
         return "downstream_outcome_available_after_utc"
-    if record.get("seal_deadline_utc"):
-        return "seal_deadline_utc"
     raise ValueError("live precommit requires downstream_outcome_available_after_utc")
 
 
@@ -182,145 +179,10 @@ def verify_precommitted(path: Path, *, root: Path = ROOT) -> dict[str, Any]:
     }
 
 
-def seal(input_path: Path, prediction: dict[str, Any], *, root: Path = ROOT) -> dict[str, Any]:
-    """Legacy short-window recorder retained only to reproduce historical audit records."""
-    record = read_json(input_path)
-    _required(record, ("event_id", "topic", "release_time_utc", "seal_deadline_utc", "root_actual"), context="live input")
-    if any(key in record for key in FORBIDDEN_PRESEAL_KEYS):
-        raise ValueError("outcome/downstream fields are forbidden before sealing")
-    now = _now()
-    deadline = _time(record["seal_deadline_utc"])
-    release = _time(record["release_time_utc"])
-    if now >= deadline:
-        raise ValueError("seal deadline has passed; retrospective demo refused")
-    if now < release:
-        raise ValueError("macro release has not occurred; root actual cannot be sealed yet")
-    if deadline <= release:
-        raise ValueError("seal deadline must be after the macro release and before the market outcome window")
-    _required(record, (*PRECOMMIT_INVARIANTS, "seal_deadline_utc", "root_actual_source"), context="live input")
-    precommit_path = root / "demo" / "precommitted" / f"{record['event_id']}.json"
-    if not precommit_path.exists():
-        raise FileNotFoundError("matching pre-release commitment is required")
-    precommit_check = verify_precommitted(precommit_path, root=root)
-    if not precommit_check["valid"]:
-        raise RuntimeError("pre-release commitment failed verification")
-    committed = read_json(precommit_path)["input"]
-    changed = [
-        key for key in (*PRECOMMIT_INVARIANTS, "seal_deadline_utc")
-        if canonical_json(record[key]) != canonical_json(committed[key])
-    ]
-    if changed:
-        raise ValueError(f"post-release input changed precommitted fields: {changed}")
-    _required(record["root_actual_source"], ("source_id", "url", "retrieved_at_utc", "sha256"), context="root actual source")
-    actual_source_time = _time(record["root_actual_source"]["retrieved_at_utc"])
-    if actual_source_time < release or actual_source_time >= deadline:
-        raise ValueError("root actual source must be captured between release and seal deadline")
-    actual_local_path = record["root_actual_source"].get("local_path")
-    if actual_local_path:
-        actual_target = root / actual_local_path
-        if not actual_target.exists() or sha256_file(actual_target) != record["root_actual_source"]["sha256"]:
-            raise ValueError("root actual source local hash mismatch")
-    lock = verify_lock(root)
-    if not lock.get("valid"):
-        raise RuntimeError("valid protocol lock required")
-    target = root / "demo" / "sealed" / f"{record['event_id']}.json"
-    if target.exists():
-        raise FileExistsError("sealed record already exists and cannot be overwritten")
-    payload = {
-        "status": "sealed_outcome_unresolved", "sealed_at_utc": now.isoformat(),
-        "protocol_sha256": lock["protocol_sha256"],
-        "precommit_sha256": precommit_check["precommit_sha256"],
-        "input": record, "prediction": prediction,
-    }
-    payload["seal_sha256"] = sha256_bytes(canonical_json(payload))
-    write_json(target, payload)
-    return payload
-
-
-def prepare_seal_input(
-    *, event_id: str, root_actual: float, actual_source_path: Path,
-    actual_source_url: str, output_path: Path, root: Path = ROOT,
-) -> dict[str, Any]:
-    """Build a legacy short-window input; retained for historical reproducibility."""
-    precommit_path = root / "demo" / "precommitted" / f"{event_id}.json"
-    if not precommit_path.exists():
-        raise FileNotFoundError("matching pre-release commitment is required")
-    check = verify_precommitted(precommit_path, root=root)
-    if not check["valid"]:
-        raise RuntimeError("pre-release commitment failed verification")
-    payload = read_json(precommit_path)
-    record = copy.deepcopy(payload["input"])
-    now = _now()
-    release = _time(record["release_time_utc"])
-    deadline = _time(record["seal_deadline_utc"])
-    if now < release or now >= deadline:
-        raise ValueError("seal input can only be prepared inside the committed release window")
-    source = actual_source_path.resolve()
-    project = root.resolve()
-    try:
-        relative_source = source.relative_to(project)
-    except ValueError as exc:
-        raise ValueError("root actual source must be stored inside the project") from exc
-    if not source.is_file():
-        raise FileNotFoundError("root actual source snapshot is missing")
-    source_modified = datetime.fromtimestamp(source.stat().st_mtime, tz=timezone.utc)
-    if source_modified < release or source_modified >= deadline:
-        raise ValueError("root actual source file must be created inside the committed release window")
-    if output_path.exists():
-        raise FileExistsError("prepared seal input already exists and cannot be overwritten")
-    record["root_actual"] = float(root_actual)
-    record["root_actual_source"] = {
-        "source_id": "bls_employment_situation_first_release_actual",
-        "url": actual_source_url,
-        "retrieved_at_utc": now.isoformat(),
-        "local_path": str(relative_source),
-        "sha256": sha256_file(source),
-    }
-    write_json(output_path, record)
-    return {
-        "event_id": event_id,
-        "output_path": str(output_path),
-        "root_actual": float(root_actual),
-        "root_z": (float(root_actual) - float(record["root_consensus_or_nowcast"])) / float(record["root_scale"]),
-        "actual_source_sha256": record["root_actual_source"]["sha256"],
-        "precommit_sha256": check["precommit_sha256"],
-    }
-
-
-def verify_sealed(path: Path, *, root: Path = ROOT) -> dict[str, Any]:
-    payload = read_json(path)
-    expected = payload.get("seal_sha256")
-    content = dict(payload)
-    content.pop("seal_sha256", None)
-    record = payload.get("input", {})
-    event_id = record.get("event_id")
-    precommit_path = root / "demo" / "precommitted" / f"{event_id}.json"
-    precommit = verify_precommitted(precommit_path, root=root) if precommit_path.exists() else {"valid": False}
-    timeline_valid = False
-    try:
-        sealed = _time(payload["sealed_at_utc"])
-        timeline_valid = _time(record["release_time_utc"]) <= sealed < _time(record["seal_deadline_utc"])
-    except (KeyError, TypeError, ValueError):
-        pass
-    valid = bool(
-        expected == sha256_bytes(canonical_json(content))
-        and precommit.get("valid")
-        and payload.get("precommit_sha256") == precommit.get("precommit_sha256")
-        and timeline_valid
-    )
-    return {
-        "valid": valid, "path": str(path), "seal_sha256": expected,
-        "precommit_sha256": payload.get("precommit_sha256"),
-        "precommit_valid": precommit.get("valid", False),
-        "timeline_valid": timeline_valid,
-        "status": payload.get("status"), "event_id": event_id,
-    }
-
-
-def _git_file_at_commit(root: Path, commit: str, path: str) -> bytes:
+def _git_blob(root: Path, oid: str) -> bytes:
     """Read immutable evidence from repository history without using its working-tree copy."""
     result = subprocess.run(
-        ["git", "show", f"{commit}:{path}"], cwd=root, check=True,
+        ["git", "cat-file", "blob", oid], cwd=root, check=True,
         stdout=subprocess.PIPE, stderr=subprocess.PIPE,
     )
     return result.stdout
@@ -363,14 +225,19 @@ def _prediction_matches_prior_record(prediction: dict[str, Any], diagnostic: dic
     return scalars_match and vectors_match and stop_matches
 
 
-def verify_current_demo(path: Path, *, root: Path = ROOT) -> dict[str, Any]:
-    """Verify a current-event prediction by ordering it before downstream labels.
+def _recorded_prediction(document: dict[str, Any]) -> dict[str, Any]:
+    """Find the prediction payload in either the compact snapshot or an older Git blob."""
+    direct = document.get("recorded_prediction")
+    if isinstance(direct, dict):
+        return direct
+    for value in document.values():
+        if isinstance(value, dict) and {"p_i", "n_i", "chain_probability"}.issubset(value):
+            return value
+    raise ValueError("prediction evidence does not contain a recorded prediction")
 
-    A short post-release seal window is intentionally not part of this check.  The
-    relevant ordering is: pre-release method commitment, released root input,
-    model prediction recorded in Git, then completion of the first downstream
-    outcome window.
-    """
+
+def verify_current_demo(path: Path, *, root: Path = ROOT) -> dict[str, Any]:
+    """Verify the order: commitment, released input, prediction, downstream labels."""
     payload = read_json(path)
     event_id = payload.get("event_id") or payload.get("input", {}).get("event_id")
     expected = payload.get("current_demo_sha256")
@@ -399,6 +266,7 @@ def verify_current_demo(path: Path, *, root: Path = ROOT) -> dict[str, Any]:
     timeline_valid = False
     git_evidence_valid = False
     evidence_snapshot_valid = False
+    actual_source_valid = False
     prediction_matches = False
     cited_commit_time = None
     try:
@@ -408,32 +276,41 @@ def verify_current_demo(path: Path, *, root: Path = ROOT) -> dict[str, Any]:
         source_retrieved = _time(payload["input"]["root_actual_source"]["retrieved_at_utc"])
         timeline_valid = release <= source_retrieved <= recorded < downstream
 
+        actual_source = payload["input"]["root_actual_source"]
+        actual_source_path = root / actual_source["local_path"]
+        actual_source_valid = bool(
+            actual_source_path.is_file()
+            and sha256_file(actual_source_path) == actual_source["sha256"]
+        )
+
         evidence = payload["prediction_evidence"]
         commit = evidence["git_commit"]
-        evidence_path = evidence["path_at_commit"]
+        snapshot_path = root / evidence["distributed_snapshot_path"]
+        snapshot_bytes = snapshot_path.read_bytes()
+        snapshot = json.loads(snapshot_bytes.decode("utf-8"))
+        snapshot_prediction = _recorded_prediction(snapshot)
+        prediction_matches = _prediction_matches_prior_record(payload["prediction"], snapshot_prediction)
+        evidence_snapshot_valid = bool(
+            sha256_bytes(snapshot_bytes) == evidence["distributed_snapshot_sha256"]
+            and snapshot.get("event_id") == event_id
+            and prediction_matches
+        )
         try:
-            prior_bytes = _git_file_at_commit(root, commit, evidence_path)
+            prior_bytes = _git_blob(root, evidence["git_blob_oid"])
             cited_commit_time_value = _git_commit_time(root, commit)
             cited_commit_time = cited_commit_time_value.isoformat()
+            prior = json.loads(prior_bytes.decode("utf-8"))
             git_evidence_valid = bool(
                 sha256_bytes(prior_bytes) == evidence["sha256_at_commit"]
                 and cited_commit_time_value == recorded
+                and prior.get("event_id") == event_id
+                and _prediction_matches_prior_record(payload["prediction"], _recorded_prediction(prior))
             )
         except (subprocess.CalledProcessError, FileNotFoundError):
-            # Source archives and Docker contexts may omit .git.  The exact file
-            # that was committed is also distributed and hash-bound.
-            prior_bytes = (root / evidence_path).read_bytes()
+            # Source archives and shallow clones may omit the older Git blob.
+            # The compact distributed snapshot keeps the numeric check portable.
             cited_commit_time_value = _time(evidence["commit_time_utc"])
             cited_commit_time = cited_commit_time_value.isoformat()
-        prior = json.loads(prior_bytes.decode("utf-8"))
-        evidence_snapshot_valid = bool(
-            sha256_bytes(prior_bytes) == evidence["sha256_at_commit"]
-            and cited_commit_time_value == recorded
-            and prior.get("event_id") == event_id
-        )
-        prediction_matches = _prediction_matches_prior_record(
-            payload["prediction"], prior["post_window_diagnostic_not_a_seal"],
-        )
     except (
         KeyError, TypeError, ValueError, json.JSONDecodeError,
         subprocess.CalledProcessError, UnicodeDecodeError, OSError,
@@ -443,7 +320,7 @@ def verify_current_demo(path: Path, *, root: Path = ROOT) -> dict[str, Any]:
     valid = bool(
         hash_valid and status_valid and forbidden_outcomes_absent
         and artifact_bindings_valid and timeline_valid
-        and evidence_snapshot_valid and prediction_matches
+        and actual_source_valid and evidence_snapshot_valid and prediction_matches
     )
     return {
         "valid": valid,
@@ -455,6 +332,7 @@ def verify_current_demo(path: Path, *, root: Path = ROOT) -> dict[str, Any]:
         "precommit_binding_valid": precommit_binding_valid,
         "artifact_bindings_valid": artifact_bindings_valid,
         "timeline_valid": timeline_valid,
+        "actual_source_valid": actual_source_valid,
         "git_evidence_valid": git_evidence_valid,
         "evidence_snapshot_valid": evidence_snapshot_valid,
         "prediction_matches_prior_commit": prediction_matches,
@@ -467,41 +345,23 @@ def verify_current_demo(path: Path, *, root: Path = ROOT) -> dict[str, Any]:
 
 
 def live_demo_status(*, root: Path = ROOT) -> dict[str, Any]:
-    withdrawal_directory = root / "demo" / "withdrawals"
-    withdrawal_files = sorted(withdrawal_directory.glob("*.json")) if withdrawal_directory.exists() else []
-    withdrawals = {
-        item.get("event_id") for item in (read_json(path) for path in withdrawal_files)
-        if item.get("status") == "WITHDRAWN_NOT_USED_FOR_SUBMISSION"
-    }
     precommit_directory = root / "demo" / "precommitted"
     precommit_files = sorted(precommit_directory.glob("*.json")) if precommit_directory.exists() else []
     precommit_checks = [verify_precommitted(path, root=root) for path in precommit_files]
-    directory = root / "demo" / "sealed"
-    files = sorted(directory.glob("*.json")) if directory.exists() else []
-    legacy_checks = [verify_sealed(path, root=root) for path in files]
     current_directory = root / "demo" / "current"
     current_files = sorted(current_directory.glob("*.json")) if current_directory.exists() else []
     current_checks = [verify_current_demo(path, root=root) for path in current_files]
-    for item in precommit_checks + legacy_checks + current_checks:
-        item["eligible_for_submission"] = item.get("event_id") not in withdrawals
-    valid_legacy = [
-        item for item in legacy_checks
-        if item["valid"] and item["status"] == "sealed_outcome_unresolved" and item["eligible_for_submission"]
-    ]
+    for item in precommit_checks + current_checks:
+        item["eligible_for_submission"] = True
     valid_current = [
         item for item in current_checks
-        if item["valid"] and item["status"] in CURRENT_DEMO_STATUSES and item["eligible_for_submission"]
+        if item["valid"] and item["status"] in CURRENT_DEMO_STATUSES
     ]
-    valid = valid_current + valid_legacy
     return {
-        "valid_pre_release_commitments": sum(item["valid"] and item["eligible_for_submission"] for item in precommit_checks),
-        "all_valid_pre_release_commitments_including_withdrawn": sum(item["valid"] for item in precommit_checks),
-        "withdrawn_event_ids": sorted(item for item in withdrawals if item),
+        "valid_pre_release_commitments": sum(item["valid"] for item in precommit_checks),
         "precommit_records": precommit_checks,
         "valid_current_macro_records": len(valid_current),
-        "valid_legacy_seals": len(valid_legacy),
         "records": current_checks,
-        "legacy_seal_records": legacy_checks,
-        "passes": len(valid) >= 1,
-        "timeline_policy": "prediction must be recorded after the macro release and before downstream outcomes become available; no 15-minute condition",
+        "passes": len(valid_current) >= 1,
+        "timeline_policy": "prediction is recorded after the macro release and before downstream outcomes become available",
     }

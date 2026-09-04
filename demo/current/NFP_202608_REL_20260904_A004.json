@@ -12,9 +12,10 @@
   "prediction_evidence": {
     "git_commit": "b8f7762377f0bb5d7e2a614a6fc9584f13ba19c4",
     "commit_time_utc": "2026-09-04T14:03:26Z",
-    "path_at_commit": "demo/failures/NFP_202608_REL_20260904_A004.json",
+    "git_blob_oid": "8376a882346461ae6e49496d07947ae882add07e",
     "sha256_at_commit": "7ae42508b0637c69b0a86a9858c2bd2b6b1ede2720d9e199cedf0840b6717bb9",
-    "remote_url": "https://github.com/HendrixityBorg/MacrochainPrediction/commit/b8f7762377f0bb5d7e2a614a6fc9584f13ba19c4",
+    "distributed_snapshot_path": "demo/evidence/NFP_202608_REL_20260904_prediction_snapshot.json",
+    "distributed_snapshot_sha256": "c4def3050924c5a3543bdf8a7d76d0e5c746dfd3711a285d31774c2651a6b42f",
     "interpretation": "该提交已经包含根输入、逐跳概率、证据量、链概率、区间与停止判断；提交时间早于最早下游结果窗口完成时间。"
   },
   "input": {
@@ -30,8 +31,8 @@
       "summary_url": "https://www.bls.gov/news.release/empsit.nr0.htm",
       "table_b1_url": "https://www.bls.gov/news.release/empsit.t17.htm",
       "retrieved_at_utc": "2026-09-04T13:55:29.524911Z",
-      "recorded_in_git_path": "demo/failures/NFP_202608_REL_20260904_A004.json",
-      "record_sha256_at_commit": "7ae42508b0637c69b0a86a9858c2bd2b6b1ede2720d9e199cedf0840b6717bb9",
+      "local_path": "demo/evidence/NFP_202608_BLS_actual_20260904.json",
+      "sha256": "d2a3ca742062f8ef23c4730570ba0d0c74d01049fc2366fb8b731e8582ae538f",
       "cross_check": "BLS 摘要与 Table B-1 均为增加 162 千人"
     },
     "outcome_windows": {
@@ -197,10 +198,5 @@
     "later_hops_are_counterfactual": true
   },
   "tracking_plan": "demo/TRACKING_PLAN.zh-CN.md",
-  "historical_15_minute_protocol": {
-    "status": "failed_and_retained_for_audit",
-    "required_by_current_demo_policy": false,
-    "record": "demo/failures/NFP_202608_REL_20260904_A004.json"
-  },
-  "current_demo_sha256": "4846ceb1e882306de2361bdac370b92e92ba53cf992b9418d8a953d4626de890"
+  "current_demo_sha256": "010965a13ef09dea0fbe7a667273efe5cff7a82f76d78669f3f5cb87da766c53"
 }

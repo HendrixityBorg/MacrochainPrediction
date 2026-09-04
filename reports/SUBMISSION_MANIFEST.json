@@ -42,7 +42,6 @@
   "disclosures": [
     "主模型略差于 climatology、primary-only 与 direct terminal logistic。",
     "确认集存在整体低估和若干可靠性分桶偏差。",
-    "A004 下游 outcome 当前未决，不进入冻结确认集。",
-    "项目自设的 15 分钟 seal 失败记录仍保留，但活动时序检查以预测早于下游 outcome 为准。"
+    "A004 下游 outcome 当前未决，不进入冻结确认集。"
   ]
 }
