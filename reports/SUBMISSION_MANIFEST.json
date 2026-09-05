@@ -1,17 +1,18 @@
 {
   "schema_version": "2.0",
-  "generated_at_utc": "2026-09-04T15:42:22Z",
+  "generated_at_utc": "2026-09-05T07:11:01Z",
   "repository": "https://github.com/HendrixityBorg/MacrochainPrediction",
-  "content_commit": "3ad7a1be89655e8458bb5657b97196d1ce148bf6",
-  "content_commit_note": "该提交包含最终代码、中文文档、模型产物和唯一当期演示；本清单与隔离复现记录在随后一次审计提交中加入。",
+  "content_commit": "642a8f74b003e4a5a7f2d2ab69815117eeb790ff",
+  "content_commit_note": "该提交包含规范化文件名后的最终代码、中文文档、模型产物和唯一当期演示；本清单与隔离复现记录在随后一次审计提交中更新。",
   "entrypoints": {
     "readme": "README.md",
-    "submission_scope": "docs/SUBMISSION_SCOPE.zh-CN.md",
-    "main_report": "reports/SUBMISSION_REPORT.zh-CN.md",
-    "evidence_index": "docs/REQUIREMENTS_TRACEABILITY.zh-CN.md",
-    "current_demo": "demo/runs/NFP_202608_REL_20260904_A004.zh-CN.md",
-    "limitations": "docs/KNOWN_LIMITATIONS.zh-CN.md",
-    "clean_clone_audit": "reports/FINAL_REPRODUCTION_AUDIT.zh-CN.md"
+    "evaluator_guide": "docs/EVALUATOR_GUIDE.md",
+    "submission_scope": "docs/SUBMISSION_SCOPE.md",
+    "main_report": "reports/SUBMISSION_REPORT.md",
+    "evidence_index": "docs/REQUIREMENTS_TRACEABILITY.md",
+    "current_demo": "demo/runs/NFP_202608_REL_20260904_A004.md",
+    "limitations": "docs/KNOWN_LIMITATIONS.md",
+    "clean_clone_audit": "reports/FINAL_REPRODUCTION_AUDIT.md"
   },
   "verification_commands": [
     "./setup.sh",
@@ -24,7 +25,7 @@
   "verified_results": {
     "pipeline_status": "S_READY_INTERNAL_IDENTIFIER",
     "failed_required_gates": [],
-    "tests_passed": 15,
+    "tests_passed": 16,
     "current_demo_valid": true,
     "current_demo_actual_source_valid": true,
     "confirmation_events": 164,
@@ -36,9 +37,11 @@
     "ci_width_error_p_value": 0.0002
   },
   "sha256": {
-    "README.md": "af1c8abb4b2780e746e5fd34a3da846ebca75cf51fb5b430f4d86cd98a0073d0",
-    "docs/SUBMISSION_SCOPE.zh-CN.md": "e1ebd0e553d865f7ded8e02a63967866a8f3c19199f0f556d5daec0808b59158",
-    "reports/SUBMISSION_REPORT.zh-CN.md": "c840434f697adb9325d2fdcab82d8e3c8ca878db7a4441168686b54a9529afe5",
+    "README.md": "d4794da135749ecc489cd39a43ea2dd197437f3401636e4dabe57795ce47763f",
+    "docs/EVALUATOR_GUIDE.md": "66177188e1cc436285258ccf98272be62d7ad26aa8c51b1496026295e5e06e86",
+    "docs/REQUIREMENTS_TRACEABILITY.md": "68aab229766422b3549fedd1e174eb9feeb74844bc503e5e74b2c7df1bd51943",
+    "docs/SUBMISSION_SCOPE.md": "0a0b16d5fc492dd27eb81787e0105e62bc22f99edb26a5382821904b86c3e9d8",
+    "reports/SUBMISSION_REPORT.md": "20c854b9f0ff4c5136a0f6b03ef92b696dd0170bc7e8f43732ecf0c5aaf84d9f",
     "reports/model_run.json": "e351f4fa42b74e988e25df606b149e92f45548c5811b48cebef86507f3852e1f",
     "reports/evaluation.json": "1952ccbe0730cf41a59be1c51bf49f17b835f90d9ffaef4f54a8ae53758525a5",
     "reports/oracle.json": "764bec186326e18c67d7ed5bc5d20801c23ca31cffad69e4dc9a05c892f22817",
@@ -48,7 +51,7 @@
     "demo/current/NFP_202608_REL_20260904_A004.json": "ef1f0418a15a1ecb80fee37e4d3b79c7e07050b6b7241a4ab158626687633d3a",
     "demo/evidence/NFP_202608_BLS_actual_20260904.json": "d2a3ca742062f8ef23c4730570ba0d0c74d01049fc2366fb8b731e8582ae538f",
     "demo/evidence/NFP_202608_REL_20260904_prediction_snapshot.json": "c4def3050924c5a3543bdf8a7d76d0e5c746dfd3711a285d31774c2651a6b42f",
-    "demo/runs/NFP_202608_REL_20260904_A004.zh-CN.md": "07d3c74ec9db2324f79e0f617f598a1c5a0c50329e3fa9aafb5e164813995aec"
+    "demo/runs/NFP_202608_REL_20260904_A004.md": "c4cdab33de5a260dc66668bd27f37815ad6051a570c2575377ef9daa1e9dadef"
   },
   "disclosures": [
     "主模型优于朴素连乘，但略差于 climatology、primary-only 与 direct terminal logistic。",

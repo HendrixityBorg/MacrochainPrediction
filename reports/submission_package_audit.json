@@ -1,9 +1,9 @@
 {
   "schema_version": "2.0-clean-clone-audit",
   "passes": true,
-  "completed_at_utc": "2026-09-04T15:42:22Z",
+  "completed_at_utc": "2026-09-05T07:11:01Z",
   "remote": "https://github.com/HendrixityBorg/MacrochainPrediction.git",
-  "tested_commit": "3ad7a1be89655e8458bb5657b97196d1ce148bf6",
+  "tested_commit": "642a8f74b003e4a5a7f2d2ab69815117eeb790ff",
   "environment": {
     "os": "Darwin 25.5.0 arm64",
     "python": "3.11.9",
@@ -30,13 +30,16 @@
   "results": {
     "pipeline_status": "S_READY",
     "failed_required_gates": [],
-    "tests_run": 15,
-    "tests_passed": 15,
+    "tests_run": 16,
+    "tests_passed": 16,
     "current_demo_valid": true,
     "current_demo_actual_source_valid": true,
     "current_demo_snapshot_valid": true,
     "current_demo_prediction_matches": true,
     "protocol_timestamp_valid": true,
+    "timestamped_protocol_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+    "current_protocol_sha256": "f50b0560111167b458cbfa8cee22c39803edcdc230b0525ad3dd2f341f16dbf0",
+    "administrative_filename_amendment_valid": true,
     "selected_precommit_timestamp_valid": true,
     "selected_event_id": "NFP_202608_REL_20260904_A004"
   },
@@ -52,6 +55,8 @@
   "notes": [
     "浅克隆不含较早预测提交对象；当期验证器使用随仓库分发且经 SHA-256 绑定的预测快照完成数值复核。",
     "核心模型、评估、区间验证、逐跳复算和当期演示文件与内容提交逐字节一致。",
+    "当前协议锁仅在已时间戳锁之后增加文件名规范化修订；历史锁与原时间戳保持不变。",
+    "浅克隆检查确认实际文件名中不存在 zh-CN。",
     "Dockerfile 使用 Python 3.11；本记录只声称实际执行过的远端浅克隆与全新虚拟环境流程。"
   ]
 }
