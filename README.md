@@ -1,6 +1,6 @@
-# 宏观事件 → 政策路径 → 实际利率 → 黄金：因果链不确定性
+# 宏观事件多跳因果链不确定性
 
-本仓库是 SX-CH-001 的独立提交项目，实现一个事件索引的**多测量潜变量条件贝叶斯链**，用于估计：
+本仓库是实现一个事件索引的**多测量潜变量条件贝叶斯链**，用于估计：
 
 ```text
 宏观首次发布创新 → 政策路径重定价 → 实际利率重定价 → 黄金重定价
@@ -8,8 +8,7 @@
                                       美元 / 外部冲击
 ```
 
-它不是把三个无条件概率直接相乘。第 2、3 跳分别估计前缀成功条件下的概率，并在同一次 Monte Carlo
-中传播结构参数、测量误差、代理相关、制度漂移、共同 frailty 和外部截断风险。
+第 2、3 跳分别估计前缀成功条件下的概率，并在同一次 Monte Carlo 中传播结构参数、测量误差、代理相关、制度漂移、共同 frailty 和外部截断风险。
 
 ## 当前审计结果
 
@@ -65,7 +64,7 @@ docker run --rm macrochain-prediction
 
 ## 主要输出
 
-- `reports/SUBMISSION_REPORT.zh-CN.md`：中文总报告；
+- `reports/SUBMISSION_REPORT.zh-CN.md`：总报告；
 - `reports/model_run.json`：每跳 `p_i/n_i`、链概率、90% CI、内生/外部风险和逐前缀不确定性；
 - `reports/edge_evidence.json`：每跳来源事件、特征、系数、协方差及随机种子；
 - `reports/stop_trace.csv`：每个前缀的 CI、EVSI、停止原因、实际首停与反事实标记；
@@ -128,9 +127,3 @@ tau = (failure_loss + transaction_cost) / (success_gain + failure_loss)
 仓库提交有限的冻结事件级记录，以及可再分发的 Philadelphia Fed、Federal Reserve 和 ALFRED
 官方原始文件。Yahoo 原始长历史不再分发，只保留事件级派生量、URL、抓取时间和 SHA-256。
 详见 `DATA_NOTICE.md` 与 `docs/DATA_SOURCES.zh-CN.md`。
-
-## 诚实限制
-
-日频 close-to-close 窗口会混入宏观发布后的其他新闻，弱于授权的 30 分钟期货事件窗；潜变量能处理
-测量误差，却不能把同时发生的价格反应自动变成结构因果证明。标签接触边界、负结果和方法局限均在
-报告中披露。
