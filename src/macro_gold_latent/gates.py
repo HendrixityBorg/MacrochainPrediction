@@ -21,8 +21,8 @@ def evaluate_gates(
     required_files = [
         "README.md", "requirements.txt", "requirements.lock.txt", "config/default.json", "run.sh", "test.sh", "Dockerfile",
         ".dockerignore", "DATA_NOTICE.md",
-        "docs/METHODOLOGY.zh-CN.md", "docs/DATA_SOURCES.zh-CN.md",
-        "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md", "demo/TRACKING_PLAN.zh-CN.md",
+        "docs/METHODOLOGY.md", "docs/DATA_SOURCE.md",
+        "preregistration/CONFIRMATION_PROTOCOL.md", "demo/TRACKING_PLAN.md",
         "data/raw/employ.xlsx", "data/raw/h15_nominal.csv", "data/raw/h15_real.csv",
         "data/raw/release_dates_50.txt",
     ]
@@ -96,15 +96,15 @@ def evaluate_gates(
             "expected_maximum_ci_width": float(config["stopping"]["maximum_interval_width"]),
         }),
         "complete_report": _gate(
-            (ROOT / "reports" / "SUBMISSION_REPORT.zh-CN.md").exists()
+            (ROOT / "reports" / "SUBMISSION_REPORT.md").exists()
             and (not live["passes"] or all(
-                (ROOT / "demo" / "runs" / f"{item['event_id']}.zh-CN.md").exists()
+                (ROOT / "demo" / "runs" / f"{item['event_id']}.md").exists()
                 for item in live["records"] if item.get("valid") and item.get("eligible_for_submission")
             )),
-            {"main": "reports/SUBMISSION_REPORT.zh-CN.md", "live_chinese_report_required_after_seal": True},
+            {"main": "reports/SUBMISSION_REPORT.md", "live_chinese_report_required_after_seal": True},
         ),
         "prospective_current_macro_demo": _gate(live["passes"], live),
-        "six_month_tracking_plan": _gate((ROOT / "demo" / "TRACKING_PLAN.zh-CN.md").exists(), "demo/TRACKING_PLAN.zh-CN.md"),
+        "six_month_tracking_plan": _gate((ROOT / "demo" / "TRACKING_PLAN.md").exists(), "demo/TRACKING_PLAN.md"),
     }
     required = read_json(ROOT / "preregistration" / "S_GRADE_MATRIX.json")["required"]
     missing = [name for name in required if not gates.get(name, {}).get("passed")]

@@ -11,7 +11,7 @@ from .io import canonical_json, read_json, sha256_file, write_json
 
 LOCK_INPUTS = [
     "config/default.json",
-    "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md",
+    "preregistration/CONFIRMATION_PROTOCOL.md",
     "preregistration/S_GRADE_MATRIX.json",
     "src/macro_gold_latent/data.py",
     "src/macro_gold_latent/latent.py",
@@ -121,3 +121,28 @@ def verify_lock(root: Path = ROOT) -> dict[str, Any]:
         "files": files,
         "frozen_at_utc": existing.get("frozen_at_utc"),
     }
+
+
+def protocol_digest_is_current_or_ancestor(protocol_sha256: str | None, root: Path = ROOT) -> bool:
+    """Accept an immutable precommit bound to the current lock or an archived ancestor."""
+    if not protocol_sha256:
+        return False
+    current_path = root / "preregistration" / "PROTOCOL_LOCK.json"
+    if not current_path.exists():
+        return False
+    lock = read_json(current_path)
+    visited: set[str] = set()
+    while lock.get("protocol_sha256") not in visited:
+        digest = lock.get("protocol_sha256")
+        if digest == protocol_sha256:
+            return True
+        if digest:
+            visited.add(digest)
+        previous = lock.get("previous_protocol_sha256")
+        if not previous:
+            return False
+        archive = root / "preregistration" / "lock_history" / f"PROTOCOL_LOCK.{previous}.json"
+        if not archive.exists():
+            return False
+        lock = read_json(archive)
+    return False

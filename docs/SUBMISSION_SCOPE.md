@@ -13,10 +13,10 @@
 评审可按以下顺序阅读：
 
 1. `README.md`：问题、结果和复现入口；
-2. `docs/EVALUATOR_GUIDE.zh-CN.md`：两分钟理解对象、边界和术语；
-3. `reports/SUBMISSION_REPORT.zh-CN.md`：方法、实验、结果与局限；
-4. `demo/runs/NFP_202608_REL_20260904_A004.zh-CN.md`：当期演示；
-5. `docs/REQUIREMENTS_TRACEABILITY.zh-CN.md`：机器证据索引；
+2. `docs/EVALUATOR_GUIDE.md`：两分钟理解对象、边界和术语；
+3. `reports/SUBMISSION_REPORT.md`：方法、实验、结果与局限；
+4. `demo/runs/NFP_202608_REL_20260904_A004.md`：当期演示；
+5. `docs/REQUIREMENTS_TRACEABILITY.md`：机器证据索引；
 6. `reports/SUBMISSION_MANIFEST.json`：内容提交、验证命令与哈希。
 
 模型对固定三跳实例化问题执行完整推理；它不是自动因果发现器、任意图执行引擎或多路径择优器。通胀预期

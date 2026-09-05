@@ -1,12 +1,12 @@
 {
   "status": "frozen_protocol_amendment_chain",
-  "protocol_sha256": "f50b0560111167b458cbfa8cee22c39803edcdc230b0525ad3dd2f341f16dbf0",
-  "frozen_at_utc": "2026-09-05T07:07:23.958397+00:00",
-  "previous_protocol_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
-  "previous_frozen_at_utc": "2026-09-03T06:55:51.054430+00:00",
+  "protocol_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+  "frozen_at_utc": "2026-09-03T06:55:51.054430+00:00",
+  "previous_protocol_sha256": "f5f00f4fbd8bf876e91d06b83e4a49c0daae046bf06214a09adaf90bf313e650",
+  "previous_frozen_at_utc": "2026-09-03T06:20:49.915870+00:00",
   "base_protocol_sha256": "4be688b56ed1616fbca76bed0df84cff469ed338f6b260f7e679116d0eed4476",
-  "amendment_file": "preregistration/AMENDMENT_005_FILENAME_NORMALIZATION.md",
-  "amendment_sha256": "31a77dbeb55c4d20222d1cf284b920e827e3962f8791ba332a3c8a14f1b74945",
+  "amendment_file": "preregistration/AMENDMENT_004_EXECUTION_AND_SUBMISSION_INTEGRITY.zh-CN.md",
+  "amendment_sha256": "a22d65e434db0c7297b4a03106a062534a15011d3783bfe7522c636b03cfdf74",
   "amendment_chain": [
     {
       "amendment_file": "preregistration/AMENDMENT_001_ZERO_RESPONSE_AND_APPLICABILITY.zh-CN.md",
@@ -27,11 +27,6 @@
       "amendment_file": "preregistration/AMENDMENT_004_EXECUTION_AND_SUBMISSION_INTEGRITY.zh-CN.md",
       "amendment_sha256": "a22d65e434db0c7297b4a03106a062534a15011d3783bfe7522c636b03cfdf74",
       "frozen_at_utc": "2026-09-03T06:55:51.054148+00:00"
-    },
-    {
-      "amendment_file": "preregistration/AMENDMENT_005_FILENAME_NORMALIZATION.md",
-      "amendment_sha256": "31a77dbeb55c4d20222d1cf284b920e827e3962f8791ba332a3c8a14f1b74945",
-      "frozen_at_utc": "2026-09-05T07:07:23.958053+00:00"
     }
   ],
   "files": [
@@ -40,8 +35,8 @@
       "sha256": "4fce7acd03cc268243cc3fd89d42051afb443a17e7ffc73f26048b5b96a76812"
     },
     {
-      "path": "preregistration/CONFIRMATION_PROTOCOL.md",
-      "sha256": "11d7c30e3a936b9666b6141cb0be5ca48ec1a6de688a09586f870dd6a20f24e1"
+      "path": "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md",
+      "sha256": "c6629e2c8bb16d8061f34b72da8091903f3059daaef917db9309fb60b3daeeb5"
     },
     {
       "path": "preregistration/S_GRADE_MATRIX.json",
@@ -73,7 +68,7 @@
     },
     {
       "path": "src/macro_gold_latent/gates.py",
-      "sha256": "18ea8e4cff32edb89cbbf3bfbcf6e1d2d0ead851a54cb55553bbfdb6f5d46b86"
+      "sha256": "3fc889ba0df7ac74e56ad411ed18276d73feea29c84486792eb46eb59a9579c8"
     }
   ],
   "external_timestamp": null,

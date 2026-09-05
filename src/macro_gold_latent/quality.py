@@ -55,7 +55,8 @@ def audit(rows: list[dict[str, Any]], config: dict[str, Any]) -> dict[str, Any]:
         manifest["protocol_sha256"] == base_lock["protocol_sha256"]
         and current_lock.get("base_protocol_sha256", current_lock.get("previous_protocol_sha256")) == base_lock["protocol_sha256"]
         and any(
-            item.get("amendment_file") == "preregistration/AMENDMENT_001_ZERO_RESPONSE_AND_APPLICABILITY.zh-CN.md"
+            str(item.get("amendment_file", "")).replace(".zh-CN", "")
+            == "preregistration/AMENDMENT_001_ZERO_RESPONSE_AND_APPLICABILITY.md"
             and item.get("amendment_sha256")
             for item in current_lock.get("amendment_chain", [{
                 "amendment_file": current_lock.get("amendment_file"),

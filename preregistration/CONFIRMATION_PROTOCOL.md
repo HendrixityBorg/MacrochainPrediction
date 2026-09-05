@@ -71,18 +71,18 @@ naive product；同时披露所有结果，不按确认成绩换主模型。
 ## 修订记录
 
 Amendment 001 在首次确认标签打开后修复“零市场响应被误判缺失”的机械错误，并把稀有事件专属条款
-改成条件适用；详见 `AMENDMENT_001_ZERO_RESPONSE_AND_APPLICABILITY.zh-CN.md`。原锁与原输出保留。
+改成条件适用；详见 `AMENDMENT_001_ZERO_RESPONSE_AND_APPLICABILITY.md`。原锁与原输出保留。
 
 Amendment 002 在 2026-09-04 NFP 发布前，把真实当期演示从写死的 CPI 改为题面允许的地缘/宏观事件，
 并事前指定同模型域 NFP；不改变历史模型、标签、数据、阈值或结果。详见
-`AMENDMENT_002_LIVE_DEMO_TOPIC.zh-CN.md`。
+`AMENDMENT_002_LIVE_DEMO_TOPIC.md`。
 
 Amendment 003 删除题面未要求的特定外部签署硬门，并把“优于 climatology”恢复为披露性研究诊断而非
 S 档机器必需项；不改变或隐藏它们的既有失败结果。详见
-`AMENDMENT_003_SUBMISSION_GOVERNANCE.zh-CN.md`。
+`AMENDMENT_003_SUBMISSION_GOVERNANCE.md`。
 
 Amendment 004 在 2026-09-04 NFP 发布前修复演示输入与执行代码的交易阈值不一致：执行阈值由
 `(failure_loss + transaction_cost) / (success_gain + failure_loss)` 唯一计算为 `0.208`，不再保留
 未被执行代码使用的 `0.26`。同时把首个停止动作、后续反事实前缀和逐前缀 CI 来源分解写入机器输出，
 并完善中文实时报告与干净仓库复现门。该修订不改变任何历史标签、每跳概率、链概率或 Brier 结果。
-详见 `AMENDMENT_004_EXECUTION_AND_SUBMISSION_INTEGRITY.zh-CN.md`。
+详见 `AMENDMENT_004_EXECUTION_AND_SUBMISSION_INTEGRITY.md`。

@@ -9,8 +9,8 @@ from macro_gold_latent.report import chinese_live_demo_report
 
 class ChineseReportingTests(unittest.TestCase):
     def test_evaluator_scope_distinguishes_main_chain_from_diagnostics(self) -> None:
-        main_report = (ROOT / "reports" / "SUBMISSION_REPORT.zh-CN.md").read_text(encoding="utf-8")
-        guide = (ROOT / "docs" / "EVALUATOR_GUIDE.zh-CN.md").read_text(encoding="utf-8")
+        main_report = (ROOT / "reports" / "SUBMISSION_REPORT.md").read_text(encoding="utf-8")
+        guide = (ROOT / "docs" / "EVALUATOR_GUIDE.md").read_text(encoding="utf-8")
         combined = main_report + guide
         for required in (
             "固定主链", "多测量潜变量", "结构诊断变量", "链内断裂",

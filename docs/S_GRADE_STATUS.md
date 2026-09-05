@@ -29,7 +29,7 @@
    outcome。
 
 当期记录位于 `demo/current/NFP_202608_REL_20260904_A004.json`，中文运行记录位于
-`demo/runs/NFP_202608_REL_20260904_A004.zh-CN.md`。下游结果在预测记录形成时尚未完成，当前不写成
+`demo/runs/NFP_202608_REL_20260904_A004.md`。下游结果在预测记录形成时尚未完成，当前不写成
 已经验证；后续只追加 outcome 文件。
 
 ## 第一跳停止的含义
@@ -58,4 +58,4 @@ CI 宽度与误差关系及未来前瞻样本共同判断。若大量事件都�
 - 操作者可访问历史原始价格，确认批弱于第三方托管的 pristine holdout；
 - 日频 close-to-close 会混入发布后其他新闻，不能单独构成严格结构因果识别。
 
-这些结果没有用于重选模型、重设标签或事后校准。详细边界见 `docs/KNOWN_LIMITATIONS.zh-CN.md`。
+这些结果没有用于重选模型、重设标签或事后校准。详细边界见 `docs/KNOWN_LIMITATIONS.md`。

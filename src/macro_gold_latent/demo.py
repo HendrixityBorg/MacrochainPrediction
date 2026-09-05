@@ -8,7 +8,7 @@ from typing import Any
 
 from .config import ROOT, load_config
 from .io import canonical_json, read_json, sha256_bytes, sha256_file, write_json
-from .locking import verify_lock
+from .locking import protocol_digest_is_current_or_ancestor, verify_lock
 from .stopping import break_even_probability
 
 
@@ -149,7 +149,10 @@ def verify_precommitted(path: Path, *, root: Path = ROOT) -> dict[str, Any]:
     dataset_path = root / "data" / "frozen" / "events.csv"
     bindings_valid = bool(
         lock.get("valid")
-        and payload.get("protocol_sha256") == lock.get("protocol_sha256")
+        and (
+            payload.get("protocol_sha256") == lock.get("protocol_sha256")
+            or protocol_digest_is_current_or_ancestor(payload.get("protocol_sha256"), root)
+        )
         and model_path.exists()
         and payload.get("model_run_sha256") == sha256_file(model_path)
         and dataset_path.exists()

@@ -119,7 +119,7 @@ def chinese_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any])
         f"- 预测证据提交：`{payload['prediction_evidence']['git_commit']}`；",
         f"- 最早下游结果窗口完成时间：`{payload['downstream_outcome_available_after_utc']}`。", "",
         "该预测记录形成时，发布日收盘、H.15 数据及逐跳 outcome 尚未完成；它们不在本记录中伪装为已验证。",
-        "后续按 `demo/TRACKING_PLAN.zh-CN.md` 追加不可覆盖的 outcome 与六个月覆盖率回查。", "",
+        "后续按 `demo/TRACKING_PLAN.md` 追加不可覆盖的 outcome 与六个月覆盖率回查。", "",
     ]
     return "\n".join(lines)
 
@@ -127,7 +127,7 @@ def chinese_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any])
 def write_live_demo_report(payload: dict[str, Any], model_run: dict[str, Any]) -> Path:
     directory = ROOT / "demo" / "runs"
     directory.mkdir(parents=True, exist_ok=True)
-    path = directory / f"{payload['input']['event_id']}.zh-CN.md"
+    path = directory / f"{payload['input']['event_id']}.md"
     path.write_text(chinese_live_demo_report(payload, model_run), encoding="utf-8")
     return path
 
@@ -208,7 +208,7 @@ def chinese_report(
         lines += [
             f"官方 actual 输入模型后，预测在下游结果窗口完成前写入 Git；链概率={prediction['chain_probability']:.4f}，"
             f"90% CI=[{prediction['ci_lower']:.4f}, {prediction['ci_upper']:.4f}]。完整记录见 "
-            f"`demo/runs/{live_payload['input']['event_id']}.zh-CN.md`。", "",
+            f"`demo/runs/{live_payload['input']['event_id']}.md`。", "",
         ]
     else:
         lines += ["precommit 本身不等于完成演示；还需证明根输入后的模型预测早于下游 outcome。", ""]

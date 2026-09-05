@@ -116,9 +116,9 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
     write_json(report_dir / "three_hop_reproduction.json", reproduction)
     write_json(report_dir / "evidence_update.json", update)
     write_json(report_dir / "data_quality.json", quality)
-    (report_dir / "DATA_QUALITY_REPORT.zh-CN.md").write_text(quality_markdown(quality), encoding="utf-8")
+    (report_dir / "DATA_QUALITY_REPORT.md").write_text(quality_markdown(quality), encoding="utf-8")
     plots(evaluation)
-    report_path = report_dir / "SUBMISSION_REPORT.zh-CN.md"
+    report_path = report_dir / "SUBMISSION_REPORT.md"
     live_payload = selected_live_demo_payload()
     if live_payload:
         write_live_demo_report(live_payload, model_run)
@@ -211,7 +211,7 @@ def main(argv: list[str] | None = None) -> int:
             args.refresh = False
             args.offline = True
         gate = run_pipeline(args)
-        print(json.dumps({"status": gate["status"], "failed_required_gates": gate["failed_required_gates"], "report": "reports/SUBMISSION_REPORT.zh-CN.md"}, ensure_ascii=False, indent=2))
+        print(json.dumps({"status": gate["status"], "failed_required_gates": gate["failed_required_gates"], "report": "reports/SUBMISSION_REPORT.md"}, ensure_ascii=False, indent=2))
         return 0 if args.command == "run" or gate["full_s_evidence_complete"] else 2
     return 2
 

@@ -72,8 +72,8 @@ terminal logistic，并存在整体低估。因而最准确的结论是：
 
 ## 推荐复核顺序
 
-1. `reports/SUBMISSION_REPORT.zh-CN.md`：方法、结果和负结果；
-2. `demo/runs/NFP_202608_REL_20260904_A004.zh-CN.md`：当期逐跳运行记录；
-3. `docs/REQUIREMENTS_TRACEABILITY.zh-CN.md`：每项主张对应的机器证据；
+1. `reports/SUBMISSION_REPORT.md`：方法、结果和负结果；
+2. `demo/runs/NFP_202608_REL_20260904_A004.md`：当期逐跳运行记录；
+3. `docs/REQUIREMENTS_TRACEABILITY.md`：每项主张对应的机器证据；
 4. `reports/model_run.json`、`reports/edge_evidence.json`、`reports/evaluation.json`：原始输出；
 5. `./run.sh --offline && ./test.sh`：隔离复现。

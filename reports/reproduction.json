@@ -4,16 +4,16 @@
   "protocol_lock": {
     "valid": true,
     "reason": "ok",
-    "protocol_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
-    "current_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+    "protocol_sha256": "f50b0560111167b458cbfa8cee22c39803edcdc230b0525ad3dd2f341f16dbf0",
+    "current_sha256": "f50b0560111167b458cbfa8cee22c39803edcdc230b0525ad3dd2f341f16dbf0",
     "files": [
       {
         "path": "config/default.json",
         "sha256": "4fce7acd03cc268243cc3fd89d42051afb443a17e7ffc73f26048b5b96a76812"
       },
       {
-        "path": "preregistration/CONFIRMATION_PROTOCOL.zh-CN.md",
-        "sha256": "c6629e2c8bb16d8061f34b72da8091903f3059daaef917db9309fb60b3daeeb5"
+        "path": "preregistration/CONFIRMATION_PROTOCOL.md",
+        "sha256": "11d7c30e3a936b9666b6141cb0be5ca48ec1a6de688a09586f870dd6a20f24e1"
       },
       {
         "path": "preregistration/S_GRADE_MATRIX.json",
@@ -45,10 +45,10 @@
       },
       {
         "path": "src/macro_gold_latent/gates.py",
-        "sha256": "3fc889ba0df7ac74e56ad411ed18276d73feea29c84486792eb46eb59a9579c8"
+        "sha256": "18ea8e4cff32edb89cbbf3bfbcf6e1d2d0ead851a54cb55553bbfdb6f5d46b86"
       }
     ],
-    "frozen_at_utc": "2026-09-03T06:55:51.054430+00:00"
+    "frozen_at_utc": "2026-09-05T07:07:23.958397+00:00"
   },
   "outputs": {
     "evaluation.json": "1952ccbe0730cf41a59be1c51bf49f17b835f90d9ffaef4f54a8ae53758525a5",

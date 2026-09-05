@@ -36,9 +36,9 @@
   "lock_timeline": {
     "base_lock": "2026-09-03T03:54:22.286472+00:00",
     "first_label_generation": "2026-09-03T03:54:43.646988+00:00",
-    "amended_lock": "2026-09-03T06:55:51.054430+00:00",
+    "amended_lock": "2026-09-05T07:07:23.958397+00:00",
     "base_protocol_sha256": "4be688b56ed1616fbca76bed0df84cff469ed338f6b260f7e679116d0eed4476",
-    "amended_protocol_sha256": "92ad7037e878d8cd181604514be80a6daab3f61035dcecc791dddc96378aa927",
+    "amended_protocol_sha256": "f50b0560111167b458cbfa8cee22c39803edcdc230b0525ad3dd2f341f16dbf0",
     "amendment_chain": [
       {
         "amendment_file": "preregistration/AMENDMENT_001_ZERO_RESPONSE_AND_APPLICABILITY.zh-CN.md",
@@ -59,6 +59,11 @@
         "amendment_file": "preregistration/AMENDMENT_004_EXECUTION_AND_SUBMISSION_INTEGRITY.zh-CN.md",
         "amendment_sha256": "a22d65e434db0c7297b4a03106a062534a15011d3783bfe7522c636b03cfdf74",
         "frozen_at_utc": "2026-09-03T06:55:51.054148+00:00"
+      },
+      {
+        "amendment_file": "preregistration/AMENDMENT_005_FILENAME_NORMALIZATION.md",
+        "amendment_sha256": "31a77dbeb55c4d20222d1cf284b920e827e3962f8791ba332a3c8a14f1b74945",
+        "frozen_at_utc": "2026-09-05T07:07:23.958053+00:00"
       }
     ]
   },
