@@ -8,6 +8,18 @@ from macro_gold_latent.report import chinese_live_demo_report
 
 
 class ChineseReportingTests(unittest.TestCase):
+    def test_evaluator_scope_distinguishes_main_chain_from_diagnostics(self) -> None:
+        main_report = (ROOT / "reports" / "SUBMISSION_REPORT.zh-CN.md").read_text(encoding="utf-8")
+        guide = (ROOT / "docs" / "EVALUATOR_GUIDE.zh-CN.md").read_text(encoding="utf-8")
+        combined = main_report + guide
+        for required in (
+            "固定主链", "多测量潜变量", "结构诊断变量", "链内断裂",
+            "外部截断", "认识论可信区间", "不等于宣告因果边不存在或模型失效",
+            "同一固定拓扑的 164 个事件实例", "完整多路径图推理器",
+        ):
+            self.assertIn(required, combined)
+        self.assertNotIn("显式并行/竞争路径", main_report)
+
     def test_live_report_contains_required_end_to_end_fields(self) -> None:
         model_run = read_json(ROOT / "reports" / "model_run.json")
         prediction = model_run["predictions"][0]

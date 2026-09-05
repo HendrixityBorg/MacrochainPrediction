@@ -4,6 +4,7 @@
 
 | 内容 | 实现或结果 | 主要证据 |
 |---|---|---|
+| 设计定位 | 固定主链、多测量节点、诊断变量和能力边界 | `docs/EVALUATOR_GUIDE.zh-CN.md`、`docs/METHODOLOGY.zh-CN.md` |
 | 完整工程 | 固定依赖、配置、运行/测试脚本、Docker 离线入口 | `README.md`、`requirements.lock.txt`、`run.sh`、`test.sh`、`Dockerfile` |
 | 端到端输出 | 链概率、逐跳 `p_i/n_i`、CI、停止、不确定性和评估 | `reports/model_run.json`、`reports/stop_trace.csv`、`reports/evaluation.json` |
 | 条件链模型 | `P(E1)P(E2|E1)P(E3|E1,E2)`，共同后验采样 | `docs/METHODOLOGY.zh-CN.md`、`src/macro_gold_latent/model.py` |
@@ -11,7 +12,7 @@
 | 朴素比较 | 主模型 Brier 0.1193，朴素边际连乘 0.1284 | `reports/baseline_report.json`、`reports/evaluation.json` |
 | 每跳来源 | 开发事件 ID、特征、系数、协方差、种子、n_raw/n_eff | `reports/edge_evidence.json`、`reports/three_hop_reproduction.json` |
 | 停止规则 | CI 边界、盈亏阈值、EVSI、复核成本、首个实际停止 | `src/macro_gold_latent/stopping.py`、`reports/stop_trace.csv` |
-| 历史确认 | 164 条确认链，22 条终点成功，Brier 0.1193 | `data/frozen/events.csv`、`reports/evaluation.json` |
+| 历史确认 | 同一固定拓扑的 164 个确认事件，22 个终点成功，Brier 0.1193 | `data/frozen/events.csv`、`reports/evaluation.json` |
 | 可靠性 | 固定 10 桶表、Wilson 区间与可靠性图 | `reports/reliability_table.csv`、`reports/reliability.png` |
 | 逐跳衰减 | 0.348 → 0.238 → 0.134 | `reports/hop_decay.csv`、`reports/hop_decay.png` |
 | CI 来源 | 参数、测量、漂移、共同 frailty、外部截断 | `reports/model_run.json`、`docs/METHODOLOGY.md` |
