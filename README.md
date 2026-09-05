@@ -64,7 +64,7 @@ docker run --rm macrochain-prediction
 
 ## 主要输出
 
-- `reports/SUBMISSION_REPORT.zh-CN.md`：总报告；
+- `reports/SUBMISSION_REPORT.md`：总报告；
 - `reports/model_run.json`：每跳 `p_i/n_i`、链概率、90% CI、内生/外部风险和逐前缀不确定性；
 - `reports/edge_evidence.json`：每跳来源事件、特征、系数、协方差及随机种子；
 - `reports/stop_trace.csv`：每个前缀的 CI、EVSI、停止原因、实际首停与反事实标记；
@@ -111,15 +111,15 @@ tau = (failure_loss + transaction_cost) / (success_gain + failure_loss)
 
 ## 文档导航
 
-- [方法与公式](docs/METHODOLOGY.zh-CN.md)
-- [数据来源与授权](docs/DATA_SOURCES.zh-CN.md)
-- [失败案例和边界](docs/FAILURE_MODES.zh-CN.md)
-- [提交状态与披露](docs/S_GRADE_STATUS.zh-CN.md)
-- [提交范围说明](docs/SUBMISSION_SCOPE.zh-CN.md)
-- [交付证据索引](docs/REQUIREMENTS_TRACEABILITY.zh-CN.md)
-- [已知限制](docs/KNOWN_LIMITATIONS.zh-CN.md)
-- [确认协议](preregistration/CONFIRMATION_PROTOCOL.zh-CN.md)
-- [六个月追踪计划](demo/TRACKING_PLAN.zh-CN.md)
+- [方法与公式](docs/METHODOLOGY.md)
+- [数据来源与授权](docs/DATA_SOURCES.md)
+- [失败案例和边界](docs/FAILURE_MODES.md)
+- [提交状态与披露](docs/S_GRADE_STATUS.md)
+- [提交范围说明](docs/SUBMISSION_SCOPE.md)
+- [交付证据索引](docs/REQUIREMENTS_TRACEABILITY.md)
+- [已知限制](docs/KNOWN_LIMITATIONS.md)
+- [确认协议](preregistration/CONFIRMATION_PROTOCOL.md)
+- [六个月追踪计划](demo/TRACKING_PLAN.md)
 - [数据声明](DATA_NOTICE.md)
 
 ## 数据边界
